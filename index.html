@@ -740,7 +740,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <!-- プラン別返礼対照表 -->
     <div style="margin-top:32px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px" class="fade-in">
       <h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;color:var(--white)">プラン別 特典一覧</h3>
-      <p style="font-size:12px;color:var(--text-dim);margin-bottom:20px">上位プランは下位プランの特典をすべて含みます。</p>
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:20px">各プランの特典は独立構成です。</p>
       <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">
           <thead>
@@ -751,57 +751,127 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <th style="padding:8px 6px;text-align:center;color:var(--gold);font-size:11px;white-space:nowrap;background:rgba(201,147,58,.06)">C<br><span style="color:var(--gold)">¥5万</span></th>
               <th style="padding:8px 6px;text-align:center;color:var(--text-dim);font-size:11px;white-space:nowrap">D<br><span style="color:var(--text-dim)">¥10万</span></th>
               <th style="padding:8px 6px;text-align:center;color:var(--text-dim);font-size:11px;white-space:nowrap">E<br><span style="color:var(--text-dim)">¥30万</span></th>
-              <th style="padding:8px 6px;text-align:center;color:var(--gold);font-size:11px;white-space:nowrap;background:rgba(201,147,58,.06)">F<br><span style="color:var(--gold)">¥50万</span></th>
+              <th style="padding:8px 6px;text-align:center;color:var(--gold);font-size:11px;white-space:nowrap;background:rgba(201,147,58,.06)">F<br><span style="color:var(--gold)">¥100万</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">✉ 御礼メッセージ</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+            <!-- Plan A -->
+            <tr style="background:rgba(61,107,42,.06)">
+              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em">PLAN A — エールスポンサー</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">📱 SNSタグ付け投稿</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">✉ 御礼メッセージ送付</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
               <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">🏆 記念走破ごとにタグ付け</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">👤 支援者ページへ名前掲載</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
               <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">▶ YouTube概要欄に社名記載</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">📝 徒歩地球一周挑戦メンバーとして記録</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <!-- Plan B -->
+            <tr style="background:rgba(61,107,42,.06)">
+              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em">PLAN B — ジャーニースポンサー</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)"># 投稿文にハッシュタグ設定</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">📱 Instagram・Xで支援者紹介</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">🇯🇵 日本国旗にロゴ記載</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">🏃 各到達地点で活動報告投稿</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🌐 徒歩地球一周公式サポーターとして掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">💬 限定オープンチャット招待</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <!-- Plan C -->
+            <tr style="background:rgba(201,147,58,.06)">
+              <td colspan="7" style="padding:6px 12px;color:var(--gold);font-size:11px;letter-spacing:.08em">PLAN C — メディアスポンサー</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">▶ YouTube概要欄へ社名掲載（半年）</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">📷 限定写真・動画共有</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">📊 活動レポート共有</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <!-- Plan D -->
+            <tr style="background:rgba(61,107,42,.06)">
+              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em">PLAN D — フラッグスポンサー</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🇯🇵 日本国旗へロゴ・名前掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🎬 YouTube動画内で企業紹介</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
@@ -810,25 +880,141 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">🛒 リヤカーにロゴ記載</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">⏱ スタート・各地到達・ゴール時で継続露出</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
               <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">🎬 スポンサー専用の特別動画</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">🎥 アメリカ絶景地から限定動画送付</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">📣 SNSで特別スポンサー紹介</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <!-- Plan E -->
+            <tr style="background:rgba(61,107,42,.06)">
+              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em">PLAN E — ドキュメンタリースポンサー</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🛒 リヤカー側面へロゴ掲載</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)">👘 着物・ウェアにロゴ記載</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">🎞 ドキュメンタリー作品へ企業名掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🎭 ブランド紹介を含む映像演出</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">📺 YouTubeエンディングで社名orロゴ掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🎤 特別スポンサーインタビュー対応</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+            </tr>
+            <!-- Plan F -->
+            <tr style="background:rgba(201,147,58,.06)">
+              <td colspan="7" style="padding:6px 12px;color:var(--gold);font-size:11px;letter-spacing:.08em">PLAN F — レジェンドスポンサー</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">👘 ウェア最上部へロゴ掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🚜 リヤカー大型ロゴ掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">⭐ 動画内で継続的に特別紹介</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🏆 ゴール達成時メインクレジット掲載</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">💿 4K映像素材の商用二次利用可能</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">™ 「Powered by ○○」表記対応</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--border)">—</td>
+              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;color:var(--text-dim)">🎖 徒歩地球一周プロジェクト公式パートナー認定</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
@@ -837,7 +1023,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
             </tr>
             <tr>
-              <td style="padding:10px 12px;color:var(--text-dim)">🎥 4K素材 二次利用（TVCM等）</td>
+              <td style="padding:10px 12px;color:var(--text-dim)">📰 特別協賛企業として各媒体で優先掲載</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border)">—</td>
               <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
@@ -848,7 +1034,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           </tbody>
         </table>
       </div>
-      <p style="font-size:11px;color:var(--text-dim);margin-top:14px">★ PLAN F限定特典 ／ ● 該当プランから利用可能</p>
+      <p style="font-size:11px;color:var(--text-dim);margin-top:14px">★ PLAN F限定特典 ／ ● 該当プランの特典</p>
     </div>
 
     <!-- 産官学連携 -->
