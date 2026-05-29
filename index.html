@@ -456,9 +456,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           <tr><td>次の挑戦</td><td>アメリカ大陸徒歩横断（地球一周）</td></tr>
         </table>
         <div class="profile-quote">
-          <p>「地球の環境を、自分の足と体で感じたい。人と人のつながりが、どこにいても変わらないことを証明したい。」</p>
+          <p>「地球を歩く挑戦を通して、人と人は言葉や国を超えてつながれると証明したい。」</p>
         </div>
-        <p style="font-size:13px;color:var(--text-dim);margin-top:20px;line-height:1.8">16歳で自転車マジック旅を始め、サハラマラソン完走、日本列島徒歩縦断（331日・200kgリヤカー）、ユーラシア大陸徒歩横断（13,000km・478日）と常識を超えた挑戦を重ねてきた。ABEMA Prime（ひろゆき氏と共演）・TBS『Nスタ』全国放送をはじめ国内外の多数メディアに取り上げられ、トルコ4大紙（人口8,500万人）でも大々的に報道された。</p>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:20px;line-height:1.8">16歳で自転車旅を始め、17歳でインド横断。19歳で車による北米大陸一周、20歳で中米縦断、21歳で南米一周を達成。22歳では中東・ヨーロッパを巡りながら、マジックの武者修行を行う。</p>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.8">23歳で200kgのリヤカーを引き、日本列島徒歩縦断（331日間）に挑戦。さらに26歳では、13,000km・478日に及ぶユーラシア大陸徒歩横断を達成するなど、常識にとらわれない挑戦を続けてきた。</p>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.8">その活動は、ABEMA Prime（ひろゆきと共演）や、Nスタ 全国放送をはじめ、国内外の多数メディアで特集。さらに、人口約8,500万人を抱えるトルコでは、4大新聞にも大きく取り上げられた。</p>
         <div style="margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
           <div style="background:var(--surface2);border:1px solid var(--border);padding:12px;border-radius:8px;font-size:12px;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;display:block;font-size:15px;margin-bottom:2px">5,000 km</span>次のアメリカ大陸徒歩横断距離</div>
           <div style="background:var(--surface2);border:1px solid var(--border);padding:12px;border-radius:8px;font-size:12px;color:var(--text-dim)"><span style="color:var(--gold);font-weight:700;display:block;font-size:15px;margin-bottom:2px">170 日</span>米国横断予定日数</div>
@@ -619,7 +621,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   <div class="container">
     <div class="section-label fade-in">SPONSOR BENEFITS</div>
     <h2 class="section-title fade-in">スポンサーになると<em>何が得られるか</em></h2>
-    <p style="color:var(--text-dim);font-size:14px;line-height:1.8;max-width:700px" class="fade-in">これはただの「広告」ではありません。1日平均30km・自分の足で5,000kmを刻む170日間——あなたのブランドが一歩一歩と共に世界に刻まれる、参加型コンテンツマーケティングです。</p>
+    <p style="color:var(--text-dim);font-size:14px;line-height:1.8;max-width:700px" class="fade-in">これは単なる「広告枠」ではありません。1日平均35km、5,000kmを徒歩で横断する170日間。<br><br>過酷な挑戦の一歩一歩に、あなたのブランドが共に刻まれ、物語として世界へ発信されていく。それが、このプロジェクトの価値です。</p>
 
     <!-- 4大メリット -->
     <div class="benefits-grid" style="margin-top:32px">
@@ -1404,12 +1406,13 @@ var planConfig = {
   'b': { max: 20, label: 'slots-b' },
   'c': { max: 15, label: 'slots-c' },
   'd': { max: 10, label: 'slots-d' },
-  'e': { max: 5, label: 'slots-e' },
-  'f': { max: 3, label: 'slots-f' }
+  'e': { max: 5, fixedUsed: 0, label: 'slots-e' },
+  'f': { max: 3, fixedUsed: 0, label: 'slots-f' }
 };
 Object.keys(planConfig).forEach(function(k) {
   var cfg = planConfig[k];
-  var used = parseInt(localStorage.getItem('jack_slots_' + k) || Math.floor(Math.random() * 3));
+  var stored = localStorage.getItem('jack_slots_' + k);
+  var used = cfg.fixedUsed !== undefined ? cfg.fixedUsed : (stored ? parseInt(stored) : Math.floor(Math.random() * 3));
   localStorage.setItem('jack_slots_' + k, used);
   var el = document.getElementById(cfg.label);
   if (!el) return;
