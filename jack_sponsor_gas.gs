@@ -445,11 +445,26 @@ function handleStripeWebhook(event) {
   var cEmail = detail.email || '不明';
   var amount = obj.amount_total || obj.amount_received || 0;
 
+  // 金額からプランを推定
+  var planMap = {10000:'PLAN A（¥10,000）エールスポンサー', 30000:'PLAN B（¥30,000）ジャーニースポンサー',
+    50000:'PLAN C（¥50,000）メディアスポンサー', 100000:'PLAN D（¥100,000）フラッグスポンサー',
+    300000:'PLAN E（¥300,000）ドキュメンタリースポンサー', 1000000:'PLAN F（¥1,000,000）レジェンドスポンサー'};
+  var plan = planMap[amount] || '¥' + amount.toLocaleString();
+
+  // スプレッドシートに記録
+  logToSheet({
+    name: cName, email: cEmail, plan: plan + '【クレカ決済】',
+    '掲載希望名':'', 'Instagram':'', 'X(Twitter)':'',
+    'ウェブサイトURL':'', '企業・活動紹介文':'', 'ブランドストーリー':'',
+    'Powered_by表記':'', '応援メッセージ':''
+  });
+
   var body = '【クレカ決済完了】スポンサー申し込みがありました！\n\n';
   body += '━━━━━━━━━━━━━━━━━━━━\n';
   body += '顧客名：' + cName + '\n';
   body += 'メール：' + cEmail + '\n';
   body += '金　額：¥' + amount.toLocaleString() + '\n';
+  body += 'プラン：' + plan + '\n';
   body += '━━━━━━━━━━━━━━━━━━━━\n\n';
   body += '▶ Stripeダッシュボード: https://dashboard.stripe.com/payments\n';
   body += '▶ スプレッドシート: ' + sheetUrl();
