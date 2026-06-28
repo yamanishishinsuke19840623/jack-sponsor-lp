@@ -1944,31 +1944,58 @@ function submitForm(e) {
   if (powered)   payload['Powered_by表記']         = powered;
   if (msg)       payload['応援メッセージ']          = msg;
 
-  fetch('https://formspree.io/f/xqeoawap', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    if (data.ok) {
-      form.innerHTML = '<div style="text-align:center;padding:40px 0">' +
-        '<div style="font-size:48px;margin-bottom:16px">🎉</div>' +
-        '<div style="font-size:22px;font-weight:700;color:var(--gold);margin-bottom:12px">ありがとうございます！</div>' +
-        '<div style="color:var(--text-dim);line-height:1.8">' + name + ' 様の応援申し込みを受け付けました。<br>' +
-        'Jackより折り返しご連絡いたします。</div></div>';
-      startConfetti();
-    } else {
+  // GAS_ENDPOINT: jack_sponsor_gas.gs をデプロイ後に差し替える
+  var GAS_ENDPOINT = 'YOUR_GAS_ENDPOINT_HERE';
+
+  var showSuccess = function() {
+    form.innerHTML =
+      '<div style="text-align:center;padding:40px 0">' +
+      '<div style="font-size:56px;margin-bottom:16px">🎉</div>' +
+      '<div style="font-size:22px;font-weight:700;color:var(--gold);margin-bottom:16px">ありがとうございます！</div>' +
+      '<div style="color:var(--text-dim);line-height:2;font-size:14px">' +
+        name + ' 様の応援申し込みを受け付けました。<br>' +
+        'まもなく振込先のご案内メールをお送りします。<br>' +
+        '<span style="color:var(--green-light);font-size:12px">（届かない場合は迷惑メールフォルダをご確認ください）</span>' +
+      '</div></div>';
+    startConfetti();
+  };
+
+  if (GAS_ENDPOINT === 'YOUR_GAS_ENDPOINT_HERE') {
+    // GAS未設定の場合は Formspree にフォールバック
+    fetch('https://formspree.io/f/xqeoawap', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) { showSuccess(); }
+      else {
+        btn.disabled = false;
+        btn.textContent = '申し込みを送る';
+        showToast('送信に失敗しました。時間をおいて再試行してください。');
+      }
+    })
+    .catch(function() {
       btn.disabled = false;
-      btn.textContent = 'お問い合わせ・銀行振込申し込みを送る';
-      showToast('送信に失敗しました。時間をおいて再試行してください。');
-    }
-  })
-  .catch(function() {
-    btn.disabled = false;
-    btn.textContent = 'お問い合わせ・銀行振込申し込みを送る';
-    showToast('ネットワークエラー。時間をおいて再試行してください。');
-  });
+      btn.textContent = '申し込みを送る';
+      showToast('ネットワークエラー。時間をおいて再試行してください。');
+    });
+  } else {
+    // GAS設定済み: no-cors で送信（自動返信メールが届く）
+    fetch(GAS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function() { showSuccess(); })
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = '申し込みを送る';
+      showToast('ネットワークエラー。時間をおいて再試行してください。');
+    });
+  }
 }
 
 // === YOUTUBE THUMBNAIL FALLBACK ===
