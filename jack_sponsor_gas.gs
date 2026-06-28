@@ -6,7 +6,7 @@
 
 var JACK_EMAIL = 'kimonomagician@gmail.com';
 var CC_EMAIL   = 'yamanishishinsuke19840623@gmail.com';
-var SHEET_ID   = ''; // ← setupSheet()実行後にここに貼り付け
+var SHEET_ID   = '1BUdt7GVFGvPhzFMOM6trGvqfeHLwWjAJ3o5Cen4uCb4';
 
 // =============================================
 //  エントリーポイント
