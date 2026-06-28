@@ -1838,26 +1838,52 @@ function scrollToForm(plan) {
 
 function submitForm(e) {
   e.preventDefault();
-  var name = document.getElementById('f-name').value;
-  var email = document.getElementById('f-email').value;
+  var form = document.getElementById('sponsor-form');
+  var btn = document.getElementById('form-submit');
+  var name = document.getElementById('f-name').value.trim();
+  var email = document.getElementById('f-email').value.trim();
   var plan = document.getElementById('f-plan').value;
-  var msg = document.getElementById('f-msg').value;
+  var msg = document.getElementById('f-msg').value.trim();
 
-  var body = encodeURIComponent(
-    'お名前: ' + name + '\n' +
-    'メールアドレス: ' + email + '\n' +
-    'プラン: ' + plan + '\n' +
-    'メッセージ: ' + msg
-  );
+  if (!name || !email || !plan) {
+    showToast('お名前・メール・プランは必須です');
+    return;
+  }
 
-  var mailto = 'mailto:kimonomagician@gmail.com' +
-    '?cc=yamanishishinsuke19840623@gmail.com' +
-    '&subject=' + encodeURIComponent('[スポンサー申し込み] ' + plan + ' - ' + name) +
-    '&body=' + body;
+  btn.disabled = true;
+  btn.textContent = '送信中...';
 
-  window.location.href = mailto;
-  showToast('メールアプリが開きます。送信してください。');
-  startConfetti();
+  fetch('https://formspree.io/f/xqeoawap', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      _subject: '[スポンサー申し込み] ' + plan + ' — ' + name,
+      name: name,
+      email: email,
+      plan: plan,
+      message: msg || '(メッセージなし)'
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.ok) {
+      form.innerHTML = '<div style="text-align:center;padding:40px 0">' +
+        '<div style="font-size:48px;margin-bottom:16px">🎉</div>' +
+        '<div style="font-size:22px;font-weight:700;color:var(--gold);margin-bottom:12px">ありがとうございます！</div>' +
+        '<div style="color:var(--text-dim);line-height:1.8">' + name + ' 様の応援申し込みを受け付けました。<br>' +
+        'Jackより折り返しご連絡いたします。</div></div>';
+      startConfetti();
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'お問い合わせ・銀行振込申し込みを送る';
+      showToast('送信に失敗しました。時間をおいて再試行してください。');
+    }
+  })
+  .catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'お問い合わせ・銀行振込申し込みを送る';
+    showToast('ネットワークエラー。時間をおいて再試行してください。');
+  });
 }
 
 // === YOUTUBE THUMBNAIL FALLBACK ===
