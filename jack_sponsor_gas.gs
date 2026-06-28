@@ -61,12 +61,52 @@ function doPost(e) {
   var data = {};
   try {
     data = JSON.parse(e.postData.contents);
+
+    // Stripe Webhook の判定（type フィールドがある）
+    if (data.type && data.data && data.data.object) {
+      return handleStripeWebhook(data);
+    }
+
+    // 通常のフォーム申し込み
     sendNotificationToJack(data);
     sendAutoReplyToApplicant(data);
     return res({ok: true});
   } catch (err) {
     return res({ok: false, error: err.toString()});
   }
+}
+
+// ---- Stripe 決済完了通知 ----
+function handleStripeWebhook(event) {
+  // 決済完了イベント以外はスキップ
+  if (event.type !== 'checkout.session.completed' &&
+      event.type !== 'payment_intent.succeeded') {
+    return res({ok: true, skipped: true});
+  }
+
+  var obj    = event.data.object;
+  var detail = obj.customer_details || {};
+  var cName  = detail.name  || obj.description || '不明';
+  var cEmail = detail.email || obj.receipt_email || '不明';
+  var amount = obj.amount_total || obj.amount_received || 0;
+
+  var body = '【クレカ決済完了】スポンサー申し込みがありました！\n\n';
+  body += '━━━━━━━━━━━━━━━━━━━━\n';
+  body += '顧客名：' + cName  + '\n';
+  body += 'メール：' + cEmail + '\n';
+  body += '金　額：¥' + amount.toLocaleString() + '\n';
+  body += '━━━━━━━━━━━━━━━━━━━━\n\n';
+  body += '▶ Stripeダッシュボードで詳細を確認してください\n';
+  body += 'https://dashboard.stripe.com/payments\n';
+
+  MailApp.sendEmail({
+    to:      JACK_EMAIL,
+    cc:      CC_EMAIL,
+    subject: '【クレカ決済完了】' + cName + ' 様（¥' + amount.toLocaleString() + '）',
+    body:    body
+  });
+
+  return res({ok: true});
 }
 
 function res(obj) {
