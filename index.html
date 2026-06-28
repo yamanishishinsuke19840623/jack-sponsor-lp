@@ -1245,8 +1245,21 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
             </select>
           </div>
           <div class="form-group">
+            <label>掲載希望名（企業名・活動名・ニックネーム可）</label>
+            <input type="text" id="f-display" placeholder="例：旅好き商事 / たびたび工房 / 匿名希望">
+            <small style="color:var(--text-dim);font-size:11px">SNS紹介・サポーター一覧に掲載する名前です。空欄の場合はお名前で掲載します。</small>
+          </div>
+          <div class="form-group">
+            <label>Instagramアカウント（任意）</label>
+            <input type="text" id="f-instagram" placeholder="例：@jack_magician">
+          </div>
+          <div class="form-group">
+            <label>X（旧Twitter）アカウント（任意）</label>
+            <input type="text" id="f-twitter" placeholder="例：@jack_kimono">
+          </div>
+          <div class="form-group">
             <label>メッセージ（任意）</label>
-            <textarea id="f-msg" placeholder="ご質問・ご要望など自由にどうぞ"></textarea>
+            <textarea id="f-msg" placeholder="ご質問・応援メッセージなど自由にどうぞ"></textarea>
           </div>
           <button type="submit" id="form-submit">お問い合わせ・銀行振込申し込みを送る</button>
         </form>
@@ -1843,6 +1856,9 @@ function submitForm(e) {
   var name = document.getElementById('f-name').value.trim();
   var email = document.getElementById('f-email').value.trim();
   var plan = document.getElementById('f-plan').value;
+  var display = document.getElementById('f-display').value.trim();
+  var instagram = document.getElementById('f-instagram').value.trim();
+  var twitter = document.getElementById('f-twitter').value.trim();
   var msg = document.getElementById('f-msg').value.trim();
 
   if (!name || !email || !plan) {
@@ -1861,6 +1877,9 @@ function submitForm(e) {
       name: name,
       email: email,
       plan: plan,
+      display_name: display || '(お名前で掲載)',
+      instagram: instagram || '(なし)',
+      twitter: twitter || '(なし)',
       message: msg || '(メッセージなし)'
     })
   })
