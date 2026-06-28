@@ -219,6 +219,18 @@ section{padding:80px 20px}
 .cheer-item .name{color:var(--gold);font-weight:700;margin-bottom:4px}
 .cheer-item .msg{color:var(--text-dim);line-height:1.5}
 
+/* Sponsors */
+#sponsors{background:var(--bg);border-top:1px solid var(--border)}
+#sponsors .section-title{margin-bottom:8px}
+.sponsor-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;justify-content:center}
+.sponsor-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:12px;transition:.2s}
+.sponsor-card:hover{border-color:var(--green-light)}
+.sponsor-badge{font-size:10px;font-weight:900;letter-spacing:.1em;padding:3px 8px;border-radius:6px;background:var(--green);color:var(--white);flex-shrink:0}
+.sponsor-badge.gold{background:var(--gold);color:var(--bg)}
+.sponsor-name{font-size:14px;color:var(--text);font-weight:600}
+.sponsor-msg{font-size:12px;color:var(--text-dim);margin-top:2px}
+#sponsors-empty{text-align:center;color:var(--text-dim);font-size:14px;padding:32px 0}
+
 /* Quote */
 #quote-section{background:linear-gradient(160deg,var(--green-pale),var(--bg));text-align:center;padding:100px 20px}
 .big-quote{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,38px);line-height:1.6;color:var(--white);max-width:800px;margin:0 auto 32px;position:relative}
@@ -1162,7 +1174,18 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   </div>
 </section>
 
-<!-- ⑩ Cheer board -->
+<!-- ⑩ Sponsors list (dynamic from Google Sheets) -->
+<section id="sponsors">
+  <div class="container">
+    <div class="section-label fade-in">SPONSORS</div>
+    <h2 class="section-title fade-in">応援してくれている<em>スポンサー</em></h2>
+    <p style="color:var(--text-dim);font-size:14px;text-align:center" class="fade-in">Jackの旅を支えてくださっている皆さまです。ありがとうございます！</p>
+    <div id="sponsor-grid" class="sponsor-grid"></div>
+    <div id="sponsors-empty" style="display:none">まだスポンサーが登録されていません。最初のスポンサーになりませんか？</div>
+  </div>
+</section>
+
+<!-- ⑪ Cheer board -->
 <section id="cheer">
   <div class="container">
     <div class="section-label fade-in">CHEER BOARD</div>
@@ -1997,6 +2020,39 @@ function submitForm(e) {
     });
   }
 }
+
+// === SPONSORS LIST ===
+var GAS_SPONSORS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyl4HMc-zuH2IioJ3MH7RkBbfp-fmqTKZ8SYiCCfdbYHkUsq0m1VscJcWJkHmqYnfcujA/exec';
+var PLAN_BADGE_CLASS = { A:'', B:'', C:'', D:'gold', E:'gold', F:'gold' };
+
+function loadSponsors(data) {
+  var grid  = document.getElementById('sponsor-grid');
+  var empty = document.getElementById('sponsors-empty');
+  var sec   = document.getElementById('sponsors');
+  if (!data || !data.sponsors || data.sponsors.length === 0) {
+    if (sec) sec.style.display = 'none';
+    return;
+  }
+  data.sponsors.forEach(function(s) {
+    var key = (s.plan || '').match(/PLAN\s*([A-F])/i);
+    var k   = key ? key[1].toUpperCase() : '';
+    var cls = PLAN_BADGE_CLASS[k] || '';
+    var card = document.createElement('div');
+    card.className = 'sponsor-card fade-in';
+    card.innerHTML =
+      '<div class="sponsor-badge ' + cls + '">' + (k ? 'PLAN ' + k : 'SP') + '</div>' +
+      '<div><div class="sponsor-name">' + (s.name || '') + '</div>' +
+      (s.message ? '<div class="sponsor-msg">' + s.message + '</div>' : '') + '</div>';
+    grid.appendChild(card);
+  });
+  if (empty) empty.style.display = 'none';
+}
+
+(function() {
+  var s = document.createElement('script');
+  s.src = GAS_SPONSORS_ENDPOINT + '?callback=loadSponsors';
+  document.head.appendChild(s);
+})();
 
 // === YOUTUBE THUMBNAIL FALLBACK ===
 var ytSizes = ['maxresdefault','sddefault','hqdefault','mqdefault','default'];
