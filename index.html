@@ -1941,6 +1941,7 @@ var stripeLinks = {
 function openStripePlan(k) {
   var link = stripeLinks[k];
   if (link) {
+    link += (link.indexOf('?') === -1 ? '?' : '&') + 'locale=' + (currentLang === 'en' ? 'en' : 'ja');
     window.open(link, '_blank');
     showToast(currentLang === 'en' ? 'Redirecting to Stripe checkout...' : 'Stripeの決済ページへ移動します...');
   } else {
