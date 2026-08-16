@@ -1451,7 +1451,7 @@ document.querySelectorAll('[data-count]').forEach(function(el) { countObserver.o
 // === TYPING ===
 var phrases = {
   ja: ['日本列島徒歩縦断・ユーラシア大陸徒歩横断を踏破。次はアメリカ大陸。', '地球一周の証人を募集しています。'],
-  en: ['Walked the length of Japan, then across Eurasia. Next: the Americas.', 'Seeking witnesses to a round-the-world journey.']
+  en: ['Walked the length of Japan, then across Eurasia. Next: across America.', 'Seeking witnesses to a round-the-world journey.']
 };
 var pi = 0, ci = 0, typing = true;
 function typeLoop() {
@@ -1896,7 +1896,7 @@ function gameWin() {
   var el = document.getElementById('game-over-msg');
   el.style.display = 'block';
   if (currentLang === 'en') {
-    document.getElementById('game-over-title').textContent = 'You Crossed the Americas!';
+    document.getElementById('game-over-title').textContent = 'You Crossed America!';
     document.getElementById('game-over-desc').textContent = "Congratulations! You cleared all 10 obstacles. Want to support Jack and become a sponsor?";
     document.getElementById('game-start-btn').textContent = 'Play Again';
   } else {
@@ -1906,7 +1906,7 @@ function gameWin() {
   }
   document.getElementById('game-start-btn').style.display = 'inline-block';
   startConfetti();
-  showToast(currentLang === 'en' ? 'You crossed the Americas! Sponsorships open now!' : 'アメリカ大陸踏破達成！スポンサー募集中！');
+  showToast(currentLang === 'en' ? 'You crossed America! Sponsorships open now!' : 'アメリカ大陸踏破達成！スポンサー募集中！');
 }
 
 // Draw idle state
@@ -2243,7 +2243,7 @@ document.addEventListener('keydown', function(e) {
 
 // === I18N (EN / JA TOGGLE) ===
 var EN_TITLE = 'Kimono Magician Jack | Walking Across America — Sponsorship';
-var EN_DESCRIPTION = "Having walked the length of Japan and across Eurasia, Kimono Magician Jack (Motoki Sato) now seeks sponsors for his next challenge: walking across the Americas.";
+var EN_DESCRIPTION = "Having walked the length of Japan and across Eurasia, Kimono Magician Jack (Motoki Sato) now seeks sponsors for his next challenge: walking across America.";
 
 var I18N_EN = {
   "nav.cta": "Become a Sponsor",
@@ -2283,8 +2283,8 @@ var I18N_EN = {
   "journey.p2.tag1": "13,000km Walked",
   "journey.p2.tag2": "478 Days",
   "journey.p3.year": "PHASE 3 → Next Challenge",
-  "journey.p3.title": "Walking Across the Americas — Toward a Round-the-World Journey",
-  "journey.p3.desc": "The next frontier is the Americas. Jungle, desert, high mountains — crossing six countries on foot, immersed in diverse nature and cultures. A 4-person professional team with an RV support vehicle minimizes risk, backed by a public-private partnership with the Philippine Department of Tourism and the NPO CebuGo, aiming for an unprecedented round-the-world trek on foot.",
+  "journey.p3.title": "Walking Across America — Toward a Round-the-World Journey",
+  "journey.p3.desc": "The next frontier is America. Jungle, desert, high mountains — crossing six countries on foot, immersed in diverse nature and cultures. A 4-person professional team with an RV support vehicle minimizes risk, backed by a public-private partnership with the Philippine Department of Tourism and the NPO CebuGo, aiming for an unprecedented round-the-world trek on foot.",
   "journey.p3.tagDays": "170 Days",
   "journey.p3.tagWalk": "North America On Foot",
   "journey.p3.tagTeam": "4-Person Pro Team",
@@ -2307,12 +2307,12 @@ var I18N_EN = {
   "profile.r5.v": "50+ countries, magic shows in 36+ countries",
   "profile.r6.k": "Social Media",
   "profile.r7.k": "Next Challenge",
-  "profile.r7.v": "Walking Across the Americas (Round-the-World Journey)",
+  "profile.r7.v": "Walking Across America (Round-the-World Journey)",
   "profile.quote": "“Through the challenge of walking the earth, I want to prove that people can connect beyond language and borders.”",
   "profile.bio1": "He began a bicycle trip at 16, and crossed India at 17. At 19 he circled North America by car, at 20 traveled the length of Central America, and at 21 completed a loop of South America. At 22, he trained as a magician while traveling the Middle East and Europe.",
   "profile.bio2": "At 23, pulling a 200kg rickshaw, he walked the length of Japan over 331 days. At 26, he went on to complete a 13,000km, 478-day trek across Eurasia — continuing a string of challenges that defied convention.",
   "profile.bio3": "His journey has been featured on ABEMA Prime (alongside Hiroyuki) and TBS's Nsuta national news, among many other outlets at home and abroad. In Turkey, home to roughly 85 million people, he was also prominently covered by all four major newspapers.",
-  "profile.card1": "Distance of the next Americas trek",
+  "profile.card1": "Distance of the next America trek",
   "profile.card2": "Planned days to cross the U.S.",
   "profile.card3": "Pro team (filming, editing, support)",
   "profile.card4": "Rickshaw weight (built for extreme terrain)",
@@ -2349,9 +2349,9 @@ var I18N_EN = {
   "game.startBtn": "Start Game!",
 
   "benefits.title": "What You Get as <em>a Sponsor</em>",
-  "benefits.desc": "This isn't just an ‘ad slot.’ It's 170 days of walking 5,000km across the Americas, averaging 35km a day.<br><br>Your brand is etched into every step of this grueling challenge, and broadcast to the world as a story. That's the value of this project.",
-  "benefits.card1.title": "Join the Journey as a Sponsor — Walk the Americas Together",
-  "benefits.card1.desc": "Your logo travels the world's roads alongside a kimono. Over the 170 days crossing the Americas, every milestone is reported on social media. Your logo appears on the rickshaw, apparel, and Japanese flag — permanently captured in 4K footage.",
+  "benefits.desc": "This isn't just an ‘ad slot.’ It's 170 days of walking 5,000km across America, averaging 35km a day.<br><br>Your brand is etched into every step of this grueling challenge, and broadcast to the world as a story. That's the value of this project.",
+  "benefits.card1.title": "Join the Journey as a Sponsor — Walk America Together",
+  "benefits.card1.desc": "Your logo travels the world's roads alongside a kimono. Over the 170 days crossing America, every milestone is reported on social media. Your logo appears on the rickshaw, apparel, and Japanese flag — permanently captured in 4K footage.",
   "benefits.card2.title": "Free, Permanent Rights to Reuse the Footage",
   "benefits.card2.desc": "Use the filmed material (4K footage across 170 days) freely for your website, social media, in-store displays, TV commercials, and web ads. High-quality video content at zero production cost.",
   "benefits.card3.title": "A Reach of 30 Million+",
@@ -2475,7 +2475,7 @@ var I18N_EN = {
   "plan.a.desc": "A standard plan to cheer on Jack's challenge.",
   "plan.b.desc": "Follow the journey and help spread the word via SNS and YouTube.",
   "plan.c.desc": "An ongoing PR plan with continued exposure through YouTube and social media.",
-  "plan.d.desc": "A flagship sponsorship — walk the Americas together as a symbolic partner.",
+  "plan.d.desc": "A flagship sponsorship — walk America together as a symbolic partner.",
   "plan.e.desc": "A full-scale tie-up plan that tells your brand story on film, to the world.",
   "plan.f.desc": "The official “main sponsor” plan behind the round-the-world challenge. Your brand featured continuously across apparel, film, and social media throughout the project.",
 
@@ -2496,7 +2496,7 @@ var I18N_EN = {
 
   "faq.title": "Frequently Asked <em>Questions</em>",
   "faq.q1": "What is the sponsorship money used for?",
-  "faq.a1": "Sponsorship funds go toward travel costs for the Americas trek (flights, lodging, food, visas) and the costs of filming and broadcasting the journey. Every contribution helps keep the challenge going.",
+  "faq.a1": "Sponsorship funds go toward travel costs for the America trek (flights, lodging, food, visas) and the costs of filming and broadcasting the journey. Every contribution helps keep the challenge going.",
   "faq.q2": "When are sponsor benefits delivered?",
   "faq.a2": "Benefits are delivered progressively after the agreement is finalized. Logos on the rickshaw and flag are added before departure. SNS tagging continues throughout the journey. Thank-you messages are sent within one week of the agreement.",
   "faq.q3": "Can individuals become sponsors too?",
@@ -2543,7 +2543,7 @@ var I18N_EN = {
   "badge.saveBtn": "Save Badge",
   "share.title": "Share This Page",
 
-  "footer.sub": "Walking Around the World — Sponsorship for the Americas Trek",
+  "footer.sub": "Walking Around the World — Sponsorship for the America Trek",
   "footer.contact": "Contact",
 
   "public.1.name": "Philippine Department of Tourism (DOT)",
