@@ -188,18 +188,20 @@ section{padding:80px 20px}
 #game-over-msg{display:none;margin-top:20px;padding:20px;background:var(--surface);border:1px solid var(--gold);border-radius:var(--radius)}
 #game-over-msg h3{font-family:'Playfair Display',serif;color:var(--gold);font-size:24px;margin-bottom:8px}
 
-/* Benefits */
-#benefits{background:var(--surface)}
-.benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:40px}
-.benefit-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:.3s}
-.benefit-card:hover{border-color:var(--green-light);transform:translateY(-4px)}
-.benefit-icon{font-size:36px;margin-bottom:16px}
-.benefit-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);margin-bottom:10px}
-.benefit-desc{font-size:14px;color:var(--text-dim);line-height:1.7}
-
 /* Plans */
 #plans{background:linear-gradient(rgba(8,8,8,.86),rgba(8,8,8,.92)),url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&auto=format&fit=crop&q=60') center/cover no-repeat}
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
+.funding-progress{max-width:560px;margin:32px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px}
+.funding-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.funding-raised{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold)}
+.funding-goal{font-size:13px;color:var(--text-dim)}
+.funding-bar-track{height:10px;border-radius:6px;background:var(--surface2);overflow:hidden}
+.funding-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:6px;transition:width 1s ease}
+.funding-sub{margin-top:10px;font-size:13px;color:var(--text-dim);text-align:right}
+.plan-category{margin-top:40px}
+.plan-category:first-child{margin-top:0}
+.plan-category-label{font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.plan-limited-tag{display:inline-block;font-size:11px;color:var(--gold);background:rgba(201,147,58,.12);border:1px solid rgba(201,147,58,.35);padding:3px 10px;border-radius:10px;margin:10px 0}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
 .plan-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:relative;transition:.3s;cursor:default}
 .plan-card.featured{border-color:var(--gold);background:linear-gradient(160deg,var(--surface2) 0%,rgba(201,147,58,.06) 100%)}
 .plan-card.featured::before{content:'人気No.1';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--bg);font-size:11px;font-weight:900;padding:4px 14px;border-radius:10px}
@@ -371,7 +373,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
       <div class="hero-badge-item" data-i18n="hero.badge5">YouTube <strong>32,000人</strong>登録</div>
       <div class="hero-badge-item" data-i18n="hero.badge6"><strong>平均を大きく上回る</strong>広告価値</div>
       <div class="hero-badge-item" data-i18n="hero.badge7">国内外で<strong>大手メディアに露出</strong></div>
-      <div class="hero-badge-item" data-i18n="hero.badge8"><strong>産官学機関</strong>バックアップ</div>
     </div>
     <div class="hero-btns">
       <a class="btn-primary" href="#plans" data-i18n="hero.btn1">スポンサーになる</a>
@@ -441,16 +442,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
         <div class="tl-dot next"></div>
         <div class="tl-year" data-i18n="journey.p3.year">PHASE 3 → 次の挑戦</div>
         <h3 class="tl-title" data-i18n="journey.p3.title">アメリカ大陸徒歩横断 — 地球一周へ</h3>
-        <p class="tl-desc" data-i18n="journey.p3.desc">次なるフィールドはアメリカ大陸。密林・砂漠・高山地帯——多様な自然と文化を自分の足で踏みしめながら6カ国を縦断する。キャンピングカーが伴走する4名プロチーム体制でリスクを最小化し、フィリピン観光省DOT・NPO法人CebuGoの産官学連携バックアップのもと、前人未到の地球一周完歩を目指す。</p>
+        <p class="tl-desc" data-i18n="journey.p3.desc">次なるフィールドはアメリカ大陸。密林・砂漠・高山地帯——多様な自然と文化を自分の足で踏みしめながら6カ国を縦断する。キャンピングカーが伴走する4名プロチーム体制でリスクを最小化し、前人未到の地球一周完歩を目指す。</p>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
           <div style="background:rgba(201,147,58,.12);border:1px solid rgba(201,147,58,.35);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--gold)">5,000 km</div>
           <div style="background:rgba(201,147,58,.12);border:1px solid rgba(201,147,58,.35);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--gold)" data-i18n="journey.p3.tagDays">170 日間</div>
           <div style="background:rgba(201,147,58,.12);border:1px solid rgba(201,147,58,.35);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--gold)" data-i18n="journey.p3.tagWalk">北アメリカ大陸徒歩横断</div>
           <div style="background:rgba(61,107,42,.2);border:1px solid rgba(90,148,64,.4);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--green-light)" data-i18n="journey.p3.tagTeam">4名プロチーム体制</div>
           <div style="background:rgba(61,107,42,.2);border:1px solid rgba(90,148,64,.4);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--green-light)" data-i18n="journey.p3.tagCamper">キャンピングカー伴走</div>
-          <div style="background:rgba(61,107,42,.2);border:1px solid rgba(90,148,64,.4);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--green-light)" data-i18n="journey.p3.tagPublic">産官学連携バックアップ</div>
         </div>
-        <div style="margin-top:10px;font-size:11px;color:var(--text-dim)" data-i18n="journey.p3.partners">協力: フィリピン観光省 DOT ／ NPO法人 CebuGo</div>
         <span class="tl-tag gold" style="margin-top:14px;display:inline-block" data-i18n="journey.p3.tagGold">スポンサー募集中</span>
       </div>
     </div>
@@ -645,548 +644,166 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   </div>
 </section>
 
-<!-- ⑧ Benefits -->
-<section id="benefits">
-  <div class="container">
-    <div class="section-label fade-in">SPONSOR BENEFITS</div>
-    <h2 class="section-title fade-in" data-i18n="benefits.title">スポンサーになると<em>何が得られるか</em></h2>
-    <p style="color:var(--text-dim);font-size:14px;line-height:1.8;max-width:700px" class="fade-in" data-i18n="benefits.desc">これは単なる「広告枠」ではありません。1日平均35km、5,000kmを徒歩で横断する170日間。<br><br>過酷な挑戦の一歩一歩に、あなたのブランドが共に刻まれ、物語として世界へ発信されていく。それが、このプロジェクトの価値です。</p>
-
-    <!-- 4大メリット -->
-    <div class="benefits-grid" style="margin-top:32px">
-      <div class="benefit-card fade-in">
-        <div class="benefit-icon">🎬</div>
-        <div class="benefit-title" data-i18n="benefits.card1.title">スポンサーとして旅に同行 — アメリカ大陸を共に歩く</div>
-        <div class="benefit-desc" data-i18n="benefits.card1.desc">あなたのロゴが着物と共に世界の路上を歩く。アメリカ大陸を徒歩横断する170日間、各地の突破ごとにSNSで報告。リヤカー・ウェア・日本国旗にロゴが入り、4K映像に永続的に刻まれます。</div>
-      </div>
-      <div class="benefit-card fade-in">
-        <div class="benefit-icon">♻️</div>
-        <div class="benefit-title" data-i18n="benefits.card2.title">素材の二次利用が永続的・無償</div>
-        <div class="benefit-desc" data-i18n="benefits.card2.desc">撮影素材（4K映像・170日分）をHP・SNS・POP・TV CM・WEB CM素材として無制限に使用可能。コンテンツ制作コスト0円で高品質な動画素材が手に入ります。</div>
-      </div>
-      <div class="benefit-card fade-in">
-        <div class="benefit-icon">📡</div>
-        <div class="benefit-title" data-i18n="benefits.card3.title">3,000万リーチの圧倒的発信力</div>
-        <div class="benefit-desc" data-i18n="benefits.card3.desc">YouTube 2,000万以上 + フィリピン観光省SNS（Facebook 290万人）+ 国内外メディア報道で推計3,000万リーチ以上。1回の協賛で届く規模が違います。</div>
-      </div>
-      <div class="benefit-card fade-in">
-        <div class="benefit-icon">❤️</div>
-        <div class="benefit-title" data-i18n="benefits.card4.title">感動ストーリーに乗るブランド価値</div>
-        <div class="benefit-desc" data-i18n="benefits.card4.desc">「挑戦する人を支えた企業」として170日間ファンの記憶に刻まれます。購買決定権を持つ35〜64歳の中堅層（男性75.2%）に直接リーチ。</div>
-      </div>
-    </div>
-
-    <!-- ROI比較：普通の広告 vs ジャック -->
-    <div style="margin-top:48px" class="fade-in">
-      <div style="text-align:center;margin-bottom:28px">
-        <div style="font-size:12px;color:var(--green-light);letter-spacing:.15em;margin-bottom:8px">ROI COMPARISON</div>
-        <div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--white)" data-i18n="roi.title">「普通の広告」と比べると——</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:700px;margin:0 auto">
-        <!-- 普通の広告 -->
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
-          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:12px" data-i18n="roi.left.label">一般的なSNS広告</div>
-          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--text-dim)">
-            <div data-i18n="roi.left.line1">CPM: <strong style="color:var(--white)">¥300〜¥600</strong></div>
-            <div data-i18n="roi.left.line2">掲載期間: <strong style="color:var(--white)">数日〜数週間</strong></div>
-            <div data-i18n="roi.left.line3">ストーリー性: <strong style="color:var(--white)">なし</strong></div>
-            <div data-i18n="roi.left.line4">二次利用: <strong style="color:var(--white)">不可・別途費用</strong></div>
-            <div data-i18n="roi.left.line5">記憶残存: <strong style="color:var(--white)">低い（スキップされる）</strong></div>
-          </div>
-        </div>
-        <!-- ジャック協賛 -->
-        <div style="background:linear-gradient(160deg,var(--surface2),var(--green-pale));border:2px solid var(--green);border-radius:var(--radius);padding:24px;position:relative">
-          <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--white);font-size:10px;font-weight:900;padding:4px 14px;border-radius:10px;white-space:nowrap" data-i18n="roi.badge">ジャック協賛</div>
-          <div style="font-size:11px;color:var(--green-light);letter-spacing:.1em;margin-bottom:12px;margin-top:4px">着物マジシャン ジャック</div>
-          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-            <div style="color:var(--text-dim)" data-i18n="roi.right.line1">CPM: <strong style="color:var(--gold)">¥1,137（実測値）</strong></div>
-            <div style="color:var(--text-dim)" data-i18n="roi.right.line2">掲載期間: <strong style="color:var(--gold)">170日間・永続的</strong></div>
-            <div style="color:var(--text-dim)" data-i18n="roi.right.line3">ストーリー性: <strong style="color:var(--gold)">感動の冒険に同行</strong></div>
-            <div style="color:var(--text-dim)" data-i18n="roi.right.line4">二次利用: <strong style="color:var(--gold)">4K素材を無償・無制限</strong></div>
-            <div style="color:var(--text-dim)" data-i18n="roi.right.line5">記憶残存: <strong style="color:var(--gold)">高い（ファンが見続ける）</strong></div>
-          </div>
-        </div>
-      </div>
-      <!-- 広告換算値 -->
-      <div style="margin-top:24px;background:linear-gradient(160deg,var(--surface2),var(--green-pale));border:1px solid var(--green);border-radius:var(--radius);padding:28px">
-        <div style="text-align:center;margin-bottom:20px">
-          <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--white)" data-i18n="advalue.title">協賛が生み出す広告価値</div>
-          <div style="font-size:12px;color:var(--text-dim);margin-top:4px" data-i18n="advalue.formula">CPM ¥1,137 × 9,700万インプレッション ÷ 1,000 で試算</div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
-          <div style="background:var(--surface);border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px" data-i18n="advalue.card1.label">YouTube視聴換算</div>
-            <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold)" data-i18n="advalue.card1.val">2,000万+</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px" data-i18n="advalue.card1.sub">広告換算価値（円）</div>
-          </div>
-          <div style="background:var(--surface);border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px" data-i18n="advalue.card2.label">メディア露出換算</div>
-            <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold)" data-i18n="advalue.card2.val">500万+</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px" data-i18n="advalue.card2.sub">TBS・地方局・海外紙</div>
-          </div>
-          <div style="background:var(--surface);border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px" data-i18n="advalue.card3.label">4K映像素材価値</div>
-            <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold)" data-i18n="advalue.card3.val">300万+</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px" data-i18n="advalue.card3.sub">170日分・二次利用無償</div>
-          </div>
-          <div style="background:linear-gradient(135deg,rgba(201,147,58,.2),rgba(201,147,58,.08));border:1px solid var(--gold);border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:11px;color:var(--gold);margin-bottom:6px" data-i18n="advalue.card4.label">合計 推計広告換算</div>
-            <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold)" data-i18n="advalue.card4.val">3,200万+</div>
-            <div style="font-size:10px;color:var(--gold);margin-top:4px;font-weight:700" data-i18n="advalue.card4.sub">投資対効果 約12倍</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CPM比較表 -->
-    <div style="margin-top:32px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px" class="fade-in">
-      <h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:20px;color:var(--white)" data-i18n="cpmtable.title">YouTube CPM比較（1,000再生あたり単価）</h3>
-      <div style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;font-size:13px">
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:10px 0;color:var(--text-dim)" data-i18n="cpmtable.r1.name">一般的なYouTube動画（エンタメ系）</td>
-            <td style="padding:10px;color:var(--text-dim);text-align:right">¥300〜¥600</td>
-            <td style="padding:10px;color:var(--text-dim);font-size:11px" data-i18n="cpmtable.r1.note">市場平均ライン</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:10px 0;color:var(--text-dim)" data-i18n="cpmtable.r2.name">スキップ不可・バンパー広告枠</td>
-            <td style="padding:10px;color:var(--text-dim);text-align:right">¥600〜¥1,000</td>
-            <td style="padding:10px;color:var(--text-dim);font-size:11px" data-i18n="cpmtable.r2.note">プレミアム・ブランド向け</td>
-          </tr>
-          <tr style="background:rgba(201,147,58,.08);border-bottom:1px solid var(--gold)">
-            <td style="padding:10px 0;color:var(--white);font-weight:700" data-i18n="cpmtable.r3.name">★ ジャック（YouTube Studio実測）</td>
-            <td style="padding:10px;color:var(--gold);font-weight:700;font-size:18px;text-align:right">¥1,137</td>
-            <td style="padding:10px;color:var(--gold);font-size:11px" data-i18n="cpmtable.r3.note">平均値の約2倍</td>
-          </tr>
-          <tr>
-            <td style="padding:10px 0;color:var(--text-dim)" data-i18n="cpmtable.r4.name">高単価ジャンル（金融・ビジネス・美容）</td>
-            <td style="padding:10px;color:var(--text-dim);text-align:right">¥1,500〜¥3,000</td>
-            <td style="padding:10px;color:var(--text-dim);font-size:11px" data-i18n="cpmtable.r4.note">業界最上位</td>
-          </tr>
-        </table>
-      </div>
-      <p style="font-size:12px;color:var(--text-dim);margin-top:12px" data-i18n="cpmtable.footnote">※ GMS/Sienca/AdMarket/Stock Sun magazine 2024-2025、Shopify、YouTube CPM調査2026を参考</p>
-    </div>
-
-    <!-- プラン別返礼対照表 -->
-    <div style="margin-top:32px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:28px" class="fade-in">
-      <h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;color:var(--white)" data-i18n="benefitstable.title">プラン別 特典一覧</h3>
-      <p style="font-size:12px;color:var(--text-dim);margin-bottom:20px" data-i18n="benefitstable.subtitle">各プランの特典は独立構成です。</p>
-      <div style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">
-          <thead>
-            <tr style="border-bottom:2px solid var(--border)">
-              <th style="text-align:left;padding:10px 12px;color:var(--text-dim);font-weight:400;min-width:180px" data-i18n="benefitstable.headCol">特典</th>
-              <th style="padding:8px 6px;text-align:center;color:var(--text-dim);font-size:11px;white-space:nowrap">A<br><span style="color:var(--text-dim)">¥1万</span></th>
-              <th style="padding:8px 6px;text-align:center;color:var(--text-dim);font-size:11px;white-space:nowrap">B<br><span style="color:var(--text-dim)">¥3万</span></th>
-              <th style="padding:8px 6px;text-align:center;color:var(--gold);font-size:11px;white-space:nowrap;background:rgba(201,147,58,.06)">C<br><span style="color:var(--gold)">¥5万</span></th>
-              <th style="padding:8px 6px;text-align:center;color:var(--text-dim);font-size:11px;white-space:nowrap">D<br><span style="color:var(--text-dim)">¥10万</span></th>
-              <th style="padding:8px 6px;text-align:center;color:var(--text-dim);font-size:11px;white-space:nowrap">E<br><span style="color:var(--text-dim)">¥30万</span></th>
-              <th style="padding:8px 6px;text-align:center;color:var(--gold);font-size:11px;white-space:nowrap;background:rgba(201,147,58,.06)">F<br><span style="color:var(--gold)">¥100万</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Plan A -->
-            <tr style="background:rgba(61,107,42,.06)">
-              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em" data-i18n="plan.a.name">PLAN A — エールスポンサー</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.a1">✉ 御礼メッセージ送付</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.a2">👤 支援者ページへ名前掲載</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.a3">📝 徒歩地球一周挑戦メンバーとして記録</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <!-- Plan B -->
-            <tr style="background:rgba(61,107,42,.06)">
-              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em" data-i18n="plan.b.name">PLAN B — ジャーニースポンサー</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.b1">📱 Instagram・Xで支援者紹介</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.b2">🏃 各到達地点で活動報告投稿</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.b3">🌐 徒歩地球一周公式サポーターとして掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.b4">💬 限定オープンチャット招待</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <!-- Plan C -->
-            <tr style="background:rgba(201,147,58,.06)">
-              <td colspan="7" style="padding:6px 12px;color:var(--gold);font-size:11px;letter-spacing:.08em" data-i18n="plan.c.name">PLAN C — メディアスポンサー</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.c1">▶ YouTube概要欄へ社名掲載（半年）</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.c2">📷 限定写真・動画共有</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.c3">📊 活動レポート共有</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <!-- Plan D -->
-            <tr style="background:rgba(61,107,42,.06)">
-              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em" data-i18n="plan.d.name">PLAN D — フラッグスポンサー</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.d1">🇯🇵 日本国旗へロゴ・名前掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.d2">🎬 YouTube動画内で企業紹介</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px;background:rgba(201,147,58,.04)">●</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.d3">⏱ スタート・各地到達・ゴール時で継続露出</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.d4">🎥 アメリカ絶景地から限定動画送付</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.d5">📣 SNSで特別スポンサー紹介</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <!-- Plan E -->
-            <tr style="background:rgba(61,107,42,.06)">
-              <td colspan="7" style="padding:6px 12px;color:var(--green-light);font-size:11px;letter-spacing:.08em" data-i18n="plan.e.name">PLAN E — ドキュメンタリースポンサー</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.e1">🛒 リヤカー側面へロゴ掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.e2">🎞 ドキュメンタリー作品へ企業名掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.e3">🎭 ブランド紹介を含む映像演出</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.e4">📺 YouTubeエンディングで社名orロゴ掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.e5">🎤 特別スポンサーインタビュー対応</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--green-light);font-size:15px">●</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-            </tr>
-            <!-- Plan F -->
-            <tr style="background:rgba(201,147,58,.06)">
-              <td colspan="7" style="padding:6px 12px;color:var(--gold);font-size:11px;letter-spacing:.08em" data-i18n="plan.f.name">PLAN F — レジェンドスポンサー</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f1">👘 ウェア最上部へロゴ掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f2">🚜 リヤカー大型ロゴ掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f3">⭐ 動画内で継続的に特別紹介</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f4">🏆 ゴール達成時メインクレジット掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f5">💿 4K映像素材の商用二次利用可能</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f6">™ 「Powered by ○○」表記対応</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border)">
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f7">🎖 徒歩地球一周プロジェクト公式パートナー認定</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-            <tr>
-              <td style="padding:10px 12px;color:var(--text-dim)" data-i18n="bt.f8">📰 特別協賛企業として各媒体で優先掲載</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border);background:rgba(201,147,58,.04)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--border)">—</td>
-              <td style="text-align:center;color:var(--gold);font-size:15px;background:rgba(201,147,58,.04)">★</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size:11px;color:var(--text-dim);margin-top:14px" data-i18n="benefitstable.footnote">★ PLAN F限定特典 ／ ● 該当プランの特典</p>
-    </div>
-
-    <!-- 産官学連携 -->
-    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px" class="fade-in">
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
-        <div style="font-size:11px;color:var(--green-light);letter-spacing:.1em;margin-bottom:8px">PUBLIC BACKING ①</div>
-        <div style="font-weight:700;color:var(--white);margin-bottom:8px" data-i18n="public.1.name">フィリピン観光省（DOT）</div>
-        <div style="font-size:13px;color:var(--text-dim);line-height:1.7" data-i18n="public.1.desc">公式バックアップ予定（詳細調整中）。アジア全域＋米国横断中のPR波及が期待できます。Facebook 290万人フォロワーへのリーチも見込まれます。</div>
-      </div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
-        <div style="font-size:11px;color:var(--green-light);letter-spacing:.1em;margin-bottom:8px">PUBLIC BACKING ②</div>
-        <div style="font-weight:700;color:var(--white);margin-bottom:8px" data-i18n="public.2.name">CebuGo（NPO法人留学協会 山口支部）</div>
-        <div style="font-size:13px;color:var(--text-dim);line-height:1.7" data-i18n="public.2.desc">内閣府認可の公的NPOサポーター。スポンサー一割免除済み。公的機関の後援によりプロジェクトのコンプライアンスと信頼性が高く保たれています。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ⑨ Plans -->
 <section id="plans">
   <div class="container">
     <div class="section-label fade-in">SPONSOR PLANS</div>
     <h2 class="section-title fade-in" data-i18n="plans.title">スポンサー<em>プラン</em></h2>
-    <p style="color:var(--text-dim);font-size:14px;margin-bottom:0" class="fade-in" data-i18n="plans.desc">お気軽な1万円から、地球一周の歴史的スポンサーまで6プランご用意しました。</p>
-    <div class="plans-grid">
+    <p style="color:var(--text-dim);font-size:14px;margin-bottom:0" class="fade-in" data-i18n="plans.desc">お気軽な¥1,000から、地球一周の挑戦を後押しするプランまで、幅広くご用意しました。</p>
 
-      <!-- Plan A -->
-      <div class="plan-card fade-in">
-        <div class="plan-name" data-i18n="plan.a.name">PLAN A — エールスポンサー</div>
-        <div class="plan-price">¥10,000<span data-i18n="plan.unit">/一口</span></div>
-        <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.a.slots">枠数制限なし</div>
-        <div class="plan-desc" data-i18n="plan.a.desc">ジャックの挑戦を応援できるスタンダード支援プラン。</div>
-        <ul class="plan-benefits">
-          <li data-i18n="bt.a1n">御礼メッセージ送付</li>
-          <li data-i18n="bt.a2n">支援者ページへ名前掲載</li>
-          <li data-i18n="bt.a3n">徒歩地球一周挑戦メンバーとして記録</li>
-        </ul>
-        <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('a')">今すぐ Jackを応援する</button>
+    <div class="funding-progress fade-in">
+      <div class="funding-top">
+        <span class="funding-raised">¥<span id="funding-raised-num">230,000</span></span>
+        <span class="funding-goal"><span data-i18n="funding.goalLabel">目標</span> ¥2,000,000</span>
       </div>
+      <div class="funding-bar-track"><div class="funding-bar-fill" id="funding-bar-fill" style="width:11.5%"></div></div>
+      <div class="funding-sub"><span id="funding-supporters-num">10</span><span data-i18n="funding.supportersSuffix">人の支援者から応援をいただいています</span></div>
+    </div>
 
-      <!-- Plan B -->
-      <div class="plan-card fade-in">
-        <div class="plan-name" data-i18n="plan.b.name">PLAN B — ジャーニースポンサー</div>
-        <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
-        <div class="plan-slots" id="slots-b"></div>
-        <div class="plan-desc" data-i18n="plan.b.desc">世界を歩く旅路を、SNS・YouTubeを通して共に発信する応援プラン。</div>
-        <ul class="plan-benefits">
-          <li data-i18n="bt.b1n">Instagram・Xで支援者紹介</li>
-          <li data-i18n="bt.b2n">各到達地点で活動報告投稿</li>
-          <li data-i18n="bt.b3n">徒歩地球一周公式サポーターとして掲載</li>
-          <li data-i18n="bt.b4n">限定オープンチャット招待</li>
-        </ul>
-        <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('b')">今すぐ Jackを応援する</button>
+    <!-- Light support -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.light">ライト・お気持ち応援枠</div>
+      <div class="plans-grid">
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.a.name">コーヒー1杯のエール</div>
+          <div class="plan-price">¥1,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.a.desc">コーヒー1杯分の気軽な応援で、ジャックの挑戦を後押ししてください。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.a1n">御礼メッセージ送付</li>
+            <li data-i18n="bt.a2n">支援者ページへ名前掲載</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('a')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.b.name">旅の相棒 — 日本国旗へお名前記入</div>
+          <div class="plan-price">¥3,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.b.desc">リヤカーに掲げる日本国旗の寄せ書きに、あなたのお名前を記入します。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.b1n">日本国旗へお名前記入（寄せ書き）</li>
+            <li data-i18n="bt.b2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('b')">今すぐ Jackを応援する</button>
+        </div>
       </div>
+    </div>
 
-      <!-- Plan C featured -->
-      <div class="plan-card featured fade-in">
-        <div class="plan-name" data-i18n="plan.c.name">PLAN C — メディアスポンサー</div>
-        <div class="plan-price">¥50,000<span data-i18n="plan.unit">/一口</span></div>
-        <div class="plan-slots" id="slots-c"></div>
-        <div class="plan-desc" data-i18n="plan.c.desc">YouTube・SNSを通して継続的な露出を行うPRプラン。</div>
-        <ul class="plan-benefits">
-          <li data-i18n="bt.c1n">YouTube概要欄へ社名掲載（半年）</li>
-          <li data-i18n="bt.c2n">限定写真・動画共有</li>
-          <li data-i18n="bt.c3n">活動レポート共有</li>
-        </ul>
-        <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('c')">今すぐ Jackを応援する</button>
+    <!-- Digital / experience / stay -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.digital">デジタル・体験・拠点プラン</div>
+      <div class="plans-grid">
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.d.name">旅の拠点に泊まる — 「ブリッジ」宿泊プラン</div>
+          <div class="plan-price">¥5,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
+          <div class="plan-desc" data-i18n="plan.d.desc">ジャックが下関で営むゲストハウス「ブリッジ」に宿泊できるプランです。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.d1n">ブリッジ（下関）宿泊1泊</li>
+            <li data-i18n="bt.d2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('d')">今すぐ Jackを応援する</button>
+        </div>
       </div>
+    </div>
 
-      <!-- Plan D -->
-      <div class="plan-card fade-in">
-        <div class="plan-name" data-i18n="plan.d.name">PLAN D — フラッグスポンサー</div>
-        <div class="plan-price">¥100,000<span data-i18n="plan.unit">/一口</span></div>
-        <div class="plan-slots" id="slots-d"></div>
-        <div class="plan-desc" data-i18n="plan.d.desc">アメリカ大陸徒歩横断を共に歩く、象徴的スポンサー参加プラン。</div>
-        <ul class="plan-benefits">
-          <li data-i18n="bt.d1n">日本国旗へロゴ・名前掲載</li>
-          <li data-i18n="bt.d2n">YouTube動画内で企業紹介</li>
-          <li data-i18n="bt.d3n">スタート時・各地到達時・ゴール時などで継続露出</li>
-          <li data-i18n="bt.d4n">アメリカ各地の絶景地から限定動画送付</li>
-          <li data-i18n="bt.d5n">SNSで特別スポンサー紹介</li>
-        </ul>
-        <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('d')">今すぐ Jackを応援する</button>
+    <!-- Name-listed -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.name">デジタル＆ネーム掲載プラン</div>
+      <div class="plans-grid">
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.f.name">名前を刻む — YouTube概要欄サポータープラン</div>
+          <div class="plan-price">¥10,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.f.desc">YouTube概要欄にお名前を掲載し、旅の記録に名を刻みます。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.f1n">YouTube概要欄へお名前掲載</li>
+            <li data-i18n="bt.f2n">支援者ページへ名前掲載</li>
+            <li data-i18n="bt.f3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('f')">今すぐ Jackを応援する</button>
+        </div>
       </div>
+    </div>
 
-      <!-- Plan E -->
-      <div class="plan-card fade-in">
-        <div class="plan-name" data-i18n="plan.e.name">PLAN E — ドキュメンタリースポンサー</div>
-        <div class="plan-price">¥300,000<span data-i18n="plan.unit">/一口</span></div>
-        <div class="plan-slots" id="slots-e"></div>
-        <div class="plan-desc" data-i18n="plan.e.desc">ブランドストーリーを映像として世界へ発信する、本格タイアッププラン。</div>
-        <ul class="plan-benefits">
-          <li data-i18n="bt.e1n">リヤカー側面へロゴ掲載</li>
-          <li data-i18n="bt.d2n">YouTube動画内で企業紹介</li>
-          <li data-i18n="bt.e2n">ドキュメンタリー作品へ企業名掲載</li>
-          <li data-i18n="bt.e3n">ブランド紹介を含む映像演出</li>
-          <li data-i18n="bt.e4n">YouTubeエンディングで社名orロゴ掲載</li>
-          <li data-i18n="bt.e5n">特別スポンサーインタビュー対応</li>
-        </ul>
-        <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('e')">今すぐ Jackを応援する</button>
+    <!-- Hardcore survival -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.hardcore">ハードコア・サバイバル枠</div>
+      <div class="plans-grid">
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.g.name">荒野の生還パーツ — 「ボロい私物」の欠片とお手紙</div>
+          <div class="plan-price">¥15,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-slots" id="slots-g"></div>
+          <div class="plan-desc" data-i18n="plan.g.desc">5,000kmを共に戦った私物の欠片と、直筆のお手紙をお届けします。20個限定。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.g1n">旅で使用した私物の欠片</li>
+            <li data-i18n="bt.g2n">直筆のお手紙</li>
+            <li data-i18n="bt.g3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('g')">今すぐ Jackを応援する</button>
+        </div>
       </div>
+    </div>
 
-      <!-- Plan F -->
-      <div class="plan-card legendary fade-in">
-        <div class="plan-name" data-i18n="plan.f.name">PLAN F — レジェンドスポンサー</div>
-        <div class="plan-price" style="font-size:28px">¥1,000,000<span data-i18n="plan.unit">/一口</span></div>
-        <div class="plan-slots" id="slots-f"></div>
-        <div class="plan-desc" data-i18n="plan.f.desc">徒歩地球一周挑戦を支える"公式メインスポンサー"プラン。ウェア・映像・SNSなど、プロジェクト全体を通して継続的にブランドを発信します。</div>
-        <ul class="plan-benefits">
-          <li data-i18n="bt.f1n">ウェア最上部へロゴ掲載</li>
-          <li data-i18n="bt.f2n">リヤカー大型ロゴ掲載</li>
-          <li data-i18n="bt.f3n">動画内で継続的に特別紹介</li>
-          <li data-i18n="bt.f4n">ゴール達成時メインクレジット掲載</li>
-          <li data-i18n="bt.f5n">4K映像素材の商用二次利用可能</li>
-          <li data-i18n="bt.f6n">「Powered by ○○」表記対応</li>
-          <li data-i18n="bt.f7n">徒歩地球一周プロジェクト公式パートナー認定</li>
-          <li data-i18n="bt.f8n">特別協賛企業として各媒体で優先掲載</li>
-        </ul>
-        <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('f')">今すぐ Jackを応援する</button>
+    <!-- Local surprise / homecoming -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.surprise">現地サプライズ・帰国直撃枠</div>
+      <div class="plans-grid">
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.h.name">アメリカからの生還 — ルート66エアメール＆限定ステッカー</div>
+          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.h.desc">ルート66から届く直筆のエアメールと、限定ステッカーをお届けします。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.h1n">ルート66からの直筆エアメール</li>
+            <li data-i18n="bt.h2n">限定ステッカー</li>
+            <li data-i18n="bt.h3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('h')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card featured fade-in">
+          <div class="plan-name" data-i18n="plan.i.name">レジェンド集結 — 伝説の旅人オンライン飲み会</div>
+          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-slots" id="slots-i"></div>
+          <div class="plan-desc" data-i18n="plan.i.desc">ジャック本人に加え、ゴッチさん・うすくくん・こたろうさんも参加する2時間のオンライン飲み会にご招待します。先着3名限定。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.i1n">ゴッチさん・うすくくん・こたろうさんも参加のオンライン飲み会（2時間）へご招待</li>
+            <li data-i18n="bt.i2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('i')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.j.name">あなたの街に直撃！ — 帰国後の日本縦断 挨拶＆飲みに行く権利</div>
+          <div class="plan-price">¥50,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
+          <div class="plan-desc" data-i18n="plan.j.desc">帰国後の日本縦断中、あなたの街のご自宅・お店へ直接伺い、ご挨拶と乾杯をします。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.j1n">ご自宅・お店への訪問</li>
+            <li data-i18n="bt.j2n">一緒に飲みに行く権利</li>
+            <li data-i18n="bt.j3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('j')">今すぐ Jackを応援する</button>
+        </div>
       </div>
+    </div>
 
+    <!-- Speaking / corporate tie-up -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.corporate">講演・企業タイアップ枠</div>
+      <div class="plans-grid">
+        <div class="plan-card legendary fade-in">
+          <div class="plan-name" data-i18n="plan.k.name">出張講演会プラン — あなたの会社や学校にジャックを呼ぶ権利</div>
+          <div class="plan-price">¥100,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.noneTravel">枠数制限なし（交通費込）</div>
+          <div class="plan-desc" data-i18n="plan.k.desc">交通費込みで、あなたの会社や学校にジャックが伺い講演を行います。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.k1n">出張講演（交通費込）</li>
+            <li data-i18n="bt.k2n">支援者ページへ名前掲載</li>
+            <li data-i18n="bt.k3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('k')">今すぐ Jackを応援する</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1276,65 +893,23 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           </div>
           <div class="form-group">
             <label data-i18n="form.plan.label">ご希望のプラン *</label>
-            <select id="f-plan" required onchange="updateFormFields()">
+            <select id="f-plan" required>
               <option value="" data-i18n="form.plan.opt0">選択してください</option>
-              <option value="PLAN A（¥10,000）エールスポンサー" data-i18n="form.plan.optA">PLAN A — エールスポンサー（¥10,000）</option>
-              <option value="PLAN B（¥30,000）ジャーニースポンサー" data-i18n="form.plan.optB">PLAN B — ジャーニースポンサー（¥30,000）</option>
-              <option value="PLAN C（¥50,000）メディアスポンサー" data-i18n="form.plan.optC">PLAN C — メディアスポンサー（¥50,000）</option>
-              <option value="PLAN D（¥100,000）フラッグスポンサー" data-i18n="form.plan.optD">PLAN D — フラッグスポンサー（¥100,000）</option>
-              <option value="PLAN E（¥300,000）ドキュメンタリースポンサー" data-i18n="form.plan.optE">PLAN E — ドキュメンタリースポンサー（¥300,000）</option>
-              <option value="PLAN F（¥1,000,000）レジェンドスポンサー" data-i18n="form.plan.optF">PLAN F — レジェンドスポンサー（¥1,000,000）</option>
+              <option value="a：コーヒー1杯のエール（¥1,000）" data-i18n="form.plan.optA">コーヒー1杯のエール（¥1,000）</option>
+              <option value="b：旅の相棒 日本国旗へお名前記入（¥3,000）" data-i18n="form.plan.optB">旅の相棒 — 日本国旗へお名前記入（¥3,000）</option>
+              <option value="d：旅の拠点に泊まる ブリッジ宿泊（¥5,000）" data-i18n="form.plan.optD">旅の拠点に泊まる — ブリッジ宿泊（¥5,000）</option>
+              <option value="f：名前を刻む YouTube概要欄（¥10,000）" data-i18n="form.plan.optF">名前を刻む — YouTube概要欄（¥10,000）</option>
+              <option value="g：荒野の生還パーツ（¥15,000）" data-i18n="form.plan.optG">荒野の生還パーツ（¥15,000）</option>
+              <option value="h：アメリカからの生還 ルート66（¥30,000）" data-i18n="form.plan.optH">アメリカからの生還 — ルート66（¥30,000）</option>
+              <option value="i：レジェンド集結 オンライン飲み会（¥30,000）" data-i18n="form.plan.optI">レジェンド集結 — オンライン飲み会（¥30,000）</option>
+              <option value="j：あなたの街に直撃！（¥50,000）" data-i18n="form.plan.optJ">あなたの街に直撃！（¥50,000）</option>
+              <option value="k：出張講演会プラン（¥100,000）" data-i18n="form.plan.optK">出張講演会プラン（¥100,000）</option>
             </select>
           </div>
 
-          <!-- A以上: 掲載希望名 -->
-          <div class="form-group pf" data-min="a" style="display:none">
+          <div class="form-group">
             <label data-i18n="form.display.label">掲載希望名（支援者ページ・SNS等に表示する名前）</label>
-            <input type="text" id="f-display" placeholder="企業名・活動名・ニックネーム可。空欄の場合はお名前で掲載" data-i18n-ph="form.display.ph">
-          </div>
-
-          <!-- B以上: Instagram / X -->
-          <div class="form-group pf" data-min="b" style="display:none">
-            <label data-i18n="form.instagram.label">Instagramアカウント（任意）</label>
-            <input type="text" id="f-instagram" placeholder="例：@jack_magician">
-            <small style="color:var(--text-dim);font-size:11px" data-i18n="form.instagram.note">Instagram・Xでスポンサー紹介の際に使用します</small>
-          </div>
-          <div class="form-group pf" data-min="b" style="display:none">
-            <label data-i18n="form.twitter.label">X（旧Twitter）アカウント（任意）</label>
-            <input type="text" id="f-twitter" placeholder="例：@jack_kimono">
-          </div>
-
-          <!-- C以上: ウェブサイトURL -->
-          <div class="form-group pf" data-min="c" style="display:none">
-            <label data-i18n="form.url.label">ウェブサイト・SNSページURL（任意）</label>
-            <input type="text" id="f-url" placeholder="https://example.com">
-            <small style="color:var(--text-dim);font-size:11px" data-i18n="form.url.note">YouTube概要欄への掲載に使用します</small>
-          </div>
-
-          <!-- D以上: 紹介文・ロゴ案内 -->
-          <div class="form-group pf" data-min="d" style="display:none">
-            <label data-i18n="form.intro.label">企業・活動のご紹介文（YouTube動画内・SNS紹介用）</label>
-            <textarea id="f-intro" style="height:80px" placeholder="例：「〇〇株式会社は日本の伝統文化を世界へ発信する企業です」（100字程度）" data-i18n-ph="form.intro.ph"></textarea>
-          </div>
-          <div class="pf" data-min="d" style="display:none;margin-bottom:16px">
-            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--text-dim);line-height:1.7" data-i18n="form.logoNote">
-              📎 <strong style="color:var(--text)">ロゴデータの送付について</strong><br>
-              申し込み送信後、ロゴ画像（PNG・AI・SVG推奨）を<br>
-              <strong style="color:var(--green-light)">kimonomagician@gmail.com</strong> までお送りください。
-            </div>
-          </div>
-
-          <!-- E以上: ブランドストーリー -->
-          <div class="form-group pf" data-min="e" style="display:none">
-            <label data-i18n="form.story.label">ブランドストーリー・映像演出のご希望（任意）</label>
-            <textarea id="f-story" style="height:100px" placeholder="ドキュメンタリー映像・YouTube内でどのように紹介してほしいか、想いやビジョンをご記載ください" data-i18n-ph="form.story.ph"></textarea>
-          </div>
-
-          <!-- F のみ: Powered by 表記 -->
-          <div class="form-group pf" data-min="f" style="display:none">
-            <label data-i18n="form.powered.label">「Powered by ○○」の表記（動画・各媒体掲載用）</label>
-            <input type="text" id="f-powered" placeholder="例：旅好き商事 / TABIZUKI Co.">
-            <small style="color:var(--text-dim);font-size:11px" data-i18n="form.powered.note">動画エンディング・公式サイトに表示するメインスポンサー名称です</small>
+            <input type="text" id="f-display" placeholder="ニックネーム可。空欄の場合はお名前で掲載" data-i18n-ph="form.display.ph">
           </div>
 
           <!-- 全プラン: 応援メッセージ -->
@@ -1503,11 +1078,8 @@ setInterval(function() {
 
 // === PLAN SLOTS ===
 var planConfig = {
-  'b': { max: 20, label: 'slots-b' },
-  'c': { max: 15, label: 'slots-c' },
-  'd': { max: 10, label: 'slots-d' },
-  'e': { max: 5, fixedUsed: 0, label: 'slots-e' },
-  'f': { max: 3, fixedUsed: 0, label: 'slots-f' }
+  'g': { max: 20, label: 'slots-g' },  // 荒野の生還パーツ 20個限定
+  'i': { max: 3, fixedUsed: 0, label: 'slots-i' }  // レジェンド集結 先着3名
 };
 Object.keys(planConfig).forEach(function(k) {
   var cfg = planConfig[k];
@@ -1929,45 +1501,37 @@ drawIdleState();
 
 // === FORM ===
 // === STRIPE PAYMENT LINKS ===
+// key: プラン記号（下のplanPricesと対応）
 var stripeLinks = {
-  a: 'https://buy.stripe.com/fZu14n73faQ24qz5Y5dZ606',
-  b: 'https://buy.stripe.com/dRm9AT2MZf6i7CLaeldZ608',
-  c: 'https://buy.stripe.com/9B600j9bn8HU6yH729dZ609',
-  d: 'https://buy.stripe.com/5kQfZhdrDcYag9hcmtdZ60a',
-  e: 'https://buy.stripe.com/6oUeVd5Zb9LY3mv3PXdZ60b',
-  f: 'https://buy.stripe.com/4gMdR92MZ7DQbT1aeldZ60c'
+  a: 'https://buy.stripe.com/3cI6oH5Zb0bo1en729dZ60f', // コーヒー1杯のエール ¥1,000
+  b: 'https://buy.stripe.com/28E6oH1IVgam3mv4U1dZ60e', // 旅の相棒（国旗へお名前記入） ¥3,000
+  d: 'https://buy.stripe.com/aFafZh2MZ4rE3mveuBdZ60g', // 旅の拠点に泊まる（ブリッジ宿泊） ¥5,000
+  f: 'https://buy.stripe.com/aFa9ATdrD0bo5uD86ddZ60h', // 名前を刻む（YouTube概要欄） ¥10,000
+  g: 'https://buy.stripe.com/fZuaEXbjv6zM3mv3PXdZ60i', // 荒野の生還パーツ ¥15,000
+  h: 'https://buy.stripe.com/4gM7sLbjv0bo5uD3PXdZ60j', // アメリカからの生還（ルート66） ¥30,000
+  i: 'https://buy.stripe.com/fZu7sL87j1fs5uD3PXdZ60k', // レジェンド集結（オンライン飲み会） ¥30,000
+  j: 'https://buy.stripe.com/3cI28r5Zb9LY4qz5Y5dZ60l', // あなたの街に直撃！ ¥50,000
+  k: 'https://buy.stripe.com/cNi9AT5Zb5vIaOX0DLdZ60m'  // 出張講演会プラン ¥100,000
 };
+
+var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:30000, j:50000, k:100000 };
 
 function openStripePlan(k) {
   var link = stripeLinks[k];
   if (link) {
-    link += (link.indexOf('?') === -1 ? '?' : '&') + 'locale=' + (currentLang === 'en' ? 'en' : 'ja');
+    link += (link.indexOf('?') === -1 ? '?' : '&') + 'locale=' + (currentLang === 'en' ? 'en' : 'ja') + '&client_reference_id=' + k;
     window.open(link, '_blank');
     showToast(currentLang === 'en' ? 'Redirecting to Stripe checkout...' : 'Stripeの決済ページへ移動します...');
   } else {
-    scrollToForm('PLAN ' + k.toUpperCase());
+    scrollToForm(k);
   }
 }
 
-var planOrder = ['a','b','c','d','e','f'];
-
-function updateFormFields() {
-  var val = document.getElementById('f-plan').value;
-  var m = val.match(/PLAN ([A-F])/);
-  var key = m ? m[1].toLowerCase() : '';
-  var idx = planOrder.indexOf(key);
-  document.querySelectorAll('.pf').forEach(function(el) {
-    var min = (el.getAttribute('data-min') || '').toLowerCase();
-    var minIdx = planOrder.indexOf(min);
-    el.style.display = (idx >= 0 && idx >= minIdx) ? '' : 'none';
-  });
-}
-
-function scrollToForm(plan) {
+function scrollToForm(planKey) {
   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   setTimeout(function() {
     var sel = document.getElementById('f-plan');
-    if (sel) { sel.value = plan; updateFormFields(); }
+    if (sel) { sel.value = planKey; }
   }, 500);
 }
 
@@ -2090,24 +1654,48 @@ function updateVisitorCount(data) {
   s.src = GAS_SPONSORS_ENDPOINT + '?action=visit&callback=updateVisitorCount';
   document.head.appendChild(s);
 })();
-var PLAN_BADGE_CLASS = { A:'', B:'', C:'', D:'gold', E:'gold', F:'gold' };
+// === FUNDING PROGRESS ===
+var FUNDING_GOAL = 2000000;
+var FUNDING_BASE_RAISED = 230000;
+var FUNDING_BASE_SUPPORTERS = 10;
+
+function updateFundingBar(extraSponsors) {
+  extraSponsors = extraSponsors || [];
+  var extraRaised = 0;
+  extraSponsors.forEach(function(s) {
+    var m = (s.plan || '').match(/^([a-k])[：:]/i);
+    var key = m ? m[1].toLowerCase() : '';
+    extraRaised += planPrices[key] || 0;
+  });
+  var raised = FUNDING_BASE_RAISED + extraRaised;
+  var supporters = FUNDING_BASE_SUPPORTERS + extraSponsors.length;
+  var pct = Math.min(100, (raised / FUNDING_GOAL) * 100);
+  var raisedEl = document.getElementById('funding-raised-num');
+  var supEl = document.getElementById('funding-supporters-num');
+  var fillEl = document.getElementById('funding-bar-fill');
+  if (raisedEl) raisedEl.textContent = raised.toLocaleString();
+  if (supEl) supEl.textContent = supporters.toLocaleString();
+  if (fillEl) fillEl.style.width = pct + '%';
+}
+updateFundingBar();
 
 function loadSponsors(data) {
   var grid  = document.getElementById('sponsor-grid');
   var empty = document.getElementById('sponsors-empty');
   var sec   = document.getElementById('sponsors');
+  updateFundingBar(data && data.sponsors);
   if (!data || !data.sponsors || data.sponsors.length === 0) {
     if (sec) sec.style.display = 'none';
     return;
   }
   data.sponsors.forEach(function(s) {
-    var key = (s.plan || '').match(/PLAN\s*([A-F])/i);
-    var k   = key ? key[1].toUpperCase() : '';
-    var cls = PLAN_BADGE_CLASS[k] || '';
+    var key = (s.plan || '').match(/^([a-k])[：:]/i);
+    var k   = key ? key[1].toLowerCase() : '';
+    var cls = (planPrices[k] || 0) >= 30000 ? 'gold' : '';
     var card = document.createElement('div');
     card.className = 'sponsor-card fade-in';
     card.innerHTML =
-      '<div class="sponsor-badge ' + cls + '">' + (k ? 'PLAN ' + k : 'SP') + '</div>' +
+      '<div class="sponsor-badge ' + cls + '">' + (k ? '¥' + planPrices[k].toLocaleString() : 'SP') + '</div>' +
       '<div><div class="sponsor-name">' + (s.name || '') + '</div>' +
       (s.message ? '<div class="sponsor-msg">' + s.message + '</div>' : '') + '</div>';
     grid.appendChild(card);
@@ -2258,7 +1846,6 @@ var I18N_EN = {
   "hero.badge5": "YouTube — <strong>32,000 subscribers</strong>",
   "hero.badge6": "<strong>Well above average</strong> ad value",
   "hero.badge7": "<strong>Featured by major media</strong> at home and abroad",
-  "hero.badge8": "<strong>Public-private partners</strong> backing the project",
   "hero.btn1": "Become a Sponsor",
   "hero.btn2": "Discover the Journey",
   "hero.visitorPre": "Page views: ",
@@ -2285,13 +1872,11 @@ var I18N_EN = {
   "journey.p2.tag2": "478 Days",
   "journey.p3.year": "PHASE 3 → Next Challenge",
   "journey.p3.title": "Walking Across America — Toward a Round-the-World Journey",
-  "journey.p3.desc": "The next frontier is America. Jungle, desert, high mountains — crossing six countries on foot, immersed in diverse nature and cultures. A 4-person professional team with an RV support vehicle minimizes risk, backed by a public-private partnership with the Philippine Department of Tourism and the NPO CebuGo, aiming for an unprecedented round-the-world trek on foot.",
+  "journey.p3.desc": "The next frontier is America. Jungle, desert, high mountains — crossing six countries on foot, immersed in diverse nature and cultures. A 4-person professional team with an RV support vehicle minimizes risk, aiming for an unprecedented round-the-world trek on foot.",
   "journey.p3.tagDays": "170 Days",
   "journey.p3.tagWalk": "North America On Foot",
   "journey.p3.tagTeam": "4-Person Pro Team",
   "journey.p3.tagCamper": "RV Support Vehicle",
-  "journey.p3.tagPublic": "Public-Private Partnership Backing",
-  "journey.p3.partners": "Partners: Philippine Department of Tourism (DOT) / NPO CebuGo",
   "journey.p3.tagGold": "Now Seeking Sponsors",
 
   "profile.title": "About <em>Kimono Magician Jack</em>",
@@ -2349,139 +1934,76 @@ var I18N_EN = {
   "game.statusIdle": "Space or click to jump",
   "game.startBtn": "Start Game!",
 
-  "benefits.title": "What You Get as <em>a Sponsor</em>",
-  "benefits.desc": "This isn't just an ‘ad slot.’ It's 170 days of walking 5,000km across America, averaging 35km a day.<br><br>Your brand is etched into every step of this grueling challenge, and broadcast to the world as a story. That's the value of this project.",
-  "benefits.card1.title": "Join the Journey as a Sponsor — Walk America Together",
-  "benefits.card1.desc": "Your logo travels the world's roads alongside a kimono. Over the 170 days crossing America, every milestone is reported on social media. Your logo appears on the rickshaw, apparel, and Japanese flag — permanently captured in 4K footage.",
-  "benefits.card2.title": "Free, Permanent Rights to Reuse the Footage",
-  "benefits.card2.desc": "Use the filmed material (4K footage across 170 days) freely for your website, social media, in-store displays, TV commercials, and web ads. High-quality video content at zero production cost.",
-  "benefits.card3.title": "A Reach of 30 Million+",
-  "benefits.card3.desc": "YouTube (20M+) + the Philippine Department of Tourism's social channels (2.9M Facebook followers) + domestic and international media coverage add up to an estimated reach of 30 million+. One sponsorship, unmatched scale.",
-  "benefits.card4.title": "Brand Value Carried by an Inspiring Story",
-  "benefits.card4.desc": "Be remembered by fans for 170 days as ‘the company that backed a challenger.’ Reach directly into the 35–64 core demographic with purchasing power (75.2% male).",
+  "cat.light": "Light Support",
+  "cat.digital": "Digital & Stay Experience",
+  "cat.name": "Digital & Name Listing",
+  "cat.hardcore": "Hardcore Survival",
+  "cat.surprise": "Local Surprise & Homecoming",
+  "cat.corporate": "Speaking Engagement & Corporate Tie-up",
+  "cat.legend": "Legendary Handover",
 
-  "roi.title": "Compared to “Ordinary Advertising”—",
-  "roi.left.label": "Typical Social Media Ads",
-  "roi.left.line1": "CPM: <strong style=\"color:var(--white)\">¥300–¥600</strong>",
-  "roi.left.line2": "Duration: <strong style=\"color:var(--white)\">Days to weeks</strong>",
-  "roi.left.line3": "Storytelling: <strong style=\"color:var(--white)\">None</strong>",
-  "roi.left.line4": "Reuse rights: <strong style=\"color:var(--white)\">Not allowed / extra cost</strong>",
-  "roi.left.line5": "Memorability: <strong style=\"color:var(--white)\">Low (often skipped)</strong>",
-  "roi.badge": "Jack Sponsorship",
-  "roi.right.line1": "CPM: <strong style=\"color:var(--gold)\">¥1,137 (measured)</strong>",
-  "roi.right.line2": "Duration: <strong style=\"color:var(--gold)\">170 days, permanent</strong>",
-  "roi.right.line3": "Storytelling: <strong style=\"color:var(--gold)\">Part of an inspiring adventure</strong>",
-  "roi.right.line4": "Reuse rights: <strong style=\"color:var(--gold)\">Free, unlimited 4K footage</strong>",
-  "roi.right.line5": "Memorability: <strong style=\"color:var(--gold)\">High (fans keep watching)</strong>",
+  "funding.goalLabel": "Goal",
+  "funding.supportersSuffix": " supporters and counting",
 
-  "advalue.title": "The Advertising Value Sponsorship Creates",
-  "advalue.formula": "Estimated at CPM ¥1,137 × 97M impressions ÷ 1,000",
-  "advalue.card1.label": "YouTube View Equivalent",
-  "advalue.card1.val": "¥20M+",
-  "advalue.card1.sub": "Estimated ad value",
-  "advalue.card2.label": "Media Exposure Equivalent",
-  "advalue.card2.val": "¥5M+",
-  "advalue.card2.sub": "TBS, regional TV, foreign press",
-  "advalue.card3.label": "4K Footage Value",
-  "advalue.card3.val": "¥3M+",
-  "advalue.card3.sub": "170 days, free reuse rights",
-  "advalue.card4.label": "Total Estimated Ad Value",
-  "advalue.card4.val": "¥32M+",
-  "advalue.card4.sub": "Roughly 12x return on investment",
+  "plan.slots.none": "Unlimited slots",
+  "plan.slots.limited": "Limited quantity",
+  "plan.slots.noneTravel": "Unlimited slots (travel expenses included)",
 
-  "cpmtable.title": "YouTube CPM Comparison (per 1,000 views)",
-  "cpmtable.r1.name": "Typical YouTube video (entertainment)",
-  "cpmtable.r1.note": "Market average",
-  "cpmtable.r2.name": "Non-skippable bumper ad slots",
-  "cpmtable.r2.note": "Premium / brand-focused",
-  "cpmtable.r3.name": "★ Jack (measured via YouTube Studio)",
-  "cpmtable.r3.note": "~2x the average",
-  "cpmtable.r4.name": "High-CPM genres (finance, business, beauty)",
-  "cpmtable.r4.note": "Top of the industry",
-  "cpmtable.footnote": "※ Based on GMS/Sienca/AdMarket/Stock Sun magazine 2024-2025, Shopify, and 2026 YouTube CPM research",
-
-  "benefitstable.title": "Benefits by Plan",
-  "benefitstable.subtitle": "Each plan's benefits are independent.",
-  "benefitstable.headCol": "Benefit",
-  "benefitstable.footnote": "★ PLAN F exclusive benefit / ● Included in that plan",
-
-  "plan.a.name": "PLAN A — Cheer Sponsor",
-  "plan.b.name": "PLAN B — Journey Sponsor",
-  "plan.c.name": "PLAN C — Media Sponsor",
-  "plan.d.name": "PLAN D — Flag Sponsor",
-  "plan.e.name": "PLAN E — Documentary Sponsor",
-  "plan.f.name": "PLAN F — Legend Sponsor",
-
-  "bt.a1": "✉ Thank-you message sent",
-  "bt.a2": "👤 Name listed on supporters page",
-  "bt.a3": "📝 Recorded as a member of the round-the-world challenge",
-  "bt.b1": "📱 Featured as a supporter on Instagram & X",
-  "bt.b2": "🏃 Progress-report posts at each milestone",
-  "bt.b3": "🌐 Listed as an official supporter of the round-the-world walk",
-  "bt.b4": "💬 Invitation to an exclusive open chat",
-  "bt.c1": "▶ Company name in YouTube description (6 months)",
-  "bt.c2": "📷 Exclusive photo & video sharing",
-  "bt.c3": "📊 Activity report sharing",
-  "bt.d1": "🇯🇵 Logo & name on the Japanese flag",
-  "bt.d2": "🎬 Company feature in YouTube videos",
-  "bt.d3": "⏱ Ongoing exposure at start, milestones, and finish",
-  "bt.d4": "🎥 Exclusive video sent from scenic spots in America",
-  "bt.d5": "📣 Special sponsor shoutout on social media",
-  "bt.e1": "🛒 Logo on the side of the rickshaw",
-  "bt.e2": "🎞 Company name in the documentary film",
-  "bt.e3": "🎭 Brand feature woven into the film",
-  "bt.e4": "📺 Company name or logo at the YouTube ending",
-  "bt.e5": "🎤 Dedicated sponsor interview",
-  "bt.f1": "👘 Logo on the top of the apparel",
-  "bt.f2": "🚜 Large logo on the rickshaw",
-  "bt.f3": "⭐ Ongoing special mentions in videos",
-  "bt.f4": "🏆 Main credit at finish-line achievement",
-  "bt.f5": "💿 Commercial reuse rights for 4K footage",
-  "bt.f6": "™ “Powered by [Your Company]” credit",
-  "bt.f7": "🎖 Certified official partner of the round-the-world project",
-  "bt.f8": "📰 Priority placement as a special sponsor across media",
-
+  "plan.a.name": "A Cup of Coffee Cheer",
+  "plan.a.desc": "A casual, coffee-sized way to cheer Jack on.",
   "bt.a1n": "Thank-you message sent",
   "bt.a2n": "Name listed on supporters page",
-  "bt.a3n": "Recorded as a member of the round-the-world challenge",
-  "bt.b1n": "Featured as a supporter on Instagram & X",
-  "bt.b2n": "Progress-report posts at each milestone",
-  "bt.b3n": "Listed as an official supporter of the round-the-world walk",
-  "bt.b4n": "Invitation to an exclusive open chat",
-  "bt.c1n": "Company name in YouTube description (6 months)",
-  "bt.c2n": "Exclusive photo & video sharing",
-  "bt.c3n": "Activity report sharing",
-  "bt.d1n": "Logo & name on the Japanese flag",
-  "bt.d2n": "Company feature in YouTube videos",
-  "bt.d3n": "Ongoing exposure at start, milestones, and finish",
-  "bt.d4n": "Exclusive video sent from scenic spots in America",
-  "bt.d5n": "Special sponsor shoutout on social media",
-  "bt.e1n": "Logo on the side of the rickshaw",
-  "bt.e2n": "Company name in the documentary film",
-  "bt.e3n": "Brand feature woven into the film",
-  "bt.e4n": "Company name or logo at the YouTube ending",
-  "bt.e5n": "Dedicated sponsor interview",
-  "bt.f1n": "Logo on the top of the apparel",
-  "bt.f2n": "Large logo on the rickshaw",
-  "bt.f3n": "Ongoing special mentions in videos",
-  "bt.f4n": "Main credit at finish-line achievement",
-  "bt.f5n": "Commercial reuse rights for 4K footage",
-  "bt.f6n": "“Powered by [Your Company]” credit",
-  "bt.f7n": "Certified official partner of the round-the-world project",
-  "bt.f8n": "Priority placement as a special sponsor across media",
+
+  "plan.b.name": "Travel Companion — Your Name on the Japanese Flag",
+  "plan.b.desc": "Add your name to the message flag flown on the rickshaw — a group message on the Japanese flag.",
+  "bt.b1n": "Your name on the Japanese flag (group message)",
+  "bt.b2n": "Thank-you message sent",
+
+  "plan.d.name": "Stay at His Home Base — \"Bridge\" Guesthouse Plan",
+  "plan.d.desc": "A one-night stay at Bridge, the guesthouse Jack runs in Shimonoseki.",
+  "bt.d1n": "One night's stay at Bridge (Shimonoseki)",
+  "bt.d2n": "Thank-you message sent",
+
+  "plan.f.name": "Etch Your Name — YouTube Description Supporter Plan",
+  "plan.f.desc": "Your name listed in the YouTube description, etched into the record of the journey.",
+  "bt.f1n": "Name listed in the YouTube description",
+  "bt.f2n": "Name listed on supporters page",
+  "bt.f3n": "Thank-you message sent",
+
+  "plan.g.name": "Wilderness Survivor Relic — A Fragment of Worn Gear & a Letter",
+  "plan.g.desc": "A fragment of the gear that survived 5,000km with him, plus a handwritten letter. Limited to 20.",
+  "bt.g1n": "A fragment of gear used on the journey",
+  "bt.g2n": "A handwritten letter",
+  "bt.g3n": "Thank-you message sent",
+
+  "plan.h.name": "Survived America — Route 66 Airmail & Limited Sticker",
+  "plan.h.desc": "A handwritten airmail letter from Route 66, plus a limited sticker.",
+  "bt.h1n": "Handwritten airmail from Route 66",
+  "bt.h2n": "Limited sticker",
+  "bt.h3n": "Thank-you message sent",
+
+  "plan.i.name": "Legends Assemble — Online Drinks With the Legendary Traveler",
+  "plan.i.desc": "A 2-hour online drinking party with Jack and fellow travelers Gotchi, Usuku, and Kotaro. Limited to the first 3 people.",
+  "bt.i1n": "2-hour online drinks with Gotchi, Usuku & Kotaro",
+  "bt.i2n": "Thank-you message sent",
+
+  "plan.j.name": "Ambush in Your Town! — Homecoming Visit & Drinks",
+  "plan.j.desc": "During his post-trip trek across Japan, Jack visits your home or shop in person for a toast.",
+  "bt.j1n": "A personal visit to your home or shop",
+  "bt.j2n": "The right to go drinking together",
+  "bt.j3n": "Thank-you message sent",
+
+  "plan.k.name": "On-Site Talk Plan — Bring Jack to Your Company or School",
+  "plan.k.desc": "Jack visits your company or school to give a talk, travel expenses included.",
+  "bt.k1n": "On-site talk (travel expenses included)",
+  "bt.k2n": "Name listed on supporters page",
+  "bt.k3n": "Thank-you message sent",
 
   "plan.unit": "/unit",
   "plan.btn": "Support Jack Now",
-  "plan.a.slots": "Unlimited slots",
-  "plan.a.desc": "A standard plan to cheer on Jack's challenge.",
-  "plan.b.desc": "Follow the journey and help spread the word via SNS and YouTube.",
-  "plan.c.desc": "An ongoing PR plan with continued exposure through YouTube and social media.",
-  "plan.d.desc": "A flagship sponsorship — walk America together as a symbolic partner.",
-  "plan.e.desc": "A full-scale tie-up plan that tells your brand story on film, to the world.",
-  "plan.f.desc": "The official “main sponsor” plan behind the round-the-world challenge. Your brand featured continuously across apparel, film, and social media throughout the project.",
 
   "plans.title": "Sponsor <em>Plans</em>",
-  "plans.desc": "From a casual ¥10,000 to a historic round-the-world sponsorship — six plans to choose from.",
+  "plans.desc": "From a casual ¥1,000 to plans that carry his challenge across the world — a wide range to choose from.",
 
   "sponsors.title": "Our <em>Sponsors</em>",
   "sponsors.desc": "The people supporting Jack's journey. Thank you!",
@@ -2515,26 +2037,17 @@ var I18N_EN = {
   "form.email.label": "Email Address *",
   "form.plan.label": "Preferred Plan *",
   "form.plan.opt0": "Please select",
-  "form.plan.optA": "PLAN A — Cheer Sponsor (¥10,000)",
-  "form.plan.optB": "PLAN B — Journey Sponsor (¥30,000)",
-  "form.plan.optC": "PLAN C — Media Sponsor (¥50,000)",
-  "form.plan.optD": "PLAN D — Flag Sponsor (¥100,000)",
-  "form.plan.optE": "PLAN E — Documentary Sponsor (¥300,000)",
-  "form.plan.optF": "PLAN F — Legend Sponsor (¥1,000,000)",
+  "form.plan.optA": "A Cup of Coffee Cheer (¥1,000)",
+  "form.plan.optB": "Travel Companion — Flag Name (¥3,000)",
+  "form.plan.optD": "Stay at Bridge Guesthouse (¥5,000)",
+  "form.plan.optF": "YouTube Description Supporter (¥10,000)",
+  "form.plan.optG": "Wilderness Survivor Relic (¥15,000)",
+  "form.plan.optH": "Survived America — Route 66 (¥30,000)",
+  "form.plan.optI": "Legends Assemble — Online Drinks (¥30,000)",
+  "form.plan.optJ": "Ambush in Your Town! (¥50,000)",
+  "form.plan.optK": "On-Site Talk Plan (¥100,000)",
   "form.display.label": "Display Name (shown on supporters page, SNS, etc.)",
-  "form.display.ph": "Company/activity name or nickname OK. Leave blank to use your name.",
-  "form.instagram.label": "Instagram Account (optional)",
-  "form.instagram.note": "Used when featuring you as a sponsor on Instagram & X",
-  "form.twitter.label": "X (formerly Twitter) Account (optional)",
-  "form.url.label": "Website / SNS Page URL (optional)",
-  "form.url.note": "Used for the YouTube description listing",
-  "form.intro.label": "Company/Activity Introduction (for YouTube video & SNS features)",
-  "form.intro.ph": "e.g. “[Company Name] shares Japanese traditional culture with the world” (about 100 characters)",
-  "form.logoNote": "📎 <strong style=\"color:var(--text)\">About sending your logo</strong><br>After submitting, please send your logo (PNG, AI, or SVG preferred) to<br><strong style=\"color:var(--green-light)\">kimonomagician@gmail.com</strong>.",
-  "form.story.label": "Brand Story / Video Direction Preferences (optional)",
-  "form.story.ph": "Let us know how you'd like to be featured in the documentary footage or YouTube videos — your vision and ideas are welcome.",
-  "form.powered.label": "“Powered by [Your Company]” Credit (for video & media use)",
-  "form.powered.note": "This is the main sponsor name shown in video endings and on the official site",
+  "form.display.ph": "Nickname OK. Leave blank to use your name.",
   "form.msg.label": "Message of Support / Questions (optional)",
   "form.msg.ph": "Feel free to leave a message of support or any questions for Jack",
   "form.submit": "Submit Application",
@@ -2546,11 +2059,6 @@ var I18N_EN = {
 
   "footer.sub": "Walking Around the World — Sponsorship for the America Trek",
   "footer.contact": "Contact",
-
-  "public.1.name": "Philippine Department of Tourism (DOT)",
-  "public.1.desc": "Official backing planned (details being finalized). Expected to generate PR reach across Asia and during the U.S. crossing, including exposure to DOT's 2.9M Facebook followers.",
-  "public.2.name": "CebuGo (NPO Study Abroad Association, Yamaguchi Chapter)",
-  "public.2.desc": "A Cabinet Office-approved public NPO supporter, already covering 10% of sponsorship costs. Backing from a public institution helps ensure the project's compliance and credibility.",
 
   "stay.suffix": " elapsed"
 };
