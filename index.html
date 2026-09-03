@@ -805,6 +805,25 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
         </div>
       </div>
     </div>
+
+    <!-- Legendary handover -->
+    <div class="plan-category">
+      <div class="plan-category-label fade-in" data-i18n="cat.legend">レジェンド譲渡枠</div>
+      <div class="plans-grid">
+        <div class="plan-card legendary fade-in">
+          <div class="plan-name" data-i18n="plan.l.name">伝説の相棒譲渡 — 北米5,000kmを共に走破した「リアル・リヤカー」永久所有権プラン</div>
+          <div class="plan-price" style="font-size:28px">¥500,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-limited-tag" data-i18n="plan.slots.one">1点限定</div>
+          <div class="plan-desc" data-i18n="plan.l.desc">北米5,000kmをジャックと共に走り抜いた、実物のリヤカーそのものを永久に譲り受けられる、唯一無二のプランです。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.l1n">リヤカー本体の永久譲渡</li>
+            <li data-i18n="bt.l2n">支援者ページへ名前掲載</li>
+            <li data-i18n="bt.l3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('l')">今すぐ Jackを応援する</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -904,6 +923,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <option value="i：レジェンド集結 オンライン飲み会（¥30,000）" data-i18n="form.plan.optI">レジェンド集結 — オンライン飲み会（¥30,000）</option>
               <option value="j：あなたの街に直撃！（¥50,000）" data-i18n="form.plan.optJ">あなたの街に直撃！（¥50,000）</option>
               <option value="k：出張講演会プラン（¥100,000）" data-i18n="form.plan.optK">出張講演会プラン（¥100,000）</option>
+              <option value="l：伝説の相棒譲渡 リアル・リヤカー永久所有権（¥500,000）" data-i18n="form.plan.optL">伝説の相棒譲渡 — リアル・リヤカー永久所有権（¥500,000）</option>
             </select>
           </div>
 
@@ -1511,10 +1531,11 @@ var stripeLinks = {
   h: 'https://buy.stripe.com/4gM7sLbjv0bo5uD3PXdZ60j', // アメリカからの生還（ルート66） ¥30,000
   i: 'https://buy.stripe.com/fZu7sL87j1fs5uD3PXdZ60k', // レジェンド集結（オンライン飲み会） ¥30,000
   j: 'https://buy.stripe.com/3cI28r5Zb9LY4qz5Y5dZ60l', // あなたの街に直撃！ ¥50,000
-  k: 'https://buy.stripe.com/cNi9AT5Zb5vIaOX0DLdZ60m'  // 出張講演会プラン ¥100,000
+  k: 'https://buy.stripe.com/cNi9AT5Zb5vIaOX0DLdZ60m', // 出張講演会プラン ¥100,000
+  l: 'https://buy.stripe.com/7sYfZhcnzbU65uD9ahdZ60n'  // 伝説の相棒譲渡（リアル・リヤカー永久所有権） ¥500,000
 };
 
-var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:30000, j:50000, k:100000 };
+var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:30000, j:50000, k:100000, l:500000 };
 
 function openStripePlan(k) {
   var link = stripeLinks[k];
@@ -1663,7 +1684,7 @@ function updateFundingBar(extraSponsors) {
   extraSponsors = extraSponsors || [];
   var extraRaised = 0;
   extraSponsors.forEach(function(s) {
-    var m = (s.plan || '').match(/^([a-k])[：:]/i);
+    var m = (s.plan || '').match(/^([a-l])[：:]/i);
     var key = m ? m[1].toLowerCase() : '';
     extraRaised += planPrices[key] || 0;
   });
@@ -1689,7 +1710,7 @@ function loadSponsors(data) {
     return;
   }
   data.sponsors.forEach(function(s) {
-    var key = (s.plan || '').match(/^([a-k])[：:]/i);
+    var key = (s.plan || '').match(/^([a-l])[：:]/i);
     var k   = key ? key[1].toLowerCase() : '';
     var cls = (planPrices[k] || 0) >= 30000 ? 'gold' : '';
     var card = document.createElement('div');
@@ -1948,6 +1969,7 @@ var I18N_EN = {
   "plan.slots.none": "Unlimited slots",
   "plan.slots.limited": "Limited quantity",
   "plan.slots.noneTravel": "Unlimited slots (travel expenses included)",
+  "plan.slots.one": "Only 1 available",
 
   "plan.a.name": "A Cup of Coffee Cheer",
   "plan.a.desc": "A casual, coffee-sized way to cheer Jack on.",
@@ -1999,6 +2021,12 @@ var I18N_EN = {
   "bt.k2n": "Name listed on supporters page",
   "bt.k3n": "Thank-you message sent",
 
+  "plan.l.name": "The Legendary Handover — Permanent Ownership of the Real Rickshaw That Crossed 5,000km of North America",
+  "plan.l.desc": "A one-of-a-kind plan: permanent ownership of the actual rickshaw that carried Jack across 5,000km of North America. Only 1 available.",
+  "bt.l1n": "Permanent transfer of the rickshaw itself",
+  "bt.l2n": "Name listed on supporters page",
+  "bt.l3n": "Thank-you message sent",
+
   "plan.unit": "/unit",
   "plan.btn": "Support Jack Now",
 
@@ -2046,6 +2074,7 @@ var I18N_EN = {
   "form.plan.optI": "Legends Assemble — Online Drinks (¥30,000)",
   "form.plan.optJ": "Ambush in Your Town! (¥50,000)",
   "form.plan.optK": "On-Site Talk Plan (¥100,000)",
+  "form.plan.optL": "The Legendary Handover (¥500,000)",
   "form.display.label": "Display Name (shown on supporters page, SNS, etc.)",
   "form.display.ph": "Nickname OK. Leave blank to use your name.",
   "form.msg.label": "Message of Support / Questions (optional)",

@@ -56,7 +56,7 @@ Formspreeを使う場合は `index.html` 内の `submitForm` 関数を書き換�
 
 ---
 
-## プラン構成（¥1,000〜¥100,000・9プラン + 12個目のプラン検討中）
+## プラン構成（¥1,000〜¥500,000・10プラン）
 
 | キー | 金額 | プラン名 |
 |------|------|---------|
@@ -69,10 +69,9 @@ Formspreeを使う場合は `index.html` 内の `submitForm` 関数を書き換�
 | i | ¥30,000 | レジェンド集結 — 伝説の旅人オンライン飲み会（先着3名） |
 | j | ¥50,000 | あなたの街に直撃！ — 帰国後の日本縦断 挨拶＆飲みに行く権利 |
 | k | ¥100,000 | 出張講演会プラン — 会社・学校にジャックを呼ぶ権利 |
+| l | ¥500,000 | 伝説の相棒譲渡 — リアル・リヤカー永久所有権プラン（1点限定） |
 
-※「伝説の相棒譲渡（リアル・リヤカー永久所有権プラン）」は12個目のプランとして追加予定。金額確定後、index.html の `stripeLinks`／`planPrices` と `jack_sponsor_gas.gs` の `PLAN_NAMES`／`PLAN_BENEFITS` に `l` キーとして追加してください（Stripeリンクは取得済み: `https://buy.stripe.com/7sYfZhcnzbU65uD9ahdZ60n`）。
-
-Stripe決済リンクは `openStripePlan()` が `client_reference_id` にプラン記号（a/b/d/f/g/h/i/j/k）を付与して送るため、Stripe Webhook側（`jack_sponsor_gas.gs`）はこれを優先してプランを判定します。¥30,000のプランが2つ（h・i）あるため、client_reference_id が無い決済（旧リンク経由など）は金額だけでは区別できず「要確認」表記になります。
+Stripe決済リンクは `openStripePlan()` が `client_reference_id` にプラン記号（a/b/d/f/g/h/i/j/k/l）を付与して送るため、Stripe Webhook側（`jack_sponsor_gas.gs`）はこれを優先してプランを判定します。¥30,000のプランが2つ（h・i）あるため、client_reference_id が無い決済（旧リンク経由など）は金額だけでは区別できず「要確認」表記になります。
 
 ---
 

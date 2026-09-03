@@ -131,7 +131,8 @@ function logToSheet(d) {
 var PLAN_NAMES = {
   a: 'コーヒー1杯のエール', b: '旅の相棒（日本国旗へお名前記入）', d: '旅の拠点に泊まる（ブリッジ宿泊）',
   f: '名前を刻む（YouTube概要欄）', g: '荒野の生還パーツ', h: 'アメリカからの生還（ルート66）',
-  i: 'レジェンド集結（オンライン飲み会）', j: 'あなたの街に直撃！', k: '出張講演会プラン'
+  i: 'レジェンド集結（オンライン飲み会）', j: 'あなたの街に直撃！', k: '出張講演会プラン',
+  l: '伝説の相棒譲渡（リアル・リヤカー永久所有権）'
 };
 
 var PLAN_BENEFITS = {
@@ -143,11 +144,12 @@ var PLAN_BENEFITS = {
   h: ['ルート66からの直筆エアメール','限定ステッカーの送付','御礼メッセージの送付'],
   i: ['ゴッチさん・うすくくん・こたろうさんも参加のオンライン飲み会（2時間）へのご招待','御礼メッセージの送付'],
   j: ['ご自宅・お店への訪問','一緒に飲みに行く権利','御礼メッセージの送付'],
-  k: ['出張講演（交通費込）','支援者ページへのお名前掲載','御礼メッセージの送付']
+  k: ['出張講演（交通費込）','支援者ページへのお名前掲載','御礼メッセージの送付'],
+  l: ['リヤカー本体の永久譲渡','支援者ページへのお名前掲載','御礼メッセージの送付']
 };
 
 function getPlanKey(planStr) {
-  var m = (planStr || '').match(/^([a-k])[：:]/i);
+  var m = (planStr || '').match(/^([a-l])[：:]/i);
   return m ? m[1].toLowerCase() : null;
 }
 
@@ -229,6 +231,13 @@ function buildTaskBody(d) {
   if (key === 'k') {
     add(1, '講演日程・会場・交通費の調整メールを送る\n   → 連絡先: ' + d.email, null);
     add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+  }
+
+  // === l: 伝説の相棒譲渡（リアル・リヤカー永久所有権） ===
+  if (key === 'l') {
+    add(1, '帰国・譲渡時期と受け渡し方法の調整メールを送る\n   → 連絡先: ' + d.email, null);
+    add(2, 'リヤカーの譲渡・名義変更手続きを行う\n   → 宛名: ' + dispName, null);
+    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
   }
 
   return lines.join('\n');
@@ -414,7 +423,7 @@ function handleStripeWebhook(event) {
   // LPの決済ボタンが付与する client_reference_id（プラン記号 a-k）を優先。
   // 無い場合は金額から推定（¥30,000は h/i の2プランがあるため要確認扱い）。
   var refKey = (obj.client_reference_id || '').toLowerCase();
-  var amountFallback = {1000:'a', 3000:'b', 5000:'d', 10000:'f', 15000:'g', 30000:'h', 50000:'j', 100000:'k'};
+  var amountFallback = {1000:'a', 3000:'b', 5000:'d', 10000:'f', 15000:'g', 30000:'h', 50000:'j', 100000:'k', 500000:'l'};
   var key  = PLAN_NAMES[refKey] ? refKey : (amountFallback[amount] || '');
   var plan = key ? (key + '：' + PLAN_NAMES[key] + '（¥' + amount.toLocaleString() + '）') : ('¥' + amount.toLocaleString());
   if (amount === 30000 && !PLAN_NAMES[refKey]) plan += '【要確認：h ルート66 or i オンライン飲み会】';
