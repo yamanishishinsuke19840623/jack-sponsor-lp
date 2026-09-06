@@ -363,7 +363,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   <div id="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge" data-i18n="hero.badgeTop">WALKING ACROSS AMERICA 2026 スポンサー募集</div>
-    <h1 class="hero-title" data-i18n="hero.title">一歩ずつ、<br><span>地球を越えていく。</span></h1>
+    <h1 class="hero-title" data-i18n="hero.title">必要ないからこそ、<br><span>やってみる。</span></h1>
     <div class="hero-typing"><span id="typing-text"></span><span class="cursor"></span></div>
     <div class="hero-badges">
       <div class="hero-badge-item" data-i18n="hero.badge1">100kgリヤカーと徒歩で<strong>世界一周の総決算</strong></div>
@@ -704,6 +704,17 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           </ul>
           <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('d')">今すぐ Jackを応援する</button>
         </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.m.name">ブリッジ開催 — JACKと飲み明かす「食べ飲み放題」懇親会</div>
+          <div class="plan-price">¥10,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
+          <div class="plan-desc" data-i18n="plan.m.desc">ブリッジ（下関）で開催、ジャックと食べ飲み放題で語り明かすリアル懇親会です。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.m1n">食べ飲み放題懇親会へご招待</li>
+            <li data-i18n="bt.m2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('m')">今すぐ Jackを応援する</button>
+        </div>
       </div>
     </div>
 
@@ -771,6 +782,17 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
             <li data-i18n="bt.i2n">御礼メッセージ送付</li>
           </ul>
           <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('i')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.n.name">大自然を共にする — JACKと行く「プライベート・キャンプ会」</div>
+          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
+          <div class="plan-desc" data-i18n="plan.n.desc">大自然の中で、ジャックと過ごすプライベートなキャンプ会です。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.n1n">プライベートキャンプ会へご招待</li>
+            <li data-i18n="bt.n2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('n')">今すぐ Jackを応援する</button>
         </div>
         <div class="plan-card fade-in">
           <div class="plan-name" data-i18n="plan.j.name">あなたの街に直撃！ — 帰国後の日本縦断 挨拶＆飲みに行く権利</div>
@@ -924,6 +946,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <option value="j：あなたの街に直撃！（¥50,000）" data-i18n="form.plan.optJ">あなたの街に直撃！（¥50,000）</option>
               <option value="k：出張講演会プラン（¥100,000）" data-i18n="form.plan.optK">出張講演会プラン（¥100,000）</option>
               <option value="l：伝説の相棒譲渡 リアル・リヤカー永久所有権（¥500,000）" data-i18n="form.plan.optL">伝説の相棒譲渡 — リアル・リヤカー永久所有権（¥500,000）</option>
+              <option value="m：ブリッジ懇親会 食べ飲み放題（¥10,000）" data-i18n="form.plan.optM">ブリッジ懇親会 — 食べ飲み放題（¥10,000）</option>
+              <option value="n：プライベート・キャンプ会（¥30,000）" data-i18n="form.plan.optN">プライベート・キャンプ会（¥30,000）</option>
             </select>
           </div>
 
@@ -1532,10 +1556,12 @@ var stripeLinks = {
   i: 'https://buy.stripe.com/fZu7sL87j1fs5uD3PXdZ60k', // レジェンド集結（オンライン飲み会） ¥30,000
   j: 'https://buy.stripe.com/3cI28r5Zb9LY4qz5Y5dZ60l', // あなたの街に直撃！ ¥50,000
   k: 'https://buy.stripe.com/cNi9AT5Zb5vIaOX0DLdZ60m', // 出張講演会プラン ¥100,000
-  l: 'https://buy.stripe.com/7sYfZhcnzbU65uD9ahdZ60n'  // 伝説の相棒譲渡（リアル・リヤカー永久所有権） ¥500,000
+  l: 'https://buy.stripe.com/7sYfZhcnzbU65uD9ahdZ60n', // 伝説の相棒譲渡（リアル・リヤカー永久所有権） ¥500,000
+  m: 'https://buy.stripe.com/9B6aEXfzLf6i4qz86ddZ60o', // ブリッジ懇親会（食べ飲み放題） ¥10,000
+  n: 'https://buy.stripe.com/fZu8wP5Zb9LY4qz1HPdZ60p'  // プライベート・キャンプ会 ¥30,000
 };
 
-var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:30000, j:50000, k:100000, l:500000 };
+var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:30000, j:50000, k:100000, l:500000, m:10000, n:30000 };
 
 function openStripePlan(k) {
   var link = stripeLinks[k];
@@ -1684,7 +1710,7 @@ function updateFundingBar(extraSponsors) {
   extraSponsors = extraSponsors || [];
   var extraRaised = 0;
   extraSponsors.forEach(function(s) {
-    var m = (s.plan || '').match(/^([a-l])[：:]/i);
+    var m = (s.plan || '').match(/^([a-n])[：:]/i);
     var key = m ? m[1].toLowerCase() : '';
     extraRaised += planPrices[key] || 0;
   });
@@ -1710,7 +1736,7 @@ function loadSponsors(data) {
     return;
   }
   data.sponsors.forEach(function(s) {
-    var key = (s.plan || '').match(/^([a-l])[：:]/i);
+    var key = (s.plan || '').match(/^([a-n])[：:]/i);
     var k   = key ? key[1].toLowerCase() : '';
     var cls = (planPrices[k] || 0) >= 30000 ? 'gold' : '';
     var card = document.createElement('div');
@@ -1859,7 +1885,7 @@ var I18N_EN = {
   "nav.cta": "Become a Sponsor",
 
   "hero.badgeTop": "WALKING ACROSS AMERICA 2026 — Now Seeking Sponsors",
-  "hero.title": "One Step at a Time,<br><span>Across the Earth.</span>",
+  "hero.title": "Because it's needless —<br><span>that's exactly why I try it.</span>",
   "hero.badge1": "100kg rickshaw, on foot — <strong>the final chapter of a round-the-world journey</strong>",
   "hero.badge2": "5,000km across America, <strong>sponsorships now open.</strong>",
   "hero.badge3": "250kg rickshaw, <strong>the length of Japan on foot</strong>",
@@ -2027,6 +2053,16 @@ var I18N_EN = {
   "bt.l2n": "Name listed on supporters page",
   "bt.l3n": "Thank-you message sent",
 
+  "plan.m.name": "Bridge Get-Together — All-You-Can-Eat & Drink Night With Jack",
+  "plan.m.desc": "A real, in-person get-together at Bridge (Shimonoseki) — eat, drink, and talk the night away with Jack.",
+  "bt.m1n": "Invitation to the all-you-can-eat & drink get-together",
+  "bt.m2n": "Thank-you message sent",
+
+  "plan.n.name": "Into the Wild Together — A Private Camping Trip With Jack",
+  "plan.n.desc": "A private camping trip with Jack, out in nature.",
+  "bt.n1n": "Invitation to the private camping trip",
+  "bt.n2n": "Thank-you message sent",
+
   "plan.unit": "/unit",
   "plan.btn": "Support Jack Now",
 
@@ -2075,6 +2111,8 @@ var I18N_EN = {
   "form.plan.optJ": "Ambush in Your Town! (¥50,000)",
   "form.plan.optK": "On-Site Talk Plan (¥100,000)",
   "form.plan.optL": "The Legendary Handover (¥500,000)",
+  "form.plan.optM": "Bridge Get-Together (¥10,000)",
+  "form.plan.optN": "Private Camping Trip (¥30,000)",
   "form.display.label": "Display Name (shown on supporters page, SNS, etc.)",
   "form.display.ph": "Nickname OK. Leave blank to use your name.",
   "form.msg.label": "Message of Support / Questions (optional)",

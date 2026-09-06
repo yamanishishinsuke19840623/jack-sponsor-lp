@@ -132,7 +132,7 @@ var PLAN_NAMES = {
   a: 'コーヒー1杯のエール', b: '旅の相棒（日本国旗へお名前記入）', d: '旅の拠点に泊まる（ブリッジ宿泊）',
   f: '名前を刻む（YouTube概要欄）', g: '荒野の生還パーツ', h: 'アメリカからの生還（ルート66）',
   i: 'レジェンド集結（オンライン飲み会）', j: 'あなたの街に直撃！', k: '出張講演会プラン',
-  l: '伝説の相棒譲渡（リアル・リヤカー永久所有権）'
+  l: '伝説の相棒譲渡（リアル・リヤカー永久所有権）', m: 'ブリッジ懇親会（食べ飲み放題）', n: 'プライベート・キャンプ会'
 };
 
 var PLAN_BENEFITS = {
@@ -145,11 +145,13 @@ var PLAN_BENEFITS = {
   i: ['ゴッチさん・うすくくん・こたろうさんも参加のオンライン飲み会（2時間）へのご招待','御礼メッセージの送付'],
   j: ['ご自宅・お店への訪問','一緒に飲みに行く権利','御礼メッセージの送付'],
   k: ['出張講演（交通費込）','支援者ページへのお名前掲載','御礼メッセージの送付'],
-  l: ['リヤカー本体の永久譲渡','支援者ページへのお名前掲載','御礼メッセージの送付']
+  l: ['リヤカー本体の永久譲渡','支援者ページへのお名前掲載','御礼メッセージの送付'],
+  m: ['食べ飲み放題懇親会へのご招待','御礼メッセージの送付'],
+  n: ['プライベートキャンプ会へのご招待','御礼メッセージの送付']
 };
 
 function getPlanKey(planStr) {
-  var m = (planStr || '').match(/^([a-l])[：:]/i);
+  var m = (planStr || '').match(/^([a-n])[：:]/i);
   return m ? m[1].toLowerCase() : null;
 }
 
@@ -238,6 +240,19 @@ function buildTaskBody(d) {
     add(1, '帰国・譲渡時期と受け渡し方法の調整メールを送る\n   → 連絡先: ' + d.email, null);
     add(2, 'リヤカーの譲渡・名義変更手続きを行う\n   → 宛名: ' + dispName, null);
     add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+  }
+
+  // === m: ブリッジ懇親会（食べ飲み放題） ===
+  if (key === 'm') {
+    add(1, '開催日程の調整メールを送る\n   → 連絡先: ' + d.email, null);
+    add(2, 'ブリッジ（下関）の懇親会枠を確保する', null);
+    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+  }
+
+  // === n: プライベート・キャンプ会 ===
+  if (key === 'n') {
+    add(1, 'キャンプ会の日程・場所の調整メールを送る\n   → 連絡先: ' + d.email, null);
+    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
   }
 
   return lines.join('\n');
@@ -420,13 +435,14 @@ function handleStripeWebhook(event) {
   var cEmail = detail.email || '不明';
   var amount = obj.amount_total || obj.amount_received || 0;
 
-  // LPの決済ボタンが付与する client_reference_id（プラン記号 a-k）を優先。
-  // 無い場合は金額から推定（¥30,000は h/i の2プランがあるため要確認扱い）。
+  // LPの決済ボタンが付与する client_reference_id（プラン記号 a-n）を優先。
+  // 無い場合は金額から推定（¥10,000・¥30,000は同額プランが複数あるため要確認扱い）。
   var refKey = (obj.client_reference_id || '').toLowerCase();
   var amountFallback = {1000:'a', 3000:'b', 5000:'d', 10000:'f', 15000:'g', 30000:'h', 50000:'j', 100000:'k', 500000:'l'};
+  var ambiguousAmounts = {10000:'f 名前を刻む or m ブリッジ懇親会', 30000:'h ルート66 or i オンライン飲み会 or n キャンプ会'};
   var key  = PLAN_NAMES[refKey] ? refKey : (amountFallback[amount] || '');
   var plan = key ? (key + '：' + PLAN_NAMES[key] + '（¥' + amount.toLocaleString() + '）') : ('¥' + amount.toLocaleString());
-  if (amount === 30000 && !PLAN_NAMES[refKey]) plan += '【要確認：h ルート66 or i オンライン飲み会】';
+  if (!PLAN_NAMES[refKey] && ambiguousAmounts[amount]) plan += '【要確認：' + ambiguousAmounts[amount] + '】';
 
   // スプレッドシートに記録
   logToSheet({
