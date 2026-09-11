@@ -760,6 +760,17 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <div class="plan-category">
       <div class="plan-category-label fade-in" data-i18n="cat.surprise">現地サプライズ・帰国直撃枠</div>
       <div class="plans-grid">
+        <div class="plan-card featured fade-in">
+          <div class="plan-name" data-i18n="plan.i.name">レジェンド集結 — 伝説の旅人オンライン飲み会</div>
+          <div class="plan-price">¥20,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-slots" id="slots-i"></div>
+          <div class="plan-desc" data-i18n="plan.i.desc">ジャック本人に加え、ゴッチさん・うすくくん・こたろうさんも参加する2時間のオンライン飲み会にご招待します。先着3名限定。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.i1n">ゴッチさん・うすくくん・こたろうさんも参加のオンライン飲み会（2時間）へご招待</li>
+            <li data-i18n="bt.i2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('i')">今すぐ Jackを応援する</button>
+        </div>
         <div class="plan-card fade-in">
           <div class="plan-name" data-i18n="plan.h.name">アメリカからの生還 — ルート66エアメール＆限定ステッカー</div>
           <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
@@ -771,17 +782,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
             <li data-i18n="bt.h3n">御礼メッセージ送付</li>
           </ul>
           <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('h')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card featured fade-in">
-          <div class="plan-name" data-i18n="plan.i.name">レジェンド集結 — 伝説の旅人オンライン飲み会</div>
-          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-slots" id="slots-i"></div>
-          <div class="plan-desc" data-i18n="plan.i.desc">ジャック本人に加え、ゴッチさん・うすくくん・こたろうさんも参加する2時間のオンライン飲み会にご招待します。先着3名限定。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.i1n">ゴッチさん・うすくくん・こたろうさんも参加のオンライン飲み会（2時間）へご招待</li>
-            <li data-i18n="bt.i2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('i')">今すぐ Jackを応援する</button>
         </div>
         <div class="plan-card fade-in">
           <div class="plan-name" data-i18n="plan.n.name">大自然を共にする — JACKと行く「プライベート・キャンプ会」</div>
@@ -942,7 +942,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <option value="f：名前を刻む YouTube概要欄（¥10,000）" data-i18n="form.plan.optF">名前を刻む — YouTube概要欄（¥10,000）</option>
               <option value="g：荒野の生還パーツ（¥15,000）" data-i18n="form.plan.optG">荒野の生還パーツ（¥15,000）</option>
               <option value="h：アメリカからの生還 ルート66（¥30,000）" data-i18n="form.plan.optH">アメリカからの生還 — ルート66（¥30,000）</option>
-              <option value="i：レジェンド集結 オンライン飲み会（¥30,000）" data-i18n="form.plan.optI">レジェンド集結 — オンライン飲み会（¥30,000）</option>
+              <option value="i：レジェンド集結 オンライン飲み会（¥20,000）" data-i18n="form.plan.optI">レジェンド集結 — オンライン飲み会（¥20,000）</option>
               <option value="j：あなたの街に直撃！（¥50,000）" data-i18n="form.plan.optJ">あなたの街に直撃！（¥50,000）</option>
               <option value="k：出張講演会プラン（¥100,000）" data-i18n="form.plan.optK">出張講演会プラン（¥100,000）</option>
               <option value="l：伝説の相棒譲渡 リアル・リヤカー永久所有権（¥500,000）" data-i18n="form.plan.optL">伝説の相棒譲渡 — リアル・リヤカー永久所有権（¥500,000）</option>
@@ -1551,9 +1551,9 @@ var stripeLinks = {
   b: 'https://buy.stripe.com/28E6oH1IVgam3mv4U1dZ60e', // 旅の相棒（国旗へお名前記入） ¥3,000
   d: 'https://buy.stripe.com/aFafZh2MZ4rE3mveuBdZ60g', // 旅の拠点に泊まる（ブリッジ宿泊） ¥5,000
   f: 'https://buy.stripe.com/aFa9ATdrD0bo5uD86ddZ60h', // 名前を刻む（YouTube概要欄） ¥10,000
-  g: 'https://buy.stripe.com/fZuaEXbjv6zM3mv3PXdZ60i', // 荒野の生還パーツ ¥15,000
+  g: 'https://buy.stripe.com/3cIfZh2MZ5vIf5deuBdZ60q', // 荒野の生還パーツ ¥15,000
   h: 'https://buy.stripe.com/4gM7sLbjv0bo5uD3PXdZ60j', // アメリカからの生還（ルート66） ¥30,000
-  i: 'https://buy.stripe.com/fZu7sL87j1fs5uD3PXdZ60k', // レジェンド集結（オンライン飲み会） ¥30,000
+  i: 'https://buy.stripe.com/fZu7sL87j1fs5uD3PXdZ60k', // レジェンド集結（オンライン飲み会） ¥20,000
   j: 'https://buy.stripe.com/3cI28r5Zb9LY4qz5Y5dZ60l', // あなたの街に直撃！ ¥50,000
   k: 'https://buy.stripe.com/cNi9AT5Zb5vIaOX0DLdZ60m', // 出張講演会プラン ¥100,000
   l: 'https://buy.stripe.com/7sYfZhcnzbU65uD9ahdZ60n', // 伝説の相棒譲渡（リアル・リヤカー永久所有権） ¥500,000
@@ -1561,7 +1561,7 @@ var stripeLinks = {
   n: 'https://buy.stripe.com/fZu8wP5Zb9LY4qz1HPdZ60p'  // プライベート・キャンプ会 ¥30,000
 };
 
-var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:30000, j:50000, k:100000, l:500000, m:10000, n:30000 };
+var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:20000, j:50000, k:100000, l:500000, m:10000, n:30000 };
 
 function openStripePlan(k) {
   var link = stripeLinks[k];
@@ -2107,7 +2107,7 @@ var I18N_EN = {
   "form.plan.optF": "YouTube Description Supporter (¥10,000)",
   "form.plan.optG": "Wilderness Survivor Relic (¥15,000)",
   "form.plan.optH": "Survived America — Route 66 (¥30,000)",
-  "form.plan.optI": "Legends Assemble — Online Drinks (¥30,000)",
+  "form.plan.optI": "Legends Assemble — Online Drinks (¥20,000)",
   "form.plan.optJ": "Ambush in Your Town! (¥50,000)",
   "form.plan.optK": "On-Site Talk Plan (¥100,000)",
   "form.plan.optL": "The Legendary Handover (¥500,000)",

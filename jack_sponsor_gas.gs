@@ -438,8 +438,8 @@ function handleStripeWebhook(event) {
   // LPの決済ボタンが付与する client_reference_id（プラン記号 a-n）を優先。
   // 無い場合は金額から推定（¥10,000・¥30,000は同額プランが複数あるため要確認扱い）。
   var refKey = (obj.client_reference_id || '').toLowerCase();
-  var amountFallback = {1000:'a', 3000:'b', 5000:'d', 10000:'f', 15000:'g', 30000:'h', 50000:'j', 100000:'k', 500000:'l'};
-  var ambiguousAmounts = {10000:'f 名前を刻む or m ブリッジ懇親会', 30000:'h ルート66 or i オンライン飲み会 or n キャンプ会'};
+  var amountFallback = {1000:'a', 3000:'b', 5000:'d', 10000:'f', 15000:'g', 20000:'i', 30000:'h', 50000:'j', 100000:'k', 500000:'l'};
+  var ambiguousAmounts = {10000:'f 名前を刻む or m ブリッジ懇親会', 30000:'h ルート66 or n キャンプ会'};
   var key  = PLAN_NAMES[refKey] ? refKey : (amountFallback[amount] || '');
   var plan = key ? (key + '：' + PLAN_NAMES[key] + '（¥' + amount.toLocaleString() + '）') : ('¥' + amount.toLocaleString());
   if (!PLAN_NAMES[refKey] && ambiguousAmounts[amount]) plan += '【要確認：' + ambiguousAmounts[amount] + '】';
