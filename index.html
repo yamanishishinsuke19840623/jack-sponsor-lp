@@ -74,8 +74,6 @@ body.lang-en .plan-card.featured::before{content:'MOST POPULAR'}
 .hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,7vw,80px);line-height:1.1;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.8)}
 .hero-title span{color:var(--gold)}
 .hero-typing{font-size:clamp(16px,2.5vw,22px);color:var(--sand);min-height:32px;margin-bottom:28px;letter-spacing:.05em}
-.hero-typing .cursor{display:inline-block;width:2px;height:1.1em;background:var(--gold);vertical-align:middle;animation:blink 1s infinite}
-@keyframes blink{50%{opacity:0}}
 .hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:32px}
 .hero-badge-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:8px 16px;border-radius:8px;font-size:13px}
 .hero-badge-item strong{color:var(--gold)}
@@ -322,6 +320,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
 @media(max-width:600px){
   section{padding:60px 16px}
   .hero-content{padding:0 16px}
+  #hero-bg{background-position:82% 45%}
 }
 </style>
 </head>
@@ -363,16 +362,13 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   <div id="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge" data-i18n="hero.badgeTop">WALKING ACROSS AMERICA 2026 スポンサー募集</div>
-    <h1 class="hero-title" data-i18n="hero.title">必要ないからこそ、<br><span>やってみる。</span></h1>
-    <div class="hero-typing"><span id="typing-text"></span><span class="cursor"></span></div>
+    <h1 class="hero-title" data-i18n="hero.title">必要ないからこそ、<br><span>地球を歩いてみる。</span></h1>
+    <div class="hero-typing" data-i18n="hero.typingFixed">日本列島徒歩縦断、ユーラシア大陸を徒歩で踏破。次はアメリカ大陸。</div>
     <div class="hero-badges">
-      <div class="hero-badge-item" data-i18n="hero.badge1">100kgリヤカーと徒歩で<strong>世界一周の総決算</strong></div>
-      <div class="hero-badge-item" data-i18n="hero.badge2">5,000km米国横断、<strong>協賛募集中。</strong></div>
+      <div class="hero-badge-item" data-i18n="hero.badge1">100kgリヤカー徒歩で<strong>世界一周の総決算</strong></div>
+      <div class="hero-badge-item" data-i18n="hero.badge2">南米一周、<strong>中米、北米縦断</strong></div>
       <div class="hero-badge-item" data-i18n="hero.badge3">250kgリヤカーと<strong>日本列島縦断</strong></div>
       <div class="hero-badge-item" data-i18n="hero.badge4">ユーラシア徒歩横断<strong>13,000km達成</strong></div>
-      <div class="hero-badge-item" data-i18n="hero.badge5">YouTube <strong>32,000人</strong>登録</div>
-      <div class="hero-badge-item" data-i18n="hero.badge6"><strong>平均を大きく上回る</strong>広告価値</div>
-      <div class="hero-badge-item" data-i18n="hero.badge7">国内外で<strong>大手メディアに露出</strong></div>
     </div>
     <div class="hero-btns">
       <a class="btn-primary" href="#plans" data-i18n="hero.btn1">スポンサーになる</a>
@@ -686,6 +682,28 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           </ul>
           <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('b')">今すぐ Jackを応援する</button>
         </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.c.name">北米横断中のJACKと直接話せる！ — 現地直通ラジオ生電話権</div>
+          <div class="plan-price">¥3,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.c.desc">アメリカ大陸横断の真っ只中にいるジャックと、現地から直接つながるラジオ生電話。今まさに歩いている本人の声を、リアルタイムで聞けます。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.c1n">現地からの直通ラジオ生電話</li>
+            <li data-i18n="bt.c2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('c')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.e.name">大地に名前を刻む — 砂漠・荒野のネームロケーション写真</div>
+          <div class="plan-price">¥3,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.e.desc">アメリカの砂漠や荒野に、あなたの名前を直接書いて撮影。世界にひとつだけの「ネームロケーション写真」をお届けします。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.e1n">砂漠・荒野のネームロケーション写真</li>
+            <li data-i18n="bt.e2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('e')">今すぐ Jackを応援する</button>
+        </div>
       </div>
     </div>
 
@@ -795,6 +813,17 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('n')">今すぐ Jackを応援する</button>
         </div>
         <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.o.name">秘伝マンツーマンレッスン（60分） — 15年の軌跡と裏側を特別公開</div>
+          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
+          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
+          <div class="plan-desc" data-i18n="plan.o.desc">帰国後開催。マジック歴15年のジャックが、その軌跡と裏側をマンツーマンで特別に伝授する60分のレッスンです。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.o1n">マンツーマンレッスン（60分）</li>
+            <li data-i18n="bt.o2n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('o')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card fade-in">
           <div class="plan-name" data-i18n="plan.j.name">あなたの街に直撃！ — 帰国後の日本縦断 挨拶＆飲みに行く権利</div>
           <div class="plan-price">¥50,000<span data-i18n="plan.unit">/一口</span></div>
           <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
@@ -824,6 +853,43 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
             <li data-i18n="bt.k3n">御礼メッセージ送付</li>
           </ul>
           <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('k')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card fade-in">
+          <div class="plan-name" data-i18n="plan.p.name">北米大陸を共に歩む — ウェア＆リヤカーにロゴ掲載（小）＋概要欄クレジット</div>
+          <div class="plan-price">¥100,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.p.desc">北米大陸横断中、ジャックのウェアとリヤカーにロゴ（小）を掲載。YouTube概要欄にもクレジットされます。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.p1n">ウェア＆リヤカーへロゴ掲載（小）</li>
+            <li data-i18n="bt.p2n">YouTube概要欄クレジット</li>
+            <li data-i18n="bt.p3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('p')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card legendary fade-in">
+          <div class="plan-name" data-i18n="plan.q.name">北米横断パートナーコース — ロゴ中 ＋ 概要欄掲載 ＋ SNS紹介</div>
+          <div class="plan-price">¥300,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.q.desc">ウェア＆リヤカーにロゴ（中）を掲載し、YouTube概要欄とSNSでもご紹介するパートナーコースです。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.q1n">ウェア＆リヤカーへロゴ掲載（中）</li>
+            <li data-i18n="bt.q2n">YouTube概要欄掲載</li>
+            <li data-i18n="bt.q3n">SNSでのご紹介</li>
+            <li data-i18n="bt.q4n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('q')">今すぐ Jackを応援する</button>
+        </div>
+        <div class="plan-card legendary fade-in">
+          <div class="plan-name" data-i18n="plan.r.name">北米横断メインパートナーコース — ロゴ大・特等席 ＋ 概要欄トップ掲載</div>
+          <div class="plan-price">¥500,000<span data-i18n="plan.unit">/一口</span></div>
+          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
+          <div class="plan-desc" data-i18n="plan.r.desc">ウェア＆リヤカーの特等席にロゴ（大）を掲載。YouTube概要欄トップに継続的に掲載される、最上位のメインパートナーコースです。</div>
+          <ul class="plan-benefits">
+            <li data-i18n="bt.r1n">ウェア＆リヤカー特等席にロゴ掲載（大）</li>
+            <li data-i18n="bt.r2n">YouTube概要欄トップに継続掲載</li>
+            <li data-i18n="bt.r3n">御礼メッセージ送付</li>
+          </ul>
+          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('r')">今すぐ Jackを応援する</button>
         </div>
       </div>
     </div>
@@ -938,6 +1004,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <option value="" data-i18n="form.plan.opt0">選択してください</option>
               <option value="a：コーヒー1杯のエール（¥1,000）" data-i18n="form.plan.optA">コーヒー1杯のエール（¥1,000）</option>
               <option value="b：旅の相棒 日本国旗へお名前記入（¥3,000）" data-i18n="form.plan.optB">旅の相棒 — 日本国旗へお名前記入（¥3,000）</option>
+              <option value="c：現地直通ラジオ生電話権（¥3,000）" data-i18n="form.plan.optC">現地直通ラジオ生電話権（¥3,000）</option>
+              <option value="e：ネームロケーション写真（¥3,000）" data-i18n="form.plan.optE">ネームロケーション写真（¥3,000）</option>
               <option value="d：旅の拠点に泊まる ブリッジ宿泊（¥5,000）" data-i18n="form.plan.optD">旅の拠点に泊まる — ブリッジ宿泊（¥5,000）</option>
               <option value="f：名前を刻む YouTube概要欄（¥10,000）" data-i18n="form.plan.optF">名前を刻む — YouTube概要欄（¥10,000）</option>
               <option value="g：荒野の生還パーツ（¥15,000）" data-i18n="form.plan.optG">荒野の生還パーツ（¥15,000）</option>
@@ -948,6 +1016,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
               <option value="l：伝説の相棒譲渡 リアル・リヤカー永久所有権（¥500,000）" data-i18n="form.plan.optL">伝説の相棒譲渡 — リアル・リヤカー永久所有権（¥500,000）</option>
               <option value="m：ブリッジ懇親会 食べ飲み放題（¥10,000）" data-i18n="form.plan.optM">ブリッジ懇親会 — 食べ飲み放題（¥10,000）</option>
               <option value="n：プライベート・キャンプ会（¥30,000）" data-i18n="form.plan.optN">プライベート・キャンプ会（¥30,000）</option>
+              <option value="o：秘伝マンツーマンレッスン60分（¥30,000）" data-i18n="form.plan.optO">秘伝マンツーマンレッスン60分（¥30,000）</option>
+              <option value="p：ロゴ小＋概要欄クレジット（¥100,000）" data-i18n="form.plan.optP">北米大陸を共に歩む — ロゴ小＋概要欄クレジット（¥100,000）</option>
+              <option value="q：北米横断パートナーコース ロゴ中（¥300,000）" data-i18n="form.plan.optQ">北米横断パートナーコース — ロゴ中（¥300,000）</option>
+              <option value="r：北米横断メインパートナーコース ロゴ大（¥500,000）" data-i18n="form.plan.optR">北米横断メインパートナーコース — ロゴ大（¥500,000）</option>
             </select>
           </div>
 
@@ -1066,31 +1138,6 @@ var countObserver = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach(function(el) { countObserver.observe(el); });
-
-// === TYPING ===
-var phrases = {
-  ja: ['日本列島徒歩縦断・ユーラシア大陸徒歩横断を踏破。次はアメリカ大陸。', '地球一周の証人を募集しています。'],
-  en: ['Walked the length of Japan, then across Eurasia. Next: across America.', 'Seeking witnesses to a round-the-world journey.']
-};
-var pi = 0, ci = 0, typing = true;
-function typeLoop() {
-  var el = document.getElementById('typing-text');
-  if (!el) return;
-  var list = phrases[currentLang] || phrases.ja;
-  if (pi >= list.length) pi = 0;
-  if (typing) {
-    el.textContent = list[pi].slice(0, ci + 1);
-    ci++;
-    if (ci >= list[pi].length) { typing = false; setTimeout(typeLoop, 2000); return; }
-    setTimeout(typeLoop, 70);
-  } else {
-    el.textContent = list[pi].slice(0, ci - 1);
-    ci--;
-    if (ci <= 0) { typing = true; pi = (pi + 1) % list.length; }
-    setTimeout(typeLoop, 30);
-  }
-}
-typeLoop();
 
 // === PARALLAX ===
 window.addEventListener('scroll', function() {
@@ -1558,10 +1605,16 @@ var stripeLinks = {
   k: 'https://buy.stripe.com/cNi9AT5Zb5vIaOX0DLdZ60m', // 出張講演会プラン ¥100,000
   l: 'https://buy.stripe.com/7sYfZhcnzbU65uD9ahdZ60n', // 伝説の相棒譲渡（リアル・リヤカー永久所有権） ¥500,000
   m: 'https://buy.stripe.com/9B6aEXfzLf6i4qz86ddZ60o', // ブリッジ懇親会（食べ飲み放題） ¥10,000
-  n: 'https://buy.stripe.com/fZu8wP5Zb9LY4qz1HPdZ60p'  // プライベート・キャンプ会 ¥30,000
+  n: 'https://buy.stripe.com/fZu8wP5Zb9LY4qz1HPdZ60p', // プライベート・キャンプ会 ¥30,000
+  c: 'https://buy.stripe.com/3cIcN55Zb3nA5uD9ahdZ60r', // 現地直通ラジオ生電話権 ¥3,000
+  e: 'https://buy.stripe.com/eVq3cv87j3nA5uDdqxdZ60s', // ネームロケーション写真 ¥3,000
+  o: 'https://buy.stripe.com/4gMeVd2MZgam8GPaeldZ60t', // 秘伝マンツーマンレッスン ¥30,000
+  p: 'https://buy.stripe.com/4gMdR94V7gamg9hdqxdZ60u', // ロゴ小＋概要欄クレジット ¥100,000
+  q: 'https://buy.stripe.com/5kQ8wP5Zb5vIaOXbipdZ60v', // 北米横断パートナーコース（ロゴ中） ¥300,000
+  r: 'https://buy.stripe.com/fZu3cv3R33nA7CLeuBdZ60w'  // 北米横断メインパートナーコース（ロゴ大） ¥500,000
 };
 
-var planPrices = { a:1000, b:3000, d:5000, f:10000, g:15000, h:30000, i:20000, j:50000, k:100000, l:500000, m:10000, n:30000 };
+var planPrices = { a:1000, b:3000, c:3000, d:5000, e:3000, f:10000, g:15000, h:30000, i:20000, j:50000, k:100000, l:500000, m:10000, n:30000, o:30000, p:100000, q:300000, r:500000 };
 
 function openStripePlan(k) {
   var link = stripeLinks[k];
@@ -1710,7 +1763,7 @@ function updateFundingBar(extraSponsors) {
   extraSponsors = extraSponsors || [];
   var extraRaised = 0;
   extraSponsors.forEach(function(s) {
-    var m = (s.plan || '').match(/^([a-n])[：:]/i);
+    var m = (s.plan || '').match(/^([a-r])[：:]/i);
     var key = m ? m[1].toLowerCase() : '';
     extraRaised += planPrices[key] || 0;
   });
@@ -1736,7 +1789,7 @@ function loadSponsors(data) {
     return;
   }
   data.sponsors.forEach(function(s) {
-    var key = (s.plan || '').match(/^([a-n])[：:]/i);
+    var key = (s.plan || '').match(/^([a-r])[：:]/i);
     var k   = key ? key[1].toLowerCase() : '';
     var cls = (planPrices[k] || 0) >= 30000 ? 'gold' : '';
     var card = document.createElement('div');
@@ -1885,14 +1938,12 @@ var I18N_EN = {
   "nav.cta": "Become a Sponsor",
 
   "hero.badgeTop": "WALKING ACROSS AMERICA 2026 — Now Seeking Sponsors",
-  "hero.title": "Because it's needless —<br><span>that's exactly why I try it.</span>",
+  "hero.title": "Because it's needless —<br><span>that's why I walk the earth.</span>",
+  "hero.typingFixed": "Walked the length of Japan, then across Eurasia on foot. Next: America.",
   "hero.badge1": "100kg rickshaw, on foot — <strong>the final chapter of a round-the-world journey</strong>",
-  "hero.badge2": "5,000km across America, <strong>sponsorships now open.</strong>",
+  "hero.badge2": "Circled South America, <strong>crossed Central & North America</strong>",
   "hero.badge3": "250kg rickshaw, <strong>the length of Japan on foot</strong>",
   "hero.badge4": "Eurasia on foot — <strong>13,000km achieved</strong>",
-  "hero.badge5": "YouTube — <strong>32,000 subscribers</strong>",
-  "hero.badge6": "<strong>Well above average</strong> ad value",
-  "hero.badge7": "<strong>Featured by major media</strong> at home and abroad",
   "hero.btn1": "Become a Sponsor",
   "hero.btn2": "Discover the Journey",
   "hero.visitorPre": "Page views: ",
@@ -2007,6 +2058,16 @@ var I18N_EN = {
   "bt.b1n": "Your name on the Japanese flag (group message)",
   "bt.b2n": "Thank-you message sent",
 
+  "plan.c.name": "Talk to Jack Live — Direct Radio Call From the Road in North America",
+  "plan.c.desc": "A live radio call, direct from Jack in the middle of his walk across America — hear his own voice, in real time, while he's still out there walking.",
+  "bt.c1n": "A direct live radio call from the road",
+  "bt.c2n": "Thank-you message sent",
+
+  "plan.e.name": "Your Name, Written on the Land — A Desert Name-Location Photo",
+  "plan.e.desc": "Your name, written by hand in the American desert or wilderness and photographed — a one-of-a-kind \"name-location photo,\" just for you.",
+  "bt.e1n": "A desert / wilderness name-location photo",
+  "bt.e2n": "Thank-you message sent",
+
   "plan.d.name": "Stay at His Home Base — \"Bridge\" Guesthouse Plan",
   "plan.d.desc": "A one-night stay at Bridge, the guesthouse Jack runs in Shimonoseki.",
   "bt.d1n": "One night's stay at Bridge (Shimonoseki)",
@@ -2063,6 +2124,30 @@ var I18N_EN = {
   "bt.n1n": "Invitation to the private camping trip",
   "bt.n2n": "Thank-you message sent",
 
+  "plan.o.name": "Secret 1-on-1 Lesson (60 Min) — 15 Years of Magic, Behind the Scenes",
+  "plan.o.desc": "Held after Jack returns to Japan. A 60-minute 1-on-1 lesson where Jack, with 15 years as a magician, personally shares the story and secrets behind his craft.",
+  "bt.o1n": "1-on-1 lesson (60 minutes)",
+  "bt.o2n": "Thank-you message sent",
+
+  "plan.p.name": "Walk North America Together — Small Logo on Wear & Rickshaw + YouTube Credit",
+  "plan.p.desc": "A small logo placed on Jack's wear and rickshaw during the North America crossing, plus a credit in the YouTube description.",
+  "bt.p1n": "Small logo on wear & rickshaw",
+  "bt.p2n": "Credit in the YouTube description",
+  "bt.p3n": "Thank-you message sent",
+
+  "plan.q.name": "North America Partner Course — Medium Logo + Description Listing + SNS Feature",
+  "plan.q.desc": "A partner course: a medium-sized logo on wear & rickshaw, a listing in the YouTube description, and a feature on social media.",
+  "bt.q1n": "Medium logo on wear & rickshaw",
+  "bt.q2n": "YouTube description listing",
+  "bt.q3n": "Featured on social media",
+  "bt.q4n": "Thank-you message sent",
+
+  "plan.r.name": "North America Main Partner Course — Large Logo in Prime Position + Top Description Listing",
+  "plan.r.desc": "The top-tier main partner course: a large logo in the prime position on wear & rickshaw, with an ongoing top listing in the YouTube description.",
+  "bt.r1n": "Large logo in the prime position on wear & rickshaw",
+  "bt.r2n": "Ongoing top listing in the YouTube description",
+  "bt.r3n": "Thank-you message sent",
+
   "plan.unit": "/unit",
   "plan.btn": "Support Jack Now",
 
@@ -2103,6 +2188,8 @@ var I18N_EN = {
   "form.plan.opt0": "Please select",
   "form.plan.optA": "A Cup of Coffee Cheer (¥1,000)",
   "form.plan.optB": "Travel Companion — Flag Name (¥3,000)",
+  "form.plan.optC": "Live Radio Call From the Road (¥3,000)",
+  "form.plan.optE": "Name-Location Photo (¥3,000)",
   "form.plan.optD": "Stay at Bridge Guesthouse (¥5,000)",
   "form.plan.optF": "YouTube Description Supporter (¥10,000)",
   "form.plan.optG": "Wilderness Survivor Relic (¥15,000)",
@@ -2113,6 +2200,10 @@ var I18N_EN = {
   "form.plan.optL": "The Legendary Handover (¥500,000)",
   "form.plan.optM": "Bridge Get-Together (¥10,000)",
   "form.plan.optN": "Private Camping Trip (¥30,000)",
+  "form.plan.optO": "Secret 1-on-1 Lesson, 60 min (¥30,000)",
+  "form.plan.optP": "Small Logo + Description Credit (¥100,000)",
+  "form.plan.optQ": "North America Partner Course — Medium Logo (¥300,000)",
+  "form.plan.optR": "North America Main Partner Course — Large Logo (¥500,000)",
   "form.display.label": "Display Name (shown on supporters page, SNS, etc.)",
   "form.display.ph": "Nickname OK. Leave blank to use your name.",
   "form.msg.label": "Message of Support / Questions (optional)",
