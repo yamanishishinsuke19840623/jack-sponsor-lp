@@ -102,7 +102,7 @@ function setupSheet() {
 //  スプレッドシート記録
 // =============================================
 
-function logToSheet(d) {
+function logToSheet(d, autoConfirmed) {
   if (!SHEET_ID) return;
   var sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('台帳');
   sheet.appendRow([
@@ -118,9 +118,9 @@ function logToSheet(d) {
     d['ブランドストーリー'] || '',
     d['Powered_by表記']    || '',
     d['応援メッセージ']    || '',
-    '未確認',
-    'いいえ',
-    ''
+    autoConfirmed ? '確認済' : '未確認',   // 振込確認：クレカ決済は即時確定するため自動で確認済に
+    autoConfirmed ? 'はい'   : 'いいえ',   // LP掲載：クレカ決済は自動でLPの支援総額・一覧に反映
+    autoConfirmed ? new Date() : ''
   ]);
 }
 
@@ -503,13 +503,13 @@ function handleStripeWebhook(event) {
   var plan = key ? (key + '：' + PLAN_NAMES[key] + '（¥' + amount.toLocaleString() + '）') : ('¥' + amount.toLocaleString());
   if (!PLAN_NAMES[refKey] && ambiguousAmounts[amount]) plan += '【要確認：' + ambiguousAmounts[amount] + '】';
 
-  // スプレッドシートに記録
+  // スプレッドシートに記録（クレカ決済は即時確定するため自動で振込確認済・LP掲載＝はい）
   logToSheet({
     name: cName, email: cEmail, plan: plan + '【クレカ決済】',
     '掲載希望名':'', 'Instagram':'', 'X(Twitter)':'',
     'ウェブサイトURL':'', '企業・活動紹介文':'', 'ブランドストーリー':'',
     'Powered_by表記':'', '応援メッセージ':''
-  });
+  }, true);
 
   var body = '【クレカ決済完了】スポンサー申し込みがありました！\n\n';
   body += '━━━━━━━━━━━━━━━━━━━━\n';
