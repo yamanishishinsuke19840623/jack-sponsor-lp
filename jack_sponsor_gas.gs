@@ -86,6 +86,47 @@ function sheetUrl() {
 }
 
 // =============================================
+//  2026-09-14 Stripe再送重複の一括整理（1回限り実行）
+//  ・「お名前+メール+プラン」が同一で振込確認=未確認のグループは最古の1行だけ残す
+//  ・お名前が「【テスト】」で始まる行（接続テスト用ダミー）は無条件で削除
+//  Apps Scriptエディタで本関数を選択して実行する。実行後は削除してよい。
+// =============================================
+
+function dedupeStripeDuplicates_20260914() {
+  var sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('台帳');
+  var rows  = sheet.getDataRange().getValues();
+  var seen  = {};
+  var rowsToDelete = [];
+
+  for (var i = 1; i < rows.length; i++) {
+    var name    = rows[i][1];
+    var email   = rows[i][2];
+    var plan    = rows[i][3];
+    var confirm = rows[i][12];
+
+    if (String(name).indexOf('【テスト】') === 0) {
+      rowsToDelete.push(i + 1); // シート上の行番号（1始まり＋ヘッダー分）
+      continue;
+    }
+
+    if (confirm === '未確認') {
+      var key = name + '|' + email + '|' + plan;
+      if (seen[key]) {
+        rowsToDelete.push(i + 1);
+      } else {
+        seen[key] = true;
+      }
+    }
+  }
+
+  // 行番号が大きい方から削除（小さい方から消すと後続の行番号がずれるため）
+  rowsToDelete.sort(function(a, b){ return b - a; });
+  rowsToDelete.forEach(function(r){ sheet.deleteRow(r); });
+
+  return {deletedRows: rowsToDelete.length, deletedRowNumbers: rowsToDelete};
+}
+
+// =============================================
 //  初期セットアップ（1回だけ実行）
 // =============================================
 
@@ -367,11 +408,25 @@ function sendTaskChecklist(d) {
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('🎩 Jack LP')
-    .addItem('✅ 振込確認メールを送信（選択行）', 'menuSendConfirmation')
+    .addItem('✅ 振込確認メールを送信（振込確認のみ）', 'menuSendConfirmation')
+    .addItem('🌟 振込確認＋LP掲載（メーターに反映）', 'menuSendConfirmationAndPublish')
     .addToUi();
 }
 
+// 振込確認のみ：M列（振込確認）を更新。N列（LP掲載）には触れない。
+// クレカ決済の旧データなど「既にメーターの基準値に含まれている支援」を
+// 二重カウントせずに確認だけ済ませたい場合に使う。
 function menuSendConfirmation() {
+  menuSendConfirmation_(false);
+}
+
+// 振込確認＋LP掲載：M列とN列（LP掲載＝はい）を同時に更新し、支援者一覧・
+// メーターに即反映させる。通常の銀行振込の新規申し込みはこちらを使う。
+function menuSendConfirmationAndPublish() {
+  menuSendConfirmation_(true);
+}
+
+function menuSendConfirmation_(alsoPublish) {
   var sheet = SpreadsheetApp.getActiveSheet();
   var row   = sheet.getActiveCell().getRow();
   if (row <= 1) { SpreadsheetApp.getUi().alert('データ行を選択してください'); return; }
@@ -381,15 +436,16 @@ function menuSendConfirmation() {
 
   if (!email) { SpreadsheetApp.getUi().alert('メールアドレスが空です'); return; }
 
-  var confirm = SpreadsheetApp.getUi().alert(
-    name + ' 様（' + plan + '）に振込確認メールを送信しますか？',
-    SpreadsheetApp.getUi().ButtonSet.YES_NO
-  );
+  var msg = name + ' 様（' + plan + '）に振込確認メールを送信しますか？';
+  if (alsoPublish) msg += '\n（LP掲載も「はい」にして、支援者一覧・メーターに反映します）';
+
+  var confirm = SpreadsheetApp.getUi().alert(msg, SpreadsheetApp.getUi().ButtonSet.YES_NO);
   if (confirm !== SpreadsheetApp.getUi().Button.YES) return;
 
   sendPaymentConfirmation({name: name, email: email, plan: plan});
 
   sheet.getRange(row, 13).setValue('確認済');
+  if (alsoPublish) sheet.getRange(row, 14).setValue('はい');
   sheet.getRange(row, 15).setValue(new Date());
 
   SpreadsheetApp.getUi().alert('✅ 送信完了しました！');
@@ -502,10 +558,28 @@ function sendNotificationToJack(d) {
 //  Stripe 決済完了通知
 // =============================================
 
+// GASのWebアプリは応答に必ず302リダイレクトを挟む仕様のため、Stripeからは
+// 「配信失敗」と誤認識され続け、最大3日間・間隔を空けて同じイベントを再送してくる。
+// event.id を処理済みシートに記録し、既出なら何もせず終了する（多重記帳・多重メール防止）。
+function isDuplicateStripeEvent(eventId) {
+  if (!eventId) return false;
+  var ss    = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = ss.getSheetByName('Stripeイベント処理済み') || ss.insertSheet('Stripeイベント処理済み');
+  var ids   = sheet.getRange(1, 1, Math.max(sheet.getLastRow(), 1), 1).getValues();
+  for (var i = 0; i < ids.length; i++) {
+    if (ids[i][0] === eventId) return true;
+  }
+  sheet.appendRow([eventId, new Date()]);
+  return false;
+}
+
 function handleStripeWebhook(event) {
   if (event.type !== 'checkout.session.completed' &&
       event.type !== 'payment_intent.succeeded') {
     return res({ok: true, skipped: true});
+  }
+  if (isDuplicateStripeEvent(event.id)) {
+    return res({ok: true, duplicate: true});
   }
   var obj    = event.data.object;
   var detail = obj.customer_details || {};
