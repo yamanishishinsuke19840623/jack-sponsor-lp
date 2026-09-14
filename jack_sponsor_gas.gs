@@ -27,9 +27,20 @@ function doPost(e) {
   }
 }
 
-// LP からスポンサー一覧を取得（JSONP）
+// LP からスポンサー一覧 / 訪問カウントを取得（JSONP）
 function doGet(e) {
-  var callback = (e.parameter || {}).callback || 'cb';
+  var params   = e.parameter || {};
+  var callback = params.callback || 'cb';
+  var action   = params.action  || 'sponsors';
+
+  // 訪問カウンター
+  if (action === 'visit') {
+    var count = incrementVisitorCount();
+    return ContentService.createTextOutput(callback + '(' + JSON.stringify({count: count}) + ')')
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+
+  // スポンサー一覧
   var sponsors = [];
   if (SHEET_ID) {
     try {
@@ -49,6 +60,20 @@ function doGet(e) {
   var json = JSON.stringify({sponsors: sponsors});
   return ContentService.createTextOutput(callback + '(' + json + ')')
     .setMimeType(ContentService.MimeType.JAVASCRIPT);
+}
+
+// スプレッドシートの「訪問数」シートに累計を記録して返す
+function incrementVisitorCount() {
+  try {
+    var ss    = SpreadsheetApp.openById(SHEET_ID);
+    var sheet = ss.getSheetByName('訪問数') || ss.insertSheet('訪問数');
+    var cell  = sheet.getRange('A1');
+    var count = (parseInt(cell.getValue()) || 0) + 1;
+    cell.setValue(count);
+    return count;
+  } catch(err) {
+    return 0;
+  }
 }
 
 function res(obj) {
