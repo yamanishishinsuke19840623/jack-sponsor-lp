@@ -172,7 +172,7 @@ function logToSheet(d, autoConfirmed) {
   if (!SHEET_ID) return;
   var sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName('台帳');
   sheet.appendRow([
-    new Date(),
+    d.date            || new Date(),
     d.name            || '',
     d.email           || '',
     d.plan            || '',
@@ -410,6 +410,9 @@ function onOpen() {
     .createMenu('🎩 Jack LP')
     .addItem('✅ 振込確認メールを送信（振込確認のみ）', 'menuSendConfirmation')
     .addItem('🌟 振込確認＋LP掲載（メーターに反映）', 'menuSendConfirmationAndPublish')
+    .addSeparator()
+    .addItem('🔄 Stripe決済を今すぐ同期（漏れ回収）', 'menuSyncStripe')
+    .addItem('🔑 Stripe読み取りキーを登録＋自動同期ON', 'menuSetupStripeSync')
     .addToUi();
 }
 
@@ -560,16 +563,32 @@ function sendNotificationToJack(d) {
 
 // GASのWebアプリは応答に必ず302リダイレクトを挟む仕様のため、Stripeからは
 // 「配信失敗」と誤認識され続け、最大3日間・間隔を空けて同じイベントを再送してくる。
-// event.id を処理済みシートに記録し、既出なら何もせず終了する（多重記帳・多重メール防止）。
-function isDuplicateStripeEvent(eventId) {
-  if (!eventId) return false;
-  var ss    = SpreadsheetApp.openById(SHEET_ID);
-  var sheet = ss.getSheetByName('Stripeイベント処理済み') || ss.insertSheet('Stripeイベント処理済み');
+// event.id / Checkout Session ID を処理済みシートに記録し、既出なら何もせず終了する（多重記帳・多重メール防止）。
+// さらに失敗扱いが続くとStripeはエンドポイント自体を自動で無効化する（2026-09-21以降の取りこぼしの原因）。
+// そのため webhook だけに頼らず、syncStripePayments() が10分ごとにStripe APIから決済を取りに行く。
+function processedSheet_() {
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  return ss.getSheetByName('Stripeイベント処理済み') || ss.insertSheet('Stripeイベント処理済み');
+}
+
+function isProcessedId_(id) {
+  if (!id) return false;
+  var sheet = processedSheet_();
   var ids   = sheet.getRange(1, 1, Math.max(sheet.getLastRow(), 1), 1).getValues();
   for (var i = 0; i < ids.length; i++) {
-    if (ids[i][0] === eventId) return true;
+    if (ids[i][0] === id) return true;
   }
-  sheet.appendRow([eventId, new Date()]);
+  return false;
+}
+
+function markProcessedId_(id) {
+  if (id) processedSheet_().appendRow([id, new Date()]);
+}
+
+function isDuplicateStripeEvent(eventId) {
+  if (!eventId) return false;
+  if (isProcessedId_(eventId)) return true;
+  markProcessedId_(eventId);
   return false;
 }
 
@@ -578,16 +597,33 @@ function handleStripeWebhook(event) {
       event.type !== 'payment_intent.succeeded') {
     return res({ok: true, skipped: true});
   }
-  if (isDuplicateStripeEvent(event.id)) {
-    return res({ok: true, duplicate: true});
+  var lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    if (isDuplicateStripeEvent(event.id)) {
+      return res({ok: true, duplicate: true});
+    }
+    var obj = event.data.object;
+    // 自動同期で既に記帳済みのセッションなら記帳しない
+    if (obj.id && isProcessedId_(obj.id)) {
+      return res({ok: true, duplicate: true});
+    }
+    markProcessedId_(obj.id);
+    recordCardPayment_(obj, false);
+  } finally {
+    lock.releaseLock();
   }
-  var obj    = event.data.object;
+  return res({ok: true});
+}
+
+// Checkout Session（または PaymentIntent）1件を台帳に記帳し、Jackへ通知する
+function recordCardPayment_(obj, fromSync) {
   var detail = obj.customer_details || {};
   var cName  = detail.name  || '不明';
   var cEmail = detail.email || '不明';
   var amount = obj.amount_total || obj.amount_received || 0;
 
-  // LPの決済ボタンが付与する client_reference_id（プラン記号 a-n）を優先。
+  // LPの決済ボタンが付与する client_reference_id（プラン記号 a-r）を優先。
   // 無い場合は金額から推定（¥10,000・¥30,000は同額プランが複数あるため要確認扱い）。
   var refKey = (obj.client_reference_id || '').toLowerCase();
   var amountFallback = {1000:'a', 3000:'b', 5000:'d', 10000:'f', 15000:'g', 20000:'i', 30000:'h', 50000:'j', 100000:'k', 300000:'q', 500000:'l'};
@@ -601,9 +637,11 @@ function handleStripeWebhook(event) {
   var key  = PLAN_NAMES[refKey] ? refKey : (amountFallback[amount] || '');
   var plan = key ? (key + '：' + PLAN_NAMES[key] + '（¥' + amount.toLocaleString() + '）') : ('¥' + amount.toLocaleString());
   if (!PLAN_NAMES[refKey] && ambiguousAmounts[amount]) plan += '【要確認：' + ambiguousAmounts[amount] + '】';
+  if (!key) plan += '【要確認：プラン不明（複数口の可能性）】';
 
   // スプレッドシートに記録（クレカ決済は即時確定するため自動で振込確認済・LP掲載＝はい）
   logToSheet({
+    date: obj.created ? new Date(obj.created * 1000) : new Date(),
     name: cName, email: cEmail, plan: plan + '【クレカ決済】',
     '掲載希望名':'', 'Instagram':'', 'X(Twitter)':'',
     'ウェブサイトURL':'', '企業・活動紹介文':'', 'ブランドストーリー':'',
@@ -611,6 +649,7 @@ function handleStripeWebhook(event) {
   }, true);
 
   var body = '【クレカ決済完了】スポンサー申し込みがありました！\n\n';
+  if (fromSync) body += '※Stripeとの自動同期で記帳しました（決済日時は台帳の申込日時をご確認ください）\n\n';
   body += '━━━━━━━━━━━━━━━━━━━━\n';
   body += '顧客名：' + cName + '\n';
   body += 'メール：' + cEmail + '\n';
@@ -625,5 +664,110 @@ function handleStripeWebhook(event) {
     subject: '【クレカ決済完了】' + cName + ' 様（¥' + amount.toLocaleString() + '）',
     body: body
   });
-  return res({ok: true});
+}
+
+// =============================================
+//  Stripe 自動同期（webhook取りこぼし対策）
+//  スクリプトプロパティ STRIPE_READ_KEY に「制限付きキー（Checkout Sessions：読み取り）」を登録して使う
+// =============================================
+
+// 初回はこの時刻以降に作成されたセッションを取り込む（webhook最終受信 2026-09-21 22:45 の当日から）
+var STRIPE_SYNC_BACKFILL_FROM = new Date('2026-09-21T00:00:00+09:00');
+
+function syncStripePayments() {
+  var props  = PropertiesService.getScriptProperties();
+  var apiKey = props.getProperty('STRIPE_READ_KEY');
+  if (!apiKey) throw new Error('STRIPE_READ_KEY が未登録です（メニュー「Stripe読み取りキーを登録」から登録）');
+
+  var since = Number(props.getProperty('STRIPE_SYNC_SINCE')) ||
+              Math.floor(STRIPE_SYNC_BACKFILL_FROM.getTime() / 1000);
+  var startedAt = Math.floor(Date.now() / 1000);
+
+  var sessions = [];
+  var startingAfter = '';
+  do {
+    var url = 'https://api.stripe.com/v1/checkout/sessions?limit=100&status=complete&created[gte]=' + since +
+              (startingAfter ? '&starting_after=' + startingAfter : '');
+    var resp = UrlFetchApp.fetch(url, {
+      headers: {Authorization: 'Bearer ' + apiKey},
+      muteHttpExceptions: true
+    });
+    if (resp.getResponseCode() !== 200) {
+      throw new Error('Stripe API エラー ' + resp.getResponseCode() + ': ' + resp.getContentText());
+    }
+    var page = JSON.parse(resp.getContentText());
+    sessions = sessions.concat(page.data);
+    startingAfter = page.has_more && page.data.length ? page.data[page.data.length - 1].id : '';
+  } while (startingAfter);
+
+  // 古い順に記帳する
+  sessions.sort(function(a, b){ return a.created - b.created; });
+
+  var added = [];
+  var lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    var ledger = SpreadsheetApp.openById(SHEET_ID).getSheetByName('台帳').getDataRange().getValues();
+    sessions.forEach(function(s) {
+      if (s.payment_status !== 'paid') return;
+      if (isProcessedId_(s.id)) return;
+      // 処理済みシートにセッションIDが無い過去分（event.idでのみ記録）は、台帳のメール＋金額＋日時で照合する
+      if (existsInLedger_(ledger, s)) { markProcessedId_(s.id); return; }
+      markProcessedId_(s.id);
+      recordCardPayment_(s, true);
+      added.push(((s.customer_details && s.customer_details.name) || '不明') + ' ¥' + (s.amount_total || 0).toLocaleString());
+    });
+  } finally {
+    lock.releaseLock();
+  }
+
+  // 次回は直近48時間分だけ見る（Checkout Sessionの有効期限は24時間なので取りこぼさない）
+  props.setProperty('STRIPE_SYNC_SINCE', String(startedAt - 2 * 86400));
+  Logger.log('Stripe同期: 取得 ' + sessions.length + '件 / 新規記帳 ' + added.length + '件 ' + added.join(', '));
+  return added;
+}
+
+// 台帳に同じメール・同じ金額の【クレカ決済】行が、セッション作成〜24時間以内の日時で既にあるか
+function existsInLedger_(ledger, s) {
+  var email   = ((s.customer_details && s.customer_details.email) || '').toLowerCase();
+  var amount  = s.amount_total || 0;
+  var created = s.created * 1000;
+  for (var i = 1; i < ledger.length; i++) {
+    var row = ledger[i];
+    if (String(row[2]).toLowerCase() !== email) continue;
+    var plan = String(row[3]);
+    if (plan.indexOf('【クレカ決済】') < 0) continue;
+    var m = plan.match(/¥([\d,]+)/);
+    if (!m || Number(m[1].replace(/,/g, '')) !== amount) continue;
+    var t = new Date(row[0]).getTime();
+    if (t >= created - 10 * 60000 && t <= created + 24 * 3600000) return true;
+  }
+  return false;
+}
+
+function installStripeSyncTrigger() {
+  ScriptApp.getProjectTriggers().forEach(function(t) {
+    if (t.getHandlerFunction() === 'syncStripePayments') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('syncStripePayments').timeBased().everyMinutes(10).create();
+}
+
+function menuSetupStripeSync() {
+  var ui = SpreadsheetApp.getUi();
+  var r  = ui.prompt('Stripe読み取りキーの登録',
+    'Stripeの制限付きキー（rk_live_ で始まる）を貼り付けてください。\n権限は「Checkout Sessions：読み取り」のみでOKです。',
+    ui.ButtonSet.OK_CANCEL);
+  if (r.getSelectedButton() !== ui.Button.OK) return;
+  var key = r.getResponseText().trim();
+  if (key.indexOf('rk_') !== 0) { ui.alert('rk_ で始まる制限付きキーを貼り付けてください（sk_ の秘密キーは使いません）'); return; }
+  PropertiesService.getScriptProperties().setProperty('STRIPE_READ_KEY', key);
+  installStripeSyncTrigger();
+  ui.alert('✅ 登録しました。10分ごとの自動同期をONにしました。\n続けて「Stripe決済を今すぐ同期」で漏れ分を回収してください。');
+}
+
+function menuSyncStripe() {
+  var added = syncStripePayments();
+  SpreadsheetApp.getUi().alert(added.length
+    ? '✅ ' + added.length + '件を台帳に追加しました\n\n' + added.join('\n')
+    : '漏れはありませんでした（台帳とStripeは一致しています）');
 }

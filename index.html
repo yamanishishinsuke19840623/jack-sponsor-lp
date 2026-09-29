@@ -1759,13 +1759,20 @@ var FUNDING_GOAL = 2000000;
 var FUNDING_BASE_RAISED = 230000;
 var FUNDING_BASE_SUPPORTERS = 10;
 
+// 台帳のプラン欄に書かれた実際の決済額（複数口なら合計額）を優先し、無ければプラン定価
+function sponsorAmount(s) {
+  var plan = s.plan || '';
+  var amt  = plan.match(/¥([\d,]+)/);
+  if (amt) return Number(amt[1].replace(/,/g, ''));
+  var m = plan.match(/^([a-r])[：:]/i);
+  return m ? (planPrices[m[1].toLowerCase()] || 0) : 0;
+}
+
 function updateFundingBar(extraSponsors) {
   extraSponsors = extraSponsors || [];
   var extraRaised = 0;
   extraSponsors.forEach(function(s) {
-    var m = (s.plan || '').match(/^([a-r])[：:]/i);
-    var key = m ? m[1].toLowerCase() : '';
-    extraRaised += planPrices[key] || 0;
+    extraRaised += sponsorAmount(s);
   });
   var raised = FUNDING_BASE_RAISED + extraRaised;
   var supporters = FUNDING_BASE_SUPPORTERS + extraSponsors.length;
@@ -1791,11 +1798,12 @@ function loadSponsors(data) {
   data.sponsors.forEach(function(s) {
     var key = (s.plan || '').match(/^([a-r])[：:]/i);
     var k   = key ? key[1].toLowerCase() : '';
-    var cls = (planPrices[k] || 0) >= 30000 ? 'gold' : '';
+    var amount = sponsorAmount(s);
+    var cls = amount >= 30000 ? 'gold' : '';
     var card = document.createElement('div');
     card.className = 'sponsor-card fade-in';
     card.innerHTML =
-      '<div class="sponsor-badge ' + cls + '">' + (k ? '¥' + planPrices[k].toLocaleString() : 'SP') + '</div>' +
+      '<div class="sponsor-badge ' + cls + '">' + (amount ? '¥' + amount.toLocaleString() : 'SP') + '</div>' +
       '<div><div class="sponsor-name">' + (s.name || '') + '</div>' +
       (s.message ? '<div class="sponsor-msg">' + s.message + '</div>' : '') + '</div>';
     grid.appendChild(card);
