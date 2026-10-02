@@ -18,7 +18,8 @@ function doPost(e) {
     if (data.type && data.data && data.data.object) {
       return handleStripeWebhook(data);
     }
-    logToSheet(data);
+    var ledgerRow = logToSheet(data);
+    try { createBenefitTasks_(data, false, ledgerRow); } catch (err) {}
     sendAutoReplyToApplicant(data);
     sendTaskChecklist(data);
     return res({ok: true});
@@ -188,6 +189,7 @@ function logToSheet(d, autoConfirmed) {
     autoConfirmed ? 'はい'   : 'いいえ',   // LP掲載：クレカ決済は自動でLPの支援総額・一覧に反映
     autoConfirmed ? new Date() : ''
   ]);
+  return sheet.getLastRow();
 }
 
 // =============================================
@@ -231,150 +233,287 @@ function getPlanKey(planStr) {
 }
 
 // プランごとのタスクリスト（コピペテンプレート付き）
-function buildTaskBody(d) {
+// [{title, template}] の配列で返す。メール本文と「特典タスク」シートの両方で使う。
+// isCard: クレカ決済（振込確認・LP掲載は自動で済んでいるため、その手順は出さない）
+var NAME_DISPLAY_PLANS = {a:1, b:1, e:1, f:1, k:1, l:1, p:1, q:1, r:1};
+
+function getPlanTasks(d, isCard) {
   var key      = getPlanKey(d.plan);
   var dispName = d['掲載希望名'] || d.name;
+  var tasks    = [];
+  var add = function(title, template) { tasks.push({title: title, template: template || ''}); };
 
-  var lines = [];
+  // プランが金額からの推定のとき（同額プランが複数ある）
+  if (String(d.plan).indexOf('【要確認') >= 0) {
+    add('Stripeダッシュボードで実際のプランを確認し、台帳のプラン欄を直す\n   → https://dashboard.stripe.com/payments');
+  }
+  // クレカ決済は掲載希望名を受け取っていない（Stripeのカード名義のまま）
+  if (isCard && NAME_DISPLAY_PLANS[key]) {
+    add('掲載・記入するお名前を本人に確認する（今はカード名義「' + d.name + '」のまま）\n   → 連絡先: ' + d.email);
+  }
 
-  var add = function(num, title, template) {
-    lines.push('□ ' + num + '. ' + title);
-    if (template) {
-      lines.push('   ┌── コピペ用 ──────────────────');
-      template.split('\n').forEach(function(l){ lines.push('   │ ' + l); });
-      lines.push('   └──────────────────────────────');
-    }
-    lines.push('');
-  };
-
-  // === a: コーヒー1杯のエール ===
   if (key === 'a') {
-    add(1, 'スプレッドシートで「振込確認」→「確認済」に変更', null);
-    add(2, 'LP掲載欄を「いいえ」→「はい」に変更（支援者ページに名前が自動表示）', null);
+    add('支援者ページにお名前が出ているか確認する');
   }
-
-  // === b: 旅の相棒（日本国旗へお名前記入） ===
   if (key === 'b') {
-    add(1, '日本国旗の寄せ書きにお名前を記入する\n   → 記入名: ' + dispName, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('日本国旗の寄せ書きにお名前を記入する\n   → 記入名: ' + dispName);
   }
-
-  // === c: 現地直通ラジオ生電話権 ===
   if (key === 'c') {
-    add(1, '生電話の日程調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('生電話の日程調整メールを送る\n   → 連絡先: ' + d.email);
   }
-
-  // === e: ネームロケーション写真 ===
-  if (key === 'e') {
-    add(1, '現地で名前を書いた撮影を行う\n   → 記入名: ' + dispName, null);
-    add(2, '撮影した写真を送付する\n   → 送信先: ' + d.email, null);
-    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
-  }
-
-  // === d: 旅の拠点に泊まる（ブリッジ宿泊） ===
   if (key === 'd') {
-    add(1, '宿泊日程の調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'ブリッジ（下関）の予約枠を確保する', null);
-    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('宿泊日程の調整メールを送る\n   → 連絡先: ' + d.email);
+    add('ブリッジ（下関）の予約枠を確保する');
   }
-
-  // === f: 名前を刻む（YouTube概要欄） ===
+  if (key === 'e') {
+    add('現地で名前を書いた撮影を行う\n   → 記入名: ' + dispName);
+    add('撮影した写真を送付する\n   → 送信先: ' + d.email);
+  }
   if (key === 'f') {
-    add(1, 'YouTube概要欄に追加する',
+    add('YouTube概要欄に追加する',
       '── サポーター ──\n' +
       dispName + '\n' +
       '──────────\n' +
       '↑ YouTubeの各動画の概要欄に追記してください'
     );
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
   }
-
-  // === g: 荒野の生還パーツ ===
   if (key === 'g') {
-    add(1, '旅で使用した私物の欠片を用意する（20個限定・在庫管理）', null);
-    add(2, '直筆のお手紙を書く\n   → 宛名: ' + dispName, null);
-    add(3, '発送する\n   → 送付先住所を確認: ' + d.email, null);
-    add(4, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('旅で使用した私物の欠片を用意する（20個限定・在庫管理）');
+    add('直筆のお手紙を書く\n   → 宛名: ' + dispName);
+    add('発送する\n   → 送付先住所を確認: ' + d.email);
   }
-
-  // === h: アメリカからの生還（ルート66） ===
   if (key === 'h') {
-    add(1, '現地からエアメールを投函する\n   → 宛名: ' + dispName, null);
-    add(2, '限定ステッカーを同封して発送する\n   → 送付先住所を確認: ' + d.email, null);
-    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('現地からエアメールを投函する\n   → 宛名: ' + dispName);
+    add('限定ステッカーを同封して発送する\n   → 送付先住所を確認: ' + d.email);
   }
-
-  // === i: レジェンド集結（オンライン飲み会） ===
   if (key === 'i') {
-    add(1, 'オンライン飲み会の日程調整メールを送る（先着3名・ゴッチさん/うすくくん/こたろうさんも参加）\n   → 連絡先: ' + d.email, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('オンライン飲み会の日程調整メールを送る（先着3名・ゴッチさん/うすくくん/こたろうさんも参加）\n   → 連絡先: ' + d.email);
   }
-
-  // === j: あなたの街に直撃！ ===
   if (key === 'j') {
-    add(1, '帰国後の日本縦断ルートと訪問希望地の照合・日程調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('帰国後の日本縦断ルートと訪問希望地の照合・日程調整メールを送る\n   → 連絡先: ' + d.email);
   }
-
-  // === k: 出張講演会プラン ===
   if (key === 'k') {
-    add(1, '講演日程・会場・交通費の調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('講演日程・会場・交通費の調整メールを送る\n   → 連絡先: ' + d.email);
   }
-
-  // === l: 伝説の相棒譲渡（リアル・リヤカー永久所有権） ===
   if (key === 'l') {
-    add(1, '帰国・譲渡時期と受け渡し方法の調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'リヤカーの譲渡・名義変更手続きを行う\n   → 宛名: ' + dispName, null);
-    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('帰国・譲渡時期と受け渡し方法の調整メールを送る\n   → 連絡先: ' + d.email);
+    add('リヤカーの譲渡・名義変更手続きを行う\n   → 宛名: ' + dispName);
   }
-
-  // === m: ブリッジ懇親会（食べ飲み放題） ===
   if (key === 'm') {
-    add(1, '開催日程の調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'ブリッジ（下関）の懇親会枠を確保する', null);
-    add(3, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('開催日程の調整メールを送る\n   → 連絡先: ' + d.email);
+    add('ブリッジ（下関）の懇親会枠を確保する');
   }
-
-  // === n: プライベート・キャンプ会 ===
   if (key === 'n') {
-    add(1, 'キャンプ会の日程・場所の調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('キャンプ会の日程・場所の調整メールを送る\n   → 連絡先: ' + d.email);
   }
-
-  // === o: 秘伝マンツーマンレッスン（60分） ===
   if (key === 'o') {
-    add(1, '帰国後のレッスン日程調整メールを送る\n   → 連絡先: ' + d.email, null);
-    add(2, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('帰国後のレッスン日程調整メールを送る\n   → 連絡先: ' + d.email);
   }
-
-  // === p: 北米大陸ロゴ掲載（小）＋概要欄クレジット ===
   if (key === 'p') {
-    add(1, 'ロゴデータをリクエストする\n   → 送付先: kimonomagician@gmail.com（申込者へ案内）', null);
-    add(2, 'ウェア＆リヤカーにロゴ（小）を掲載する', null);
-    add(3, 'YouTube概要欄にクレジットを追加する\n   → 掲載名: ' + dispName, null);
-    add(4, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('ロゴデータをリクエストする\n   → 送付先: kimonomagician@gmail.com（申込者へ案内）');
+    add('ウェア＆リヤカーにロゴ（小）を掲載する');
+    add('YouTube概要欄にクレジットを追加する\n   → 掲載名: ' + dispName);
   }
-
-  // === q: 北米横断パートナーコース（ロゴ中） ===
   if (key === 'q') {
-    add(1, 'ロゴデータをリクエストする\n   → 送付先: kimonomagician@gmail.com（申込者へ案内）', null);
-    add(2, 'ウェア＆リヤカーにロゴ（中）を掲載する', null);
-    add(3, 'YouTube概要欄に掲載する\n   → 掲載名: ' + dispName, null);
-    add(4, 'SNSで紹介投稿する', null);
-    add(5, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('ロゴデータをリクエストする\n   → 送付先: kimonomagician@gmail.com（申込者へ案内）');
+    add('ウェア＆リヤカーにロゴ（中）を掲載する');
+    add('YouTube概要欄に掲載する\n   → 掲載名: ' + dispName);
+    add('SNSで紹介投稿する');
   }
-
-  // === r: 北米横断メインパートナーコース（ロゴ大） ===
   if (key === 'r') {
-    add(1, 'ロゴデータをリクエストする\n   → 送付先: kimonomagician@gmail.com（申込者へ案内）', null);
-    add(2, 'ウェア＆リヤカーの特等席にロゴ（大）を掲載する', null);
-    add(3, 'YouTube概要欄トップに継続掲載する\n   → 掲載名: ' + dispName, null);
-    add(4, 'スプレッドシートで「振込確認」→「確認済」・「LP掲載」→「はい」に変更', null);
+    add('ロゴデータをリクエストする\n   → 送付先: kimonomagician@gmail.com（申込者へ案内）');
+    add('ウェア＆リヤカーの特等席にロゴ（大）を掲載する');
+    add('YouTube概要欄トップに継続掲載する\n   → 掲載名: ' + dispName);
   }
 
+  // 全プラン共通の特典「御礼メッセージの送付」
+  add('御礼メッセージを送る\n   → 連絡先: ' + d.email);
+
+  if (!isCard) {
+    add('入金を確認したら、台帳の行を選んでメニュー「🌟 振込確認＋LP掲載」を実行');
+  }
+  return tasks;
+}
+
+function buildTaskBody(d, isCard) {
+  var lines = [];
+  getPlanTasks(d, isCard).forEach(function(t, i) {
+    lines.push('□ ' + (i + 1) + '. ' + t.title);
+    if (t.template) {
+      lines.push('   ┌── コピペ用 ──────────────────');
+      t.template.split('\n').forEach(function(l){ lines.push('   │ ' + l); });
+      lines.push('   └──────────────────────────────');
+    }
+    lines.push('');
+  });
+  lines.push('▶ 終わったら「特典タスク」シートのチェックボックスに ✓ を入れてください');
+  lines.push('   ' + taskSheetUrl_());
   return lines.join('\n');
+}
+
+// =============================================
+//  特典タスク シート（チェックボックスで完了管理）
+//  台帳 P列「特典対応」に進捗（未完了 1/3 / ✅ 完了）、Q列「管理ID」に紐付けIDを書く
+// =============================================
+
+var TASK_SHEET_NAME = '特典タスク';
+var TASK_HEADERS    = ['完了','申込日時','お名前','メール','プラン','やること','コピペ用','完了日','管理ID'];
+var LEDGER_STATUS_COL = 16; // P列：特典対応
+var LEDGER_ID_COL     = 17; // Q列：管理ID
+
+function taskSheet_(ss) {
+  ss = ss || SpreadsheetApp.openById(SHEET_ID);
+  var sheet = ss.getSheetByName(TASK_SHEET_NAME);
+  if (sheet) return sheet;
+
+  sheet = ss.insertSheet(TASK_SHEET_NAME);
+  var h = sheet.getRange(1, 1, 1, TASK_HEADERS.length);
+  h.setValues([TASK_HEADERS]).setFontWeight('bold').setBackground('#1a3a1a').setFontColor('#ffffff');
+  sheet.setFrozenRows(1);
+  sheet.setColumnWidth(1, 50);
+  sheet.setColumnWidth(6, 420);
+  sheet.setColumnWidth(7, 260);
+  sheet.getRange('F:G').setWrap(true);
+  sheet.hideColumns(9);
+
+  // 完了した行はグレー＋取り消し線
+  var rule = SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied('=$A2=TRUE')
+    .setFontColor('#999999').setStrikethrough(true).setBackground('#eeeeee')
+    .setRanges([sheet.getRange('A2:H')]).build();
+  sheet.setConditionalFormatRules([rule]);
+
+  // 台帳側の見出し
+  var ledger = ss.getSheetByName('台帳');
+  ledger.getRange(1, LEDGER_STATUS_COL).setValue('特典対応');
+  ledger.getRange(1, LEDGER_ID_COL).setValue('管理ID');
+  ledger.getRange(1, LEDGER_STATUS_COL, 1, 2)
+    .setFontWeight('bold').setBackground('#1a3a1a').setFontColor('#ffffff');
+  return sheet;
+}
+
+function taskSheetUrl_() {
+  try {
+    return sheetUrl() + '/edit#gid=' + taskSheet_().getSheetId();
+  } catch (err) {
+    return sheetUrl();
+  }
+}
+
+// 台帳の1行分の特典タスクを「特典タスク」シートに追加する
+function createBenefitTasks_(d, isCard, ledgerRow) {
+  if (!SHEET_ID) return;
+  var ss     = SpreadsheetApp.openById(SHEET_ID);
+  var sheet  = taskSheet_(ss);
+  var ledger = ss.getSheetByName('台帳');
+  var id     = 'S' + Utilities.getUuid().replace(/-/g, '').slice(0, 10);
+  var date   = d.date || new Date();
+
+  var tasks = getPlanTasks(d, isCard);
+  var rows  = tasks.map(function(t) {
+    return [false, date, d.name || '', d.email || '', d.plan || '', t.title, t.template, '', id];
+  });
+  var start = sheet.getLastRow() + 1;
+  sheet.getRange(start, 1, rows.length, TASK_HEADERS.length).setValues(rows);
+  sheet.getRange(start, 1, rows.length, 1).insertCheckboxes();
+
+  if (ledgerRow) {
+    ledger.getRange(ledgerRow, LEDGER_ID_COL).setValue(id);
+    ledger.getRange(ledgerRow, LEDGER_STATUS_COL).setValue('未完了 0/' + tasks.length);
+  }
+  return id;
+}
+
+// チェックボックスが押されたら完了日を記録し、台帳の「特典対応」を更新する
+// （インストール型トリガー：setupBenefitTasks() で登録）
+function onTaskEdit(e) {
+  var sheet = e.range.getSheet();
+  if (sheet.getName() !== TASK_SHEET_NAME) return;
+  if (e.range.getColumn() !== 1) return;
+
+  var ids = {};
+  for (var r = e.range.getRow(); r <= e.range.getLastRow(); r++) {
+    if (r <= 1) continue;
+    var done = sheet.getRange(r, 1).getValue() === true;
+    sheet.getRange(r, 8).setValue(done ? new Date() : '');
+    var id = sheet.getRange(r, 9).getValue();
+    if (id) ids[id] = true;
+  }
+  Object.keys(ids).forEach(function(id){ refreshLedgerStatus_(sheet.getParent(), id); });
+}
+
+function refreshLedgerStatus_(ss, id) {
+  var tasks = ss.getSheetByName(TASK_SHEET_NAME).getDataRange().getValues();
+  var total = 0, done = 0;
+  for (var i = 1; i < tasks.length; i++) {
+    if (tasks[i][8] !== id) continue;
+    total++;
+    if (tasks[i][0] === true) done++;
+  }
+  var status = (total && done === total) ? '✅ 完了' : '未完了 ' + done + '/' + total;
+
+  var ledger = ss.getSheetByName('台帳');
+  var ids    = ledger.getRange(1, LEDGER_ID_COL, ledger.getLastRow(), 1).getValues();
+  for (var j = 1; j < ids.length; j++) {
+    if (ids[j][0] === id) { ledger.getRange(j + 1, LEDGER_STATUS_COL).setValue(status); return; }
+  }
+}
+
+// 台帳の行（1始まり）から特典タスクを作る。既に管理IDがあれば何もしない。
+function createTasksForLedgerRow_(ledger, row) {
+  var v = ledger.getRange(row, 1, 1, LEDGER_ID_COL).getValues()[0];
+  if (!v[1] || v[LEDGER_ID_COL - 1]) return null;
+  if (String(v[1]).indexOf('【テスト】') === 0) return null;
+  var plan = String(v[3]);
+  createBenefitTasks_({
+    date: v[0], name: v[1], email: v[2], plan: plan, '掲載希望名': v[4]
+  }, plan.indexOf('【クレカ決済】') >= 0, row);
+  return v[1] + '（' + plan + '）';
+}
+
+// 初期セットアップ（1回だけ、Apps Scriptエディタで実行）
+//  ・「特典タスク」シートを作る
+//  ・チェックで完了を記録するトリガーを登録
+//  ・BENEFIT_TASK_BACKFILL_FROM 以降の申込で、まだタスクが無いものを一括作成
+var BENEFIT_TASK_BACKFILL_FROM = new Date('2026-09-21T00:00:00+09:00');
+
+function setupBenefitTasks() {
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  taskSheet_(ss);
+
+  ScriptApp.getProjectTriggers().forEach(function(t) {
+    if (t.getHandlerFunction() === 'onTaskEdit') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('onTaskEdit').forSpreadsheet(ss).onEdit().create();
+
+  var ledger = ss.getSheetByName('台帳');
+  var dates  = ledger.getRange(1, 1, ledger.getLastRow(), 1).getValues();
+  var made   = [];
+  for (var r = 2; r <= dates.length; r++) {
+    var t = new Date(dates[r - 1][0]);
+    if (isNaN(t) || t < BENEFIT_TASK_BACKFILL_FROM) continue;
+    var m = createTasksForLedgerRow_(ledger, r);
+    if (m) made.push(m);
+  }
+  Logger.log('特典タスク作成: ' + made.length + '件\n' + made.join('\n'));
+  return made;
+}
+
+// メニュー：台帳で選んだ行（複数可）の特典タスクを作る
+function menuCreateTasksForSelection() {
+  var ui    = SpreadsheetApp.getUi();
+  var sheet = SpreadsheetApp.getActiveSheet();
+  if (sheet.getName() !== '台帳') { ui.alert('「台帳」シートで、タスクを作りたい行を選んでから実行してください'); return; }
+  var range = sheet.getActiveRange();
+  var made  = [];
+  for (var r = range.getRow(); r <= range.getLastRow(); r++) {
+    if (r <= 1) continue;
+    var m = createTasksForLedgerRow_(sheet, r);
+    if (m) made.push(m);
+  }
+  ui.alert(made.length
+    ? '✅ ' + made.length + '件の特典タスクを作りました\n\n' + made.join('\n')
+    : '新しく作るタスクはありませんでした（既に作成済みです）');
 }
 
 // =============================================
@@ -382,8 +521,7 @@ function buildTaskBody(d) {
 // =============================================
 
 function sendTaskChecklist(d) {
-  var taskBody = buildTaskBody(d);
-  if (!taskBody) return;
+  var taskBody = buildTaskBody(d, false);
 
   var body = '━━━━━━━━━━━━━━━━━━━━\n';
   body += '【タスクリスト】' + d.plan + '\n';
@@ -410,6 +548,8 @@ function onOpen() {
     .createMenu('🎩 Jack LP')
     .addItem('✅ 振込確認メールを送信（振込確認のみ）', 'menuSendConfirmation')
     .addItem('🌟 振込確認＋LP掲載（メーターに反映）', 'menuSendConfirmationAndPublish')
+    .addSeparator()
+    .addItem('📋 選んだ行の特典タスクを作る', 'menuCreateTasksForSelection')
     .addSeparator()
     .addItem('🔄 Stripe決済を今すぐ同期（漏れ回収）', 'menuSyncStripe')
     .addItem('🔑 Stripe読み取りキーを登録＋自動同期ON', 'menuSetupStripeSync')
@@ -640,13 +780,15 @@ function recordCardPayment_(obj, fromSync) {
   if (!key) plan += '【要確認：プラン不明（複数口の可能性）】';
 
   // スプレッドシートに記録（クレカ決済は即時確定するため自動で振込確認済・LP掲載＝はい）
-  logToSheet({
+  var d = {
     date: obj.created ? new Date(obj.created * 1000) : new Date(),
     name: cName, email: cEmail, plan: plan + '【クレカ決済】',
     '掲載希望名':'', 'Instagram':'', 'X(Twitter)':'',
     'ウェブサイトURL':'', '企業・活動紹介文':'', 'ブランドストーリー':'',
     'Powered_by表記':'', '応援メッセージ':''
-  }, true);
+  };
+  var ledgerRow = logToSheet(d, true);
+  try { createBenefitTasks_(d, true, ledgerRow); } catch (err) {} // 失敗しても通知メールは必ず送る
 
   var body = '【クレカ決済完了】スポンサー申し込みがありました！\n\n';
   if (fromSync) body += '※Stripeとの自動同期で記帳しました（決済日時は台帳の申込日時をご確認ください）\n\n';
@@ -656,6 +798,9 @@ function recordCardPayment_(obj, fromSync) {
   body += '金　額：¥' + amount.toLocaleString() + '\n';
   body += 'プラン：' + plan + '\n';
   body += '━━━━━━━━━━━━━━━━━━━━\n\n';
+  body += '■ やること（特典タスク）\n\n';
+  body += buildTaskBody(d, true) + '\n\n';
+  body += '━━━━━━━━━━━━━━━━━━━━\n';
   body += '▶ Stripeダッシュボード: https://dashboard.stripe.com/payments\n';
   body += '▶ スプレッドシート: ' + sheetUrl();
 
