@@ -361,7 +361,7 @@ function buildTaskBody(d, isCard) {
 
 // =============================================
 //  特典タスク シート（チェックボックスで完了管理）
-//  台帳 P列「特典対応」に進捗（未完了 1/3 / ✅ 完了）、Q列「管理ID」に紐付けIDを書く
+//  台帳 P列「特典対応」に進捗（未完了 1/3 / 完了）、Q列「管理ID」に紐付けIDを書く
 // =============================================
 
 var TASK_SHEET_NAME = '特典タスク';
@@ -458,7 +458,7 @@ function refreshLedgerStatus_(ss, id) {
     total++;
     if (tasks[i][0] === true) done++;
   }
-  var status = (total && done === total) ? '✅ 完了' : '未完了 ' + done + '/' + total;
+  var status = (total && done === total) ? '完了' : '未完了 ' + done + '/' + total;
 
   var ledger = ss.getSheetByName('台帳');
   var ids    = ledger.getRange(1, LEDGER_ID_COL, ledger.getLastRow(), 1).getValues();
@@ -526,9 +526,12 @@ function addYamanishiSponsor_20261003() {
     'ウェブサイトURL':'', '企業・活動紹介文':'', 'ブランドストーリー':'',
     'Powered_by表記':'', '応援メッセージ':''
   };
-  var row = logToSheet(d, true); // 入金済み：振込確認＝確認済、LP掲載＝はい
+  var row = logToSheet(d, true); // 入金済み：振込確認＝確認済
+  // 7月時点の支援のため、9/2にジャックさんから受けた実績値（FUNDING_BASE_RAISED ¥230,000・10人）に含まれている。
+  // LP掲載＝はいにするとメーターが二重カウントになるので「いいえ」にする。
+  ledger.getRange(row, 14).setValue('いいえ');
   createBenefitTasks_(d, true, row);
-  Logger.log('✅ 台帳 ' + row + '行目に追加し、特典タスクを作りました');
+  Logger.log('台帳 ' + row + '行目に追加し、特典タスクを作りました（LP掲載＝いいえ：メーター基準値に含まれるため）');
 }
 
 // メニュー：台帳で選んだ行（複数可）の特典タスクを作る
@@ -544,7 +547,7 @@ function menuCreateTasksForSelection() {
     if (m) made.push(m);
   }
   ui.alert(made.length
-    ? '✅ ' + made.length + '件の特典タスクを作りました\n\n' + made.join('\n')
+    ? made.length + '件の特典タスクを作りました\n\n' + made.join('\n')
     : '新しく作るタスクはありませんでした（既に作成済みです）');
 }
 
@@ -581,7 +584,7 @@ function onOpen() {
     .addItem('✅ 振込確認メールを送信（振込確認のみ）', 'menuSendConfirmation')
     .addItem('🌟 振込確認＋LP掲載（メーターに反映）', 'menuSendConfirmationAndPublish')
     .addSeparator()
-    .addItem('📋 選んだ行の特典タスクを作る', 'menuCreateTasksForSelection')
+    .addItem('選んだ行の特典タスクを作る', 'menuCreateTasksForSelection')
     .addSeparator()
     .addItem('🔄 Stripe決済を今すぐ同期（漏れ回収）', 'menuSyncStripe')
     .addItem('🔑 Stripe読み取りキーを登録＋自動同期ON', 'menuSetupStripeSync')
