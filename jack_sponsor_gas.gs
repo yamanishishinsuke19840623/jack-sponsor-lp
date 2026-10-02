@@ -326,6 +326,14 @@ function getPlanTasks(d, isCard) {
     add('YouTube概要欄トップに継続掲載する\n   → 掲載名: ' + dispName);
   }
 
+  // 旧プラン（7月時点のLP）PLAN B — ジャーニースポンサー（¥30,000）
+  if (/^PLAN B/.test(String(d.plan))) {
+    add('Instagram・Xで支援者として紹介投稿する\n   → 紹介名: ' + dispName);
+    add('各到達地点での活動報告投稿（旅の間ずっと続ける。仕組みを決めたら✓）');
+    add('徒歩地球一周の公式サポーターとして支援者ページに名前が出ているか確認する');
+    add('限定オープンチャットに招待する\n   → 連絡先: ' + d.email);
+  }
+
   // 全プラン共通の特典「御礼メッセージの送付」
   add('御礼メッセージを送る\n   → 連絡先: ' + d.email);
 
@@ -497,6 +505,30 @@ function setupBenefitTasks() {
   }
   Logger.log('特典タスク作成: ' + made.length + '件\n' + made.join('\n'));
   return made;
+}
+
+// 2026-10-03 山西さんの初期支援（旧PLAN B ジャーニースポンサー ¥30,000）を台帳に追加し、特典タスクを作る
+// 支援日は台帳に記録が無いため、実行日時で記帳する。Apps Scriptエディタで1回だけ実行。
+function addYamanishiSponsor_20261003() {
+  var ss     = SpreadsheetApp.openById(SHEET_ID);
+  var ledger = ss.getSheetByName('台帳');
+  var rows   = ledger.getDataRange().getValues();
+  for (var i = 1; i < rows.length; i++) {
+    if (rows[i][2] === CC_EMAIL && String(rows[i][3]).indexOf('PLAN B') === 0) {
+      Logger.log('既に台帳にあります（' + (i + 1) + '行目）');
+      return;
+    }
+  }
+  var d = {
+    name: '山西 伸典', email: CC_EMAIL,
+    plan: 'PLAN B（¥30,000）ジャーニースポンサー【初期支援・後日記帳】',
+    '掲載希望名':'', 'Instagram':'', 'X(Twitter)':'',
+    'ウェブサイトURL':'', '企業・活動紹介文':'', 'ブランドストーリー':'',
+    'Powered_by表記':'', '応援メッセージ':''
+  };
+  var row = logToSheet(d, true); // 入金済み：振込確認＝確認済、LP掲載＝はい
+  createBenefitTasks_(d, true, row);
+  Logger.log('✅ 台帳 ' + row + '行目に追加し、特典タスクを作りました');
 }
 
 // メニュー：台帳で選んだ行（複数可）の特典タスクを作る
