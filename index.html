@@ -654,9 +654,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <div class="funding-progress ">
       <div class="funding-top">
         <span class="funding-raised">¥<span id="funding-raised-num">1,197,000</span></span>
-        <span class="funding-goal"><span data-i18n="funding.goalLabel">目標</span> ¥2,000,000</span>
       </div>
-      <div class="funding-bar-track"><div class="funding-bar-fill" id="funding-bar-fill" style="width:59.85%"></div></div>
       <div class="funding-sub"><span id="funding-supporters-num">74</span><span data-i18n="funding.supportersSuffix">件のご支援をいただきました</span></div>
     </div>
 
@@ -1510,7 +1508,6 @@ function updateVisitorCount(data) {
   document.head.appendChild(s);
 })();
 // === FUNDING PROGRESS ===
-var FUNDING_GOAL = 2000000;
 var FUNDING_BASE_RAISED = 293000;     // 230,000 ＋ 2026-10-05 現金手渡し分 63,000（4人）
 var FUNDING_BASE_SUPPORTERS = 14;    // 10 ＋ 現金手渡し 4人
 
@@ -1531,13 +1528,10 @@ function updateFundingBar(extraSponsors) {
   });
   var raised = 1197000; // 公開支援データ904,000円＋既存現金等293,000円、2026-10-23確認
   var supporters = 74; // 既存14件＋公開台帳60件。同一人物の重複を含むため件数表記
-  var pct = Math.min(100, (raised / FUNDING_GOAL) * 100);
   var raisedEl = document.getElementById('funding-raised-num');
   var supEl = document.getElementById('funding-supporters-num');
-  var fillEl = document.getElementById('funding-bar-fill');
   if (raisedEl) raisedEl.textContent = raised.toLocaleString();
   if (supEl) supEl.textContent = supporters.toLocaleString();
-  if (fillEl) fillEl.style.width = pct + '%';
 }
 updateFundingBar();
 
