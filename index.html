@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title">着物マジシャン ジャック｜アメリカ大陸徒歩横断 スポンサー募集</title>
-<meta name="description" id="page-description" content="日本列島徒歩縦断・ユーラシア大陸徒歩横断を踏破。次なる挑戦はアメリカ大陸。着物マジシャン・ジャック（佐藤基）のスポンサー募集ページ。">
+<title id="page-title">着物マジシャン ジャック｜アメリカ大陸徒歩横断 クラウドファンディング終了</title>
+<meta name="description" id="page-description" content="日本列島徒歩縦断・ユーラシア大陸徒歩横断を踏破。現在はアメリカ大陸の徒歩横断に挑戦中。着物マジシャン・ジャック（佐藤基）のクラウドファンディング終了ページ。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <!-- Google Analytics GA4 -->
@@ -216,7 +216,7 @@ section{padding:80px 20px}
 .plan-desc{font-size:13px;color:var(--text-dim);margin:12px 0;line-height:1.6}
 .plan-benefits{list-style:none;margin-top:12px}
 .plan-benefits li{font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text-dim);display:flex;align-items:flex-start;gap:8px}
-.plan-benefits li::before{content:'✓';color:var(--green-light);flex-shrink:0}
+.plan-benefits li::before{content:'';color:var(--green-light);flex-shrink:0}
 .plan-btn{width:100%;margin-top:20px;background:var(--green);color:var(--white);border:none;padding:12px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:.2s}
 .plan-btn:hover{background:var(--green-light)}
 .plan-card.featured .plan-btn{background:linear-gradient(135deg,var(--gold),var(--gold-light))}
@@ -322,18 +322,22 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   .hero-content{padding:0 16px}
   #hero-bg{background-position:82% 45%}
 }
+[hidden]{display:none!important}
+.thanks-letter{max-width:760px;margin:48px auto 0;padding:clamp(24px,5vw,56px);background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:12px;font-size:clamp(15px,2vw,17px);line-height:2.15}
+.thanks-letter p{margin:0 0 1.5em}.thanks-letter p:last-child{margin-bottom:0}.thanks-signature{text-align:right;color:var(--gold);font-weight:700}
+@media(max-width:600px){nav{padding:12px 14px}.nav-logo{font-size:12px;max-width:120px}.nav-right{gap:8px}.nav-cta{font-size:11px;padding:10px 12px}#lang-toggle{font-size:11px}}
 </style>
 </head>
 <body>
 
 <!-- Cursor -->
-<div id="custom-cursor">🥾</div>
+<div id="custom-cursor"></div>
 <!-- Progress -->
 <div id="progress-bar"></div>
 <div id="level-gauge"><div id="level-fill"></div></div>
 <div id="level-label">旅人見習い</div>
 <!-- Stay badge -->
-<div id="stay-badge">🕐 <span id="stay-time">0分</span><span data-i18n="stay.suffix">滞在中</span></div>
+<div id="stay-badge"> <span id="stay-time">0分</span><span data-i18n="stay.suffix">滞在中</span></div>
 <!-- Toast -->
 <div id="toast"></div>
 <!-- Confetti -->
@@ -352,7 +356,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   <div class="nav-logo">着物マジシャン JACK</div>
   <div class="nav-right">
     <button id="lang-toggle" onclick="toggleLang()">EN</button>
-    <button class="nav-cta" data-i18n="nav.cta" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">スポンサーになる</button>
+    <button class="nav-cta" data-i18n="nav.cta" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">支援終了のご報告</button>
   </div>
 </nav>
 
@@ -361,9 +365,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   <div id="hero-bg"></div>
   <div id="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-badge" data-i18n="hero.badgeTop">WALKING ACROSS AMERICA 2026 スポンサー募集</div>
+    <div class="hero-badge" data-i18n="hero.badgeTop">WALKING ACROSS AMERICA 2026 クラウドファンディング終了</div>
     <h1 class="hero-title" data-i18n="hero.title">必要ないからこそ、<br><span>地球を歩いてみる。</span></h1>
-    <div class="hero-typing" data-i18n="hero.typingFixed">日本列島徒歩縦断、ユーラシア大陸を徒歩で踏破。次はアメリカ大陸。</div>
+    <div class="hero-typing" data-i18n="hero.typingFixed">日本列島徒歩縦断、ユーラシア大陸を徒歩で踏破。現在、アメリカ大陸を徒歩横断中。</div>
     <div class="hero-badges">
       <div class="hero-badge-item" data-i18n="hero.badge1">100kgリヤカー徒歩で<strong>世界一周の総決算</strong></div>
       <div class="hero-badge-item" data-i18n="hero.badge2">南米一周、<strong>中米、北米縦断</strong></div>
@@ -371,7 +375,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
       <div class="hero-badge-item" data-i18n="hero.badge4">ユーラシア徒歩横断<strong>13,000km達成</strong></div>
     </div>
     <div class="hero-btns">
-      <a class="btn-primary" href="#plans" data-i18n="hero.btn1">スポンサーになる</a>
+      <a class="btn-primary" href="#plans" data-i18n="hero.btn1">支援終了のご報告</a>
       <a class="btn-outline" href="#journey" data-i18n="hero.btn2">旅を知る</a>
     </div>
     <div id="visitor-count"><span data-i18n="hero.visitorPre">このページを見た人: </span><span id="v-count">0</span><span data-i18n="hero.visitorPost">人</span></div>
@@ -420,7 +424,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <div class="timeline">
       <div class="tl-item fade-in">
         <div class="tl-dot done"></div>
-        <div class="tl-year" data-i18n="journey.p1.year">PHASE 1 ✓ 達成</div>
+        <div class="tl-year" data-i18n="journey.p1.year">PHASE 1  達成</div>
         <h3 class="tl-title" data-i18n="journey.p1.title">日本列島徒歩縦断 — 北海道から沖縄まで</h3>
         <p class="tl-desc" data-i18n="journey.p1.desc">200kgを超えるリヤカーを引きながら、331日かけて日本全国を徒歩で縦断。マジック屋台で各地の人々に笑顔と感動を届けた。沖縄では地元の人たちが宿と食事で迎えてくれ、日本中の温かさを体感した旅。</p>
         <span class="tl-tag done" data-i18n="journey.p1.tag1">331日 完走</span>
@@ -428,7 +432,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
       </div>
       <div class="tl-item fade-in">
         <div class="tl-dot done"></div>
-        <div class="tl-year" data-i18n="journey.p2.year">PHASE 2 ✓ 達成</div>
+        <div class="tl-year" data-i18n="journey.p2.year">PHASE 2  達成</div>
         <h3 class="tl-title" data-i18n="journey.p2.title">ユーラシア大陸徒歩横断 — ベトナムからフランスへ</h3>
         <p class="tl-desc" data-i18n="journey.p2.desc">ホーチミンを出発し、東南アジア・南アジア・中央アジア・ヨーロッパを徒歩横断。砂嵐、極寒、悪路……すべてを越えてパリへ。約13,000kmを478日で踏破し、世界中の人々とつながった。</p>
         <span class="tl-tag done" data-i18n="journey.p2.tag1">13,000km 踏破</span>
@@ -446,7 +450,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           <div style="background:rgba(61,107,42,.2);border:1px solid rgba(90,148,64,.4);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--green-light)" data-i18n="journey.p3.tagTeam">4名プロチーム体制</div>
           <div style="background:rgba(61,107,42,.2);border:1px solid rgba(90,148,64,.4);padding:5px 14px;border-radius:20px;font-size:12px;color:var(--green-light)" data-i18n="journey.p3.tagCamper">キャンピングカー伴走</div>
         </div>
-        <span class="tl-tag gold" style="margin-top:14px;display:inline-block" data-i18n="journey.p3.tagGold">スポンサー募集中</span>
+        <span class="tl-tag gold" style="margin-top:14px;display:inline-block" data-i18n="journey.p3.tagGold">アメリカ大陸徒歩横断に挑戦中</span>
       </div>
     </div>
   </div>
@@ -504,27 +508,27 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <div class="gallery-grid">
       <div class="gallery-item fade-in" onclick="openLightbox('./photos/1a34f8d3-ecdb-473b-af16-1c9ad9e66bf8.jpg')">
         <img src="./photos/1a34f8d3-ecdb-473b-af16-1c9ad9e66bf8.jpg" alt="ヨーロッパの道路">
-        <div class="gallery-overlay">🔍</div>
+        <div class="gallery-overlay"></div>
       </div>
       <div class="gallery-item fade-in" onclick="openLightbox('./photos/782af010-e9c7-4962-a0e4-d5d4c90c3f27.jpg')">
         <img src="./photos/782af010-e9c7-4962-a0e4-d5d4c90c3f27.jpg" alt="雪の中を歩く">
-        <div class="gallery-overlay">🔍</div>
+        <div class="gallery-overlay"></div>
       </div>
       <div class="gallery-item fade-in" onclick="openLightbox('./photos/6169850f-9f6d-4e67-99d5-d66d3e172531.jpg')">
         <img src="./photos/6169850f-9f6d-4e67-99d5-d66d3e172531.jpg" alt="砂浜のシルエット">
-        <div class="gallery-overlay">🔍</div>
+        <div class="gallery-overlay"></div>
       </div>
       <div class="gallery-item fade-in" onclick="openLightbox('./photos/75fa2f5b-dd37-4e92-bbc6-4a768cf7b526.jpg')">
         <img src="./photos/75fa2f5b-dd37-4e92-bbc6-4a768cf7b526.jpg" alt="パキスタンの夕焼け">
-        <div class="gallery-overlay">🔍</div>
+        <div class="gallery-overlay"></div>
       </div>
       <div class="gallery-item fade-in" onclick="openLightbox('./photos/17001955-7076-4a48-a759-495f8857fcb7.jpg')">
         <img src="./photos/17001955-7076-4a48-a759-495f8857fcb7.jpg" alt="パキスタンの道">
-        <div class="gallery-overlay">🔍</div>
+        <div class="gallery-overlay"></div>
       </div>
       <div class="gallery-item fade-in" onclick="openLightbox('./photos/4026e98b-7104-41d6-af11-5faabde94f77.jpg')">
         <img src="./photos/4026e98b-7104-41d6-af11-5faabde94f77.jpg" alt="ベトナム出発">
-        <div class="gallery-overlay">🔍</div>
+        <div class="gallery-overlay"></div>
       </div>
     </div>
   </div>
@@ -643,275 +647,20 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
 <!-- ⑨ Plans -->
 <section id="plans">
   <div class="container">
-    <div class="section-label fade-in">SPONSOR PLANS</div>
-    <h2 class="section-title fade-in" data-i18n="plans.title">スポンサー<em>プラン</em></h2>
-    <p style="color:var(--text-dim);font-size:14px;margin-bottom:0" class="fade-in" data-i18n="plans.desc">お気軽な¥1,000から、地球一周の挑戦を後押しするプランまで、幅広くご用意しました。</p>
+    <div class="section-label ">THANK YOU</div>
+    <h2 class="section-title " data-i18n="plans.title">ご支援、<em>ありがとうございました。</em></h2>
+    <p style="color:var(--text-dim);font-size:14px;margin-bottom:0" class="" data-i18n="plans.desc">クラウドファンディングの受付は終了しました。ご支援・応援いただき、本当にありがとうございました。</p>
 
-    <div class="funding-progress fade-in">
+    <div class="funding-progress ">
       <div class="funding-top">
-        <span class="funding-raised">¥<span id="funding-raised-num">230,000</span></span>
+        <span class="funding-raised">¥<span id="funding-raised-num">1,197,000</span></span>
         <span class="funding-goal"><span data-i18n="funding.goalLabel">目標</span> ¥2,000,000</span>
       </div>
-      <div class="funding-bar-track"><div class="funding-bar-fill" id="funding-bar-fill" style="width:11.5%"></div></div>
-      <div class="funding-sub"><span id="funding-supporters-num">10</span><span data-i18n="funding.supportersSuffix">人の支援者から応援をいただいています</span></div>
+      <div class="funding-bar-track"><div class="funding-bar-fill" id="funding-bar-fill" style="width:59.85%"></div></div>
+      <div class="funding-sub"><span id="funding-supporters-num">74</span><span data-i18n="funding.supportersSuffix">件のご支援をいただきました</span></div>
     </div>
 
-    <!-- Light support -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.light">ライト・お気持ち応援枠</div>
-      <div class="plans-grid">
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.a.name">コーヒー1杯のエール</div>
-          <div class="plan-price">¥1,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.a.desc">コーヒー1杯分の気軽な応援で、ジャックの挑戦を後押ししてください。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.a1n">御礼メッセージ送付</li>
-            <li data-i18n="bt.a2n">支援者ページへ名前掲載</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('a')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.b.name">旅の相棒 — 日本国旗へお名前記入</div>
-          <div class="plan-price">¥3,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.b.desc">リヤカーに掲げる日本国旗の寄せ書きに、あなたのお名前を記入します。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.b1n">日本国旗へお名前記入（寄せ書き）</li>
-            <li data-i18n="bt.b2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('b')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.c.name">北米横断中のJACKと直接話せる！ — 現地直通ラジオ生電話権</div>
-          <div class="plan-price">¥3,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.c.desc">アメリカ大陸横断の真っ只中にいるジャックと、現地から直接つながるラジオ生電話。今まさに歩いている本人の声を、リアルタイムで聞けます。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.c1n">現地からの直通ラジオ生電話</li>
-            <li data-i18n="bt.c2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('c')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.e.name">大地に名前を刻む — 砂漠・荒野のネームロケーション写真</div>
-          <div class="plan-price">¥3,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.e.desc">アメリカの砂漠や荒野に、あなたの名前を直接書いて撮影。世界にひとつだけの「ネームロケーション写真」をお届けします。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.e1n">砂漠・荒野のネームロケーション写真</li>
-            <li data-i18n="bt.e2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('e')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Digital / experience / stay -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.digital">デジタル・体験・拠点プラン</div>
-      <div class="plans-grid">
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.d.name">旅の拠点に泊まる — 「ブリッジ」宿泊プラン</div>
-          <div class="plan-price">¥5,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
-          <div class="plan-desc" data-i18n="plan.d.desc">ジャックが下関で営むゲストハウス「ブリッジ」に宿泊できるプランです。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.d1n">ブリッジ（下関）宿泊1泊</li>
-            <li data-i18n="bt.d2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('d')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.m.name">ブリッジ開催 — JACKと飲み明かす「食べ飲み放題」懇親会</div>
-          <div class="plan-price">¥10,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
-          <div class="plan-desc" data-i18n="plan.m.desc">ブリッジ（下関）で開催、ジャックと食べ飲み放題で語り明かすリアル懇親会です。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.m1n">食べ飲み放題懇親会へご招待</li>
-            <li data-i18n="bt.m2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('m')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Name-listed -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.name">デジタル＆ネーム掲載プラン</div>
-      <div class="plans-grid">
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.f.name">名前を刻む — YouTube概要欄サポータープラン</div>
-          <div class="plan-price">¥10,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.f.desc">YouTube概要欄にお名前を掲載し、旅の記録に名を刻みます。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.f1n">YouTube概要欄へお名前掲載</li>
-            <li data-i18n="bt.f2n">支援者ページへ名前掲載</li>
-            <li data-i18n="bt.f3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('f')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hardcore survival -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.hardcore">ハードコア・サバイバル枠</div>
-      <div class="plans-grid">
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.g.name">荒野の生還パーツ — 「ボロい私物」の欠片とお手紙</div>
-          <div class="plan-price">¥15,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-slots" id="slots-g"></div>
-          <div class="plan-desc" data-i18n="plan.g.desc">アスファルトの照り返しや砂嵐を潜り抜け、5,000kmの荒野でジャックの身を守り、限界を迎えた愛用ギアたち。そのボロボロになった実物の端切れを、綺麗に洗浄・消毒してあなただけにお届けします。土埃と汗の歴史が染み込んだ、世界に二つとない生還の証です。20個限定。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.g1n">実物の「ボロい私物」の端切れ（専用パッケージ・届くパーツはお楽しみ）</li>
-            <li data-i18n="bt.g2n">JACK直筆の生還メッセージカード</li>
-            <li data-i18n="bt.g3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('g')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Local surprise / homecoming -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.surprise">現地サプライズ・帰国直撃枠</div>
-      <div class="plans-grid">
-        <div class="plan-card featured fade-in">
-          <div class="plan-name" data-i18n="plan.i.name">レジェンド集結 — 伝説の旅人オンライン飲み会</div>
-          <div class="plan-price">¥20,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-slots" id="slots-i"></div>
-          <div class="plan-desc" data-i18n="plan.i.desc">ジャック本人に加え、ゴッチさん・うすくくん・こたろうさんも参加する2時間のオンライン飲み会にご招待します。先着3名限定。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.i1n">ゴッチさん・うすくくん・こたろうさんも参加のオンライン飲み会（2時間）へご招待</li>
-            <li data-i18n="bt.i2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('i')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.h.name">アメリカからの生還 — ルート66エアメール＆限定ステッカー</div>
-          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.h.desc">ルート66から届く直筆のエアメールと、限定ステッカーをお届けします。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.h1n">ルート66からの直筆エアメール</li>
-            <li data-i18n="bt.h2n">限定ステッカー</li>
-            <li data-i18n="bt.h3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('h')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.n.name">大自然を共にする — JACKと行く「プライベート・キャンプ会」</div>
-          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
-          <div class="plan-desc" data-i18n="plan.n.desc">大自然の中で、ジャックと過ごすプライベートなキャンプ会です。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.n1n">プライベートキャンプ会へご招待</li>
-            <li data-i18n="bt.n2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('n')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.o.name">秘伝マンツーマンレッスン（60分） — 15年の軌跡と裏側を特別公開</div>
-          <div class="plan-price">¥30,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
-          <div class="plan-desc" data-i18n="plan.o.desc">帰国後開催。マジック歴15年のジャックが、その軌跡と裏側をマンツーマンで特別に伝授する60分のレッスンです。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.o1n">マンツーマンレッスン（60分）</li>
-            <li data-i18n="bt.o2n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('o')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.j.name">あなたの街に直撃！ — 帰国後の日本縦断 挨拶＆飲みに行く権利</div>
-          <div class="plan-price">¥50,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-limited-tag" data-i18n="plan.slots.limited">数量限定</div>
-          <div class="plan-desc" data-i18n="plan.j.desc">帰国後の日本縦断中、あなたの街のご自宅・お店へ直接伺い、ご挨拶と乾杯をします。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.j1n">ご自宅・お店への訪問</li>
-            <li data-i18n="bt.j2n">一緒に飲みに行く権利</li>
-            <li data-i18n="bt.j3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" data-i18n="plan.btn" onclick="openStripePlan('j')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Speaking / corporate tie-up -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.corporate">講演・企業タイアップ枠</div>
-      <div class="plans-grid">
-        <div class="plan-card legendary fade-in">
-          <div class="plan-name" data-i18n="plan.k.name">出張講演会プラン — あなたの会社や学校にジャックを呼ぶ権利</div>
-          <div class="plan-price">¥100,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.noneTravel">枠数制限なし（交通費込）</div>
-          <div class="plan-desc" data-i18n="plan.k.desc">交通費込みで、あなたの会社や学校にジャックが伺い講演を行います。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.k1n">出張講演（交通費込）</li>
-            <li data-i18n="bt.k2n">支援者ページへ名前掲載</li>
-            <li data-i18n="bt.k3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('k')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card fade-in">
-          <div class="plan-name" data-i18n="plan.p.name">北米大陸を共に歩む — ウェア＆リヤカーにロゴ掲載（小）＋概要欄クレジット</div>
-          <div class="plan-price">¥100,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.p.desc">北米大陸横断中、ジャックのウェアとリヤカーにロゴ（小）を掲載。YouTube概要欄にもクレジットされます。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.p1n">ウェア＆リヤカーへロゴ掲載（小）</li>
-            <li data-i18n="bt.p2n">YouTube概要欄クレジット</li>
-            <li data-i18n="bt.p3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('p')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card legendary fade-in">
-          <div class="plan-name" data-i18n="plan.q.name">北米横断パートナーコース — ロゴ中 ＋ 概要欄掲載 ＋ SNS紹介</div>
-          <div class="plan-price">¥300,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.q.desc">ウェア＆リヤカーにロゴ（中）を掲載し、YouTube概要欄とSNSでもご紹介するパートナーコースです。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.q1n">ウェア＆リヤカーへロゴ掲載（中）</li>
-            <li data-i18n="bt.q2n">YouTube概要欄掲載</li>
-            <li data-i18n="bt.q3n">SNSでのご紹介</li>
-            <li data-i18n="bt.q4n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('q')">今すぐ Jackを応援する</button>
-        </div>
-        <div class="plan-card legendary fade-in">
-          <div class="plan-name" data-i18n="plan.r.name">北米横断メインパートナーコース — ロゴ大・特等席 ＋ 概要欄トップ掲載</div>
-          <div class="plan-price">¥500,000<span data-i18n="plan.unit">/一口</span></div>
-          <div style="font-size:12px;color:var(--green-light);margin:12px 0" data-i18n="plan.slots.none">枠数制限なし</div>
-          <div class="plan-desc" data-i18n="plan.r.desc">ウェア＆リヤカーの特等席にロゴ（大）を掲載。YouTube概要欄トップに継続的に掲載される、最上位のメインパートナーコースです。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.r1n">ウェア＆リヤカー特等席にロゴ掲載（大）</li>
-            <li data-i18n="bt.r2n">YouTube概要欄トップに継続掲載</li>
-            <li data-i18n="bt.r3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('r')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Legendary handover -->
-    <div class="plan-category">
-      <div class="plan-category-label fade-in" data-i18n="cat.legend">レジェンド譲渡枠</div>
-      <div class="plans-grid">
-        <div class="plan-card legendary fade-in">
-          <div class="plan-name" data-i18n="plan.l.name">伝説の相棒譲渡 — 北米5,000kmを共に走破した「リアル・リヤカー」永久所有権プラン</div>
-          <div class="plan-price" style="font-size:28px">¥500,000<span data-i18n="plan.unit">/一口</span></div>
-          <div class="plan-limited-tag" data-i18n="plan.slots.one">1点限定</div>
-          <div class="plan-desc" data-i18n="plan.l.desc">北米5,000kmをジャックと共に走り抜いた、実物のリヤカーそのものを永久に譲り受けられる、唯一無二のプランです。</div>
-          <ul class="plan-benefits">
-            <li data-i18n="bt.l1n">リヤカー本体の永久譲渡</li>
-            <li data-i18n="bt.l2n">支援者ページへ名前掲載</li>
-            <li data-i18n="bt.l3n">御礼メッセージ送付</li>
-          </ul>
-          <button class="plan-btn" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))" data-i18n="plan.btn" onclick="openStripePlan('l')">今すぐ Jackを応援する</button>
-        </div>
-      </div>
-    </div>
+    <article class="thanks-letter"><p>この度、クラウドファンディングが無事に終了しました。</p><p>ご支援いただいた皆様、SNSで拡散してくださった皆様、応援のメッセージを送ってくださった皆様、本当にありがとうございました。</p><p>決して簡単な挑戦ではありませんが、皆様からのご支援や温かい言葉の一つひとつが、大きな力になっています。</p><p>現在、僕は「歩いて地球一周」の最終章として、アメリカ大陸の徒歩横断に挑戦しています。</p><p>日本を歩き、ユーラシア大陸を歩き、そして今、最後の大きな挑戦に挑んでいます。</p><p>ここまで来られたのは、決して自分一人の力ではありません。応援してくださる皆様のおかげです。</p><p>皆様から託していただいた想いを胸に、必ずこの挑戦をやり遂げます。</p><p>そして、僕の旅を通して「体が弱くても、夢は実現できる」ということを、一人でも多くの人に届けたいと思っています。</p><p>クラウドファンディングは終了しましたが、旅はまだ続きます。</p><p>最後まで見届けていただけたら嬉しいです。</p><p>ご支援・応援してくださった皆様、本当に、本当にありがとうございました。</p><p>最後まで全力で歩き続けます。</p><p class="thanks-signature">着物マジシャン ジャック</p></article>
   </div>
 </section>
 
@@ -922,7 +671,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <h2 class="section-title fade-in" data-i18n="sponsors.title">応援してくれている<em>スポンサー</em></h2>
     <p style="color:var(--text-dim);font-size:14px;text-align:center" class="fade-in" data-i18n="sponsors.desc">Jackの旅を支えてくださっている皆さまです。ありがとうございます！</p>
     <div id="sponsor-grid" class="sponsor-grid"></div>
-    <div id="sponsors-empty" style="display:none" data-i18n="sponsors.empty">まだスポンサーが登録されていません。最初のスポンサーになりませんか？</div>
+    <div id="sponsors-empty" style="display:none" data-i18n="sponsors.empty">ご支援いただいた皆様、本当にありがとうございました。</div>
   </div>
 </section>
 
@@ -950,7 +699,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
 </section>
 
 <!-- ⑫ FAQ -->
-<section id="faq">
+<section id="faq" hidden inert aria-hidden="true">
   <div class="container">
     <div class="section-label fade-in">FAQ</div>
     <h2 class="section-title fade-in" data-i18n="faq.title">よくある<em>ご質問</em></h2>
@@ -980,7 +729,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
 </section>
 
 <!-- ⑬ Contact -->
-<section id="contact">
+<section id="contact" hidden inert aria-hidden="true">
   <div class="container">
     <div class="section-label fade-in">CONTACT</div>
     <h2 class="section-title fade-in" data-i18n="contact.title">スポンサー<em>申し込み</em></h2>
@@ -1068,7 +817,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
 <!-- Footer -->
 <footer>
   <div class="footer-logo">着物マジシャン JACK</div>
-  <div class="footer-sub" data-i18n="footer.sub">歩いて地球一周 — アメリカ大陸徒歩横断 スポンサー募集</div>
+  <div class="footer-sub" data-i18n="footer.sub">歩いて地球一周 — アメリカ大陸徒歩横断 クラウドファンディング終了</div>
   <div class="footer-links">
     <a href="https://www.youtube.com/@kimonomagician" target="_blank">YouTube</a>
     <a href="https://www.instagram.com/kimonomagician/" target="_blank">Instagram</a>
@@ -1463,7 +1212,7 @@ function updateGame() {
   ctx2.fillStyle = 'rgba(255,255,255,0.5)';
   ctx2.font = '13px Noto Sans JP, sans-serif';
   var envNames = { ja: ['ジャングル','砂漠','山岳地帯','夜の都市'], en: ['Jungle','Desert','Mountains','Night City'] };
-  ctx2.fillText('📍 ' + envNames[currentLang][Math.min(Math.floor(score/3),3)], 12, 20);
+  ctx2.fillText(' ' + envNames[currentLang][Math.min(Math.floor(score/3),3)], 12, 20);
 
   gameLoop = requestAnimationFrame(updateGame);
 }
@@ -1569,7 +1318,7 @@ function gameWin() {
   }
   document.getElementById('game-start-btn').style.display = 'inline-block';
   startConfetti();
-  showToast(currentLang === 'en' ? 'You crossed America! Sponsorships open now!' : 'アメリカ大陸踏破達成！スポンサー募集中！');
+  showToast(currentLang === 'en' ? 'You crossed America! Thank you for your support!' : 'アメリカ大陸踏破達成！アメリカ大陸徒歩横断に挑戦中！');
 }
 
 // Draw idle state
@@ -1617,6 +1366,8 @@ var stripeLinks = {
 var planPrices = { a:1000, b:3000, c:3000, d:5000, e:3000, f:10000, g:15000, h:30000, i:20000, j:50000, k:100000, l:500000, m:10000, n:30000, o:30000, p:100000, q:300000, r:500000 };
 
 function openStripePlan(k) {
+  showToast(currentLang === 'en' ? 'Crowdfunding has ended. Thank you!' : 'クラウドファンディングの受付は終了しました。');
+  return;
   var link = stripeLinks[k];
   if (link) {
     link += (link.indexOf('?') === -1 ? '?' : '&') + 'locale=' + (currentLang === 'en' ? 'en' : 'ja') + '&client_reference_id=' + k;
@@ -1628,6 +1379,8 @@ function openStripePlan(k) {
 }
 
 function scrollToForm(planKey) {
+  document.getElementById('plans').scrollIntoView({behavior: 'smooth'});
+  return;
   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   setTimeout(function() {
     var sel = document.getElementById('f-plan');
@@ -1636,6 +1389,8 @@ function scrollToForm(planKey) {
 }
 
 function submitForm(e) {
+  e.preventDefault();
+  return;
   e.preventDefault();
   var form = document.getElementById('sponsor-form');
   var btn = document.getElementById('form-submit');
@@ -1681,7 +1436,7 @@ function submitForm(e) {
     if (currentLang === 'en') {
       form.innerHTML =
         '<div style="text-align:center;padding:40px 0">' +
-        '<div style="font-size:56px;margin-bottom:16px">🎉</div>' +
+        '<div style="font-size:56px;margin-bottom:16px"></div>' +
         '<div style="font-size:22px;font-weight:700;color:var(--gold);margin-bottom:16px">Thank you!</div>' +
         '<div style="color:var(--text-dim);line-height:2;font-size:14px">' +
           'We\'ve received ' + name + '\'s sponsorship application.<br>' +
@@ -1691,7 +1446,7 @@ function submitForm(e) {
     } else {
       form.innerHTML =
         '<div style="text-align:center;padding:40px 0">' +
-        '<div style="font-size:56px;margin-bottom:16px">🎉</div>' +
+        '<div style="font-size:56px;margin-bottom:16px"></div>' +
         '<div style="font-size:22px;font-weight:700;color:var(--gold);margin-bottom:16px">ありがとうございます！</div>' +
         '<div style="color:var(--text-dim);line-height:2;font-size:14px">' +
           name + ' 様の応援申し込みを受け付けました。<br>' +
@@ -1774,8 +1529,8 @@ function updateFundingBar(extraSponsors) {
   extraSponsors.forEach(function(s) {
     extraRaised += sponsorAmount(s);
   });
-  var raised = FUNDING_BASE_RAISED + extraRaised;
-  var supporters = FUNDING_BASE_SUPPORTERS + extraSponsors.length;
+  var raised = 1197000; // 公開支援データ904,000円＋既存現金等293,000円、2026-10-23確認
+  var supporters = 74; // 既存14件＋公開台帳60件。同一人物の重複を含むため件数表記
   var pct = Math.min(100, (raised / FUNDING_GOAL) * 100);
   var raisedEl = document.getElementById('funding-raised-num');
   var supEl = document.getElementById('funding-supporters-num');
@@ -1832,7 +1587,7 @@ function ytThumbFallback(img, id) {
 
 // === SHARE ===
 var pageUrl = encodeURIComponent(window.location.href);
-var pageTitle = encodeURIComponent('着物マジシャン ジャック｜アメリカ大陸徒歩横断 スポンサー募集');
+var pageTitle = encodeURIComponent('着物マジシャン ジャック｜アメリカ大陸徒歩横断 クラウドファンディング終了');
 function shareX() {
   window.open('https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle + '%20%40kimonomagician', '_blank');
 }
@@ -1899,7 +1654,7 @@ function drawBadge() {
   bx.fillText(currentLang === 'en' ? 'Walking Across America — Sponsor' : 'アメリカ大陸徒歩横断 応援スポンサー', 140, 80);
   // Icon
   bx.font = '28px sans-serif';
-  bx.fillText('🌎', 140, 120);
+  bx.fillText('', 140, 120);
   // Border
   bx.strokeStyle = '#c9933a';
   bx.lineWidth = 1;
@@ -1923,7 +1678,7 @@ function downloadBadge() {
       c.style.display = 'none';
     }
     var btn = document.querySelector('.modal-dl-btn');
-    if (btn) { btn.innerHTML = currentLang === 'en' ? '👆 Long-press the image to save' : '👆 画像を長押しして保存'; btn.onclick = null; }
+    if (btn) { btn.innerHTML = currentLang === 'en' ? ' Long-press the image to save' : ' 画像を長押しして保存'; btn.onclick = null; }
   } else {
     var a = document.createElement('a');
     a.download = 'jack-sponsor-badge.png';
@@ -1939,20 +1694,20 @@ document.addEventListener('keydown', function(e) {
 });
 
 // === I18N (EN / JA TOGGLE) ===
-var EN_TITLE = 'Kimono Magician Jack | Walking Across America — Sponsorship';
-var EN_DESCRIPTION = "Having walked the length of Japan and across Eurasia, Kimono Magician Jack (Motoki Sato) now seeks sponsors for his next challenge: walking across America.";
+var EN_TITLE = 'Kimono Magician Jack | Walking Across America — Crowdfunding Closed';
+var EN_DESCRIPTION = "Having walked the length of Japan and across Eurasia, Kimono Magician Jack (Motoki Sato) is now walking across America. Crowdfunding has ended. Thank you for your support.";
 
 var I18N_EN = {
-  "nav.cta": "Become a Sponsor",
+  "nav.cta": "Crowdfunding Results",
 
-  "hero.badgeTop": "WALKING ACROSS AMERICA 2026 — Now Seeking Sponsors",
+  "hero.badgeTop": "WALKING ACROSS AMERICA 2026 — Crowdfunding Closed",
   "hero.title": "Because it's needless —<br><span>that's why I walk the earth.</span>",
   "hero.typingFixed": "Walked the length of Japan, then across Eurasia on foot. Next: America.",
   "hero.badge1": "100kg rickshaw, on foot — <strong>the final chapter of a round-the-world journey</strong>",
   "hero.badge2": "Circled South America, <strong>crossed Central & North America</strong>",
   "hero.badge3": "250kg rickshaw, <strong>the length of Japan on foot</strong>",
   "hero.badge4": "Eurasia on foot — <strong>13,000km achieved</strong>",
-  "hero.btn1": "Become a Sponsor",
+  "hero.btn1": "Crowdfunding Results",
   "hero.btn2": "Discover the Journey",
   "hero.visitorPre": "Page views: ",
   "hero.visitorPost": "",
@@ -1966,12 +1721,12 @@ var I18N_EN = {
   "stats.7": "Total Distance Walked (Japan + Eurasia, Completed)",
 
   "journey.title": "The Road to a Round-the-World Journey",
-  "journey.p1.year": "PHASE 1 ✓ Complete",
+  "journey.p1.year": "PHASE 1  Complete",
   "journey.p1.title": "Walking the Length of Japan — Hokkaido to Okinawa",
   "journey.p1.desc": "Pulling a rickshaw of over 200kg, he walked the length of Japan over 331 days, bringing smiles and wonder to towns along the way with his magic street shows. In Okinawa, locals welcomed him with food and lodging — a journey that revealed the warmth of Japan.",
   "journey.p1.tag1": "331 Days Completed",
   "journey.p1.tag2": "Approx. 3,000km Walked",
-  "journey.p2.year": "PHASE 2 ✓ Complete",
+  "journey.p2.year": "PHASE 2  Complete",
   "journey.p2.title": "Walking Across Eurasia — Vietnam to France",
   "journey.p2.desc": "Starting in Ho Chi Minh City, he walked across Southeast Asia, South Asia, Central Asia, and Europe. Sandstorms, extreme cold, rough terrain — he overcame it all to reach Paris, covering roughly 13,000km in 478 days and connecting with people around the world.",
   "journey.p2.tag1": "13,000km Walked",
@@ -1983,7 +1738,7 @@ var I18N_EN = {
   "journey.p3.tagWalk": "North America On Foot",
   "journey.p3.tagTeam": "4-Person Pro Team",
   "journey.p3.tagCamper": "RV Support Vehicle",
-  "journey.p3.tagGold": "Now Seeking Sponsors",
+  "journey.p3.tagGold": "Crowdfunding Closed",
 
   "profile.title": "About <em>Kimono Magician Jack</em>",
   "profile.photoBadge": "Kimono Magician<br>Jack",
@@ -2229,6 +1984,7 @@ var I18N_EN = {
   "stay.suffix": " elapsed"
 };
 
+Object.assign(I18N_EN, {"nav.cta": "Crowdfunding Results", "hero.btn1": "Crowdfunding Results", "hero.badgeTop": "WALKING ACROSS AMERICA 2026 — CROWDFUNDING CLOSED", "hero.typingFixed": "Having crossed Japan and Eurasia on foot, Jack is now walking across America.", "journey.p3.tagGold": "Walking Across America", "plans.title": "Thank you for <em>your support.</em>", "plans.desc": "Crowdfunding has ended. Thank you for your generous support and encouragement.", "funding.supportersSuffix": " contributions received", "sponsors.empty": "Thank you to everyone who supported this journey.", "footer.sub": "Walking Around the World — The Journey Continues"});
 function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.getAttribute('data-i18n');
