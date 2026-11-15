@@ -234,6 +234,14 @@ section{padding:80px 20px}
 .cheer-item .msg{color:var(--text-dim);line-height:1.5}
 
 /* Sponsors */
+.sp-list{max-width:900px;margin:40px auto 0}
+.sp-head{text-align:center;font-size:clamp(18px,3vw,22px);color:var(--gold-light);margin-bottom:28px;letter-spacing:.05em}
+.sp-group{margin-bottom:32px}
+.sp-label{font-size:13px;color:var(--gold);letter-spacing:.12em;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:14px}
+.sp-names{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.sp-names li{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:14px}
+.sp-names.corp li{border-color:var(--gold);font-weight:700}
+.sp-names.main li{border-color:var(--gold-light);color:var(--gold-light);font-weight:900;font-size:18px;padding:10px 24px}
 #sponsors{background:var(--bg);border-top:1px solid var(--border)}
 #sponsors .section-title{margin-bottom:8px}
 .sponsor-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;justify-content:center}
@@ -323,6 +331,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   #hero-bg{background-position:82% 45%}
 }
 [hidden]{display:none!important}
+.support-banner{max-width:760px;margin:32px auto 0;padding:28px 20px;text-align:center;border:1px solid var(--gold);border-radius:12px;background:var(--surface)}
+.support-banner p{margin-bottom:18px;line-height:1.9}
+.btn-primary.support-link{background:var(--gold);color:#111}
 .thanks-letter{max-width:760px;margin:48px auto 0;padding:clamp(24px,5vw,56px);background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:12px;font-size:clamp(15px,2vw,17px);line-height:2.15}
 .thanks-letter p{margin:0 0 1.5em}.thanks-letter p:last-child{margin-bottom:0}.thanks-signature{text-align:right;color:var(--gold);font-weight:700}
 @media(max-width:600px){nav{padding:12px 14px}.nav-logo{font-size:12px;max-width:120px}.nav-right{gap:8px}.nav-cta{font-size:11px;padding:10px 12px}#lang-toggle{font-size:11px}}
@@ -376,6 +387,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     </div>
     <div class="hero-btns">
       <a class="btn-primary" href="#plans" data-i18n="hero.btn1">支援終了のご報告</a>
+      <a class="btn-primary support-link" href="./support/">いまの旅を応援する</a>
       <a class="btn-outline" href="#journey" data-i18n="hero.btn2">旅を知る</a>
     </div>
     <div id="visitor-count"><span data-i18n="hero.visitorPre">このページを見た人: </span><span id="v-count">0</span><span data-i18n="hero.visitorPost">人</span></div>
@@ -656,6 +668,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     </div>
 
     <article class="thanks-letter"><p>この度、クラウドファンディングが無事に終了しました。</p><p>ご支援いただいた皆様、SNSで拡散してくださった皆様、応援のメッセージを送ってくださった皆様、本当にありがとうございました。</p><p>決して簡単な挑戦ではありませんが、皆様からのご支援や温かい言葉の一つひとつが、大きな力になっています。</p><p>現在、僕は「歩いて地球一周」の最終章として、アメリカ大陸の徒歩横断に挑戦しています。</p><p>日本を歩き、ユーラシア大陸を歩き、そして今、最後の大きな挑戦に挑んでいます。</p><p>ここまで来られたのは、決して自分一人の力ではありません。応援してくださる皆様のおかげです。</p><p>皆様から託していただいた想いを胸に、必ずこの挑戦をやり遂げます。</p><p>そして、僕の旅を通して「体が弱くても、夢は実現できる」ということを、一人でも多くの人に届けたいと思っています。</p><p>クラウドファンディングは終了しましたが、旅はまだ続きます。</p><p>最後まで見届けていただけたら嬉しいです。</p><p>ご支援・応援してくださった皆様、本当に、本当にありがとうございました。</p><p>最後まで全力で歩き続けます。</p><p class="thanks-signature">着物マジシャン ジャック</p></article>
+    <div class="support-banner"><p>クラウドファンディングは終了しましたが、旅はまだ続いています。<br>自由な金額での応援を受け付けています。</p><a class="btn-primary support-link" href="./support/">いまの旅を応援する</a></div>
   </div>
 </section>
 
@@ -665,8 +678,12 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <div class="section-label fade-in">SPONSORS</div>
     <h2 class="section-title fade-in" data-i18n="sponsors.title">応援してくれている<em>スポンサー</em></h2>
     <p style="color:var(--text-dim);font-size:14px;text-align:center" class="fade-in" data-i18n="sponsors.desc">Jackの旅を支えてくださっている皆さまです。ありがとうございます！</p>
-    <div id="sponsor-grid" class="sponsor-grid"></div>
-    <div id="sponsors-empty" style="display:none" data-i18n="sponsors.empty">ご支援いただいた皆様、本当にありがとうございました。</div>
+    <div class="sp-list fade-in">
+      <h3 class="sp-head">北アメリカ大陸徒歩横断 スポンサー</h3>
+      <div class="sp-group"><div class="sp-label">企業・団体スポンサー</div><ul class="sp-names corp"><li class="">株式会社CAPTAIN STAG 様</li><li class="">マルコメ株式会社 様</li><li class="">株式会社ピカコーポレイション 様</li><li class="">タンナス 様</li><li class="">Insta360 様</li><li class="">Global WiFi 様</li><li class="">ちゅう吉 様</li><li class="">内日ベース 様</li><li class="">株式会社ミクル 様</li><li class="">ARCH 株式会社 様</li></ul></div>
+      <div class="sp-group"><div class="sp-label">メインパートナー・上位スポンサー</div><ul class="sp-names main"><li class="">Kenji Sasaki 様</li></ul></div>
+      <div class="sp-group"><div class="sp-label">個人スポンサー</div><ul class="sp-names ind"><li class="">三川屋 幾朗 様</li><li class="">山西 伸典 様</li><li class="">SEIJI NATORI 様</li><li class="">SHINICHIRO KOJIMA 様</li><li class="">hirotheworld 様</li><li class="">YOICHI SATO 様</li><li class="">CHIHARU SUTO 様</li><li class="">S M 様</li><li class="">ANACHAITYL SAKAMOTO 様</li><li class="">K5 様</li><li class="">SAKI YATABE 様</li><li class="">りさぷりんせす 様</li><li class="">Satoshi Kimura 様</li><li class="">SEIGO OOGAI 様</li><li class="">井上正太 様</li><li class="">TAKESHI YANAGIMOTO 様</li><li class="">瀬見 暁彦 様</li><li class="">Masato Seto 様</li><li class="">Makino natsuki 様</li><li class="">藤澤 高士 様</li><li class="">MUSASHI NARITA 様</li><li class="">Marcus Polster 様</li><li class="">CHIHIRO MORITA 様</li><li class="">森田 千裕 様</li><li class="">Yuya kawanishi 様</li><li class="">MOTOYA UCHIDA 様</li><li class="">takehana akemi 様</li><li class="">かめさわ 様</li><li class="">SAKI HATANO 様</li><li class="">SHINJIRO TANAKA 様</li><li class="">SHO EHIRA 様</li><li class="">YUKA YAMAGUCHI 様</li><li class="">RIE KOIKE 様</li><li class="">KOSAKU HAYAMI 様</li><li class="">MINAKO NISHIO 様</li><li class="">本間 拓実 様</li><li class="">香川 知秋 様</li><li class="">後藤蒼太 様</li><li class="">HIROMI YOSHINAKAI 様</li><li class="">KONATSU SAITO 様</li><li class="">新野由希子 様</li><li class="">SATO TAISHI 様</li><li class="">HIROSHI KIKUI 様</li><li class="">YUJI OKITSU 様</li><li class="">SHINICHIRO TSURUI 様</li><li class="">牧田 竜二 様</li><li class="">TOMOKO IZUMI 様</li><li class="">ニシエ タカミチ 様</li><li class="">森 勘太 様</li><li class="">MANABU KUROBUCHI 様</li><li class="">NARUMI SEINO 様</li><li class="">野口 雅仁 様</li><li class="">SOUKO KATOU 様</li><li class="">KURUMI WAKAYAMA 様</li><li class="">SHINSAKU IMAJO 様</li><li class="">鶴見友紀 様</li><li class="">HARUKA OGAWA 様</li><li class="">川瀬 太一 様</li><li class="">佐藤 結 様</li></ul></div>
+    </div>
   </div>
 </section>
 
@@ -1537,6 +1554,7 @@ function loadSponsors(data) {
   var empty = document.getElementById('sponsors-empty');
   var sec   = document.getElementById('sponsors');
   updateFundingBar(data && data.sponsors);
+  return; // 2026-11 スポンサー一覧はジャック提供の固定リストで表示（台帳からの自動表示は停止）
   if (!data || !data.sponsors || data.sponsors.length === 0) {
     if (sec) sec.style.display = 'none';
     return;
